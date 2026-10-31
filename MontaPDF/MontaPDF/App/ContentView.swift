@@ -10,12 +10,12 @@ import SwiftUI
 /// Shows Login when there is no session, otherwise My Documents.
 struct ContentView: View {
     let container: AppContainer
-    @State private var documentsViewModel: DocumentListViewModel
+    @State private var documents: DocumentsFeature
     @State private var isAccountPresented = false
 
     init(container: AppContainer) {
         self.container = container
-        _documentsViewModel = State(initialValue: container.makeDocumentListViewModel())
+        _documents = State(initialValue: container.makeDocumentsFeature())
     }
 
     private var session: SessionViewModel { container.sessionViewModel }
@@ -23,10 +23,14 @@ struct ContentView: View {
     var body: some View {
         Group {
             if session.isSignedIn {
-                DocumentListView(viewModel: documentsViewModel) {
+                DocumentListView(
+                    viewModel: documents.list,
+                    scanner: documents.scanner,
+                    importer: documents.importer
+                ) {
                     isAccountPresented = true
                 }
-                .sheet(isPresented: $isAccountPresented, onDismiss: documentsViewModel.load) {
+                .sheet(isPresented: $isAccountPresented, onDismiss: documents.list.load) {
                     AccountView(viewModel: container.makeAccountViewModel())
                 }
             } else {

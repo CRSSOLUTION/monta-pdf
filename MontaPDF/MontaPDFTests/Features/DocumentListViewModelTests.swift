@@ -18,15 +18,10 @@ struct DocumentListViewModelTests {
         repository = SwiftDataDocumentRepository(container: try makeInMemoryContainer())
     }
 
-    private func makeViewModel(
-        builder: FakePDFBuilder = FakePDFBuilder(),
-        availability: FakeScannerAvailability = FakeScannerAvailability()
-    ) -> DocumentListViewModel {
+    private func makeViewModel() -> DocumentListViewModel {
         DocumentListViewModel(
             repository: repository,
             namer: DocumentNamer(automaticTitle: { "Document \($0)" }),
-            pdfBuilder: builder,
-            scannerAvailability: availability,
             exporter: exporter
         )
     }
@@ -42,7 +37,7 @@ struct DocumentListViewModelTests {
         let viewModel = makeViewModel()
 
         #expect(viewModel.rows.isEmpty)
-        #expect(viewModel.alert == nil)
+        #expect(viewModel.errorMessage == nil)
     }
 
     @Test func loadShowsNewestFirstWithAutomaticNames() throws {
@@ -82,82 +77,37 @@ struct DocumentListViewModelTests {
     }
 
     @Test func repositoryFailureShowsAnAlert() {
-        let viewModel = DocumentListViewModel(repository: FailingDocumentRepository())
+        let viewModel = DocumentListViewModel(
+            repository: FailingDocumentRepository(),
+            namer: DocumentNamer(),
+            exporter: exporter
+        )
 
         viewModel.load()
 
-        #expect(viewModel.alert == .generic("Test failure"))
+        #expect(viewModel.errorMessage == "Test failure")
         #expect(viewModel.rows.isEmpty)
     }
 
-    // MARK: - Scanner
+    // MARK: - Saved banner
 
-    @Test func scanOpensTheScannerWhenAvailable() async {
-        let viewModel = makeViewModel()
-
-        await viewModel.scanTapped()
-
-        #expect(viewModel.isScannerPresented)
-        #expect(viewModel.alert == nil)
-    }
-
-    @Test func scanWithCameraDeniedExplainsHowToFix() async {
-        let viewModel = makeViewModel(availability: FakeScannerAvailability(cameraAccess: .denied))
-
-        await viewModel.scanTapped()
-
-        #expect(viewModel.isScannerPresented == false)
-        #expect(viewModel.alert == .cameraDenied)
-    }
-
-    @Test func savingScannedPagesCreatesOneDocumentAndShowsBanner() async throws {
+    @Test func documentAddedReloadsAndShowsTheBanner() throws {
         try addDocument(minute: 1)
         let viewModel = makeViewModel()
         viewModel.load()
-        viewModel.isScannerPresented = true
+        let added = try addDocument(minute: 2, pages: 3)
 
-        await viewModel.scannerFinished(with: [makeTestImage(), makeTestImage(), makeTestImage()])
+        viewModel.documentAdded(id: added.id)
 
-        #expect(viewModel.isScannerPresented == false)
-        #expect(viewModel.isSaving == false)
         #expect(viewModel.rows.count == 2)
-        let newest = try #require(viewModel.rows.first)
-        #expect(newest.title == "Document 2")
-        #expect(newest.pageCount == 3)
-        #expect(viewModel.savedBanner == SavedBanner(id: newest.id, title: "Document 2"))
-        let stored = try #require(try repository.fetchAll().first)
-        #expect(stored.pdfData == Data("pdf-3".utf8))
+        #expect(viewModel.rows.first?.pageCount == 3)
+        #expect(viewModel.savedBanner == SavedBanner(id: added.id, title: "Document 2"))
     }
 
-    @Test func failedSaveKeepsPagesAndRetrySavesThem() async throws {
-        let viewModel = makeViewModel(builder: FakePDFBuilder(failures: 1))
-
-        await viewModel.saveScannedPages([makeTestImage(), makeTestImage()])
-
-        #expect(viewModel.alert == .saveFailed)
-        #expect(viewModel.rows.isEmpty)
-        #expect(try repository.fetchAll().isEmpty)
-
-        await viewModel.retrySave()
-
-        #expect(viewModel.rows.count == 1)
-        #expect(viewModel.rows.first?.pageCount == 2)
-    }
-
-    @Test func discardingPendingPagesMakesRetryDoNothing() async throws {
-        let viewModel = makeViewModel(builder: FakePDFBuilder(failures: 1))
-        await viewModel.saveScannedPages([makeTestImage()])
-
-        viewModel.discardPendingPages()
-        await viewModel.retrySave()
-
-        #expect(viewModel.rows.isEmpty)
-        #expect(viewModel.savedBanner == nil)
-    }
-
-    @Test func dismissBannerClearsIt() async {
+    @Test func dismissBannerClearsIt() throws {
+        let added = try addDocument(minute: 1)
         let viewModel = makeViewModel()
-        await viewModel.saveScannedPages([makeTestImage()])
+        viewModel.documentAdded(id: added.id)
         #expect(viewModel.savedBanner != nil)
 
         viewModel.dismissBanner()
@@ -230,24 +180,5 @@ struct DocumentListViewModelTests {
         viewModel.share(id: document.id)
 
         #expect(viewModel.shareItem == nil)
-    }
-
-    // MARK: - Scan enhancement
-
-    @Test func everyScannedPageIsEnhancedBeforeBuildingThePDF() async throws {
-        let enhancer = FakeScanEnhancer()
-        let viewModel = DocumentListViewModel(
-            repository: repository,
-            namer: DocumentNamer(automaticTitle: { "Document \($0)" }),
-            pdfBuilder: FakePDFBuilder(),
-            scannerAvailability: FakeScannerAvailability(),
-            exporter: exporter,
-            scanEnhancer: enhancer
-        )
-
-        await viewModel.saveScannedPages([makeTestImage(), makeTestImage(), makeTestImage()])
-
-        #expect(enhancer.enhancedCount == 3)
-        #expect(viewModel.rows.first?.pageCount == 3)
     }
 }

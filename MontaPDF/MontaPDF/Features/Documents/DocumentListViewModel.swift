@@ -31,30 +31,12 @@ nonisolated struct SavedBanner: Identifiable, Equatable, Sendable {
     let title: String
 }
 
-nonisolated enum DocumentListAlert: Identifiable, Equatable, Sendable {
-    case scannerUnavailable
-    case cameraDenied
-    case saveFailed
-    case generic(String)
-
-    var id: String {
-        switch self {
-        case .scannerUnavailable: "scannerUnavailable"
-        case .cameraDenied: "cameraDenied"
-        case .saveFailed: "saveFailed"
-        case .generic(let message): "generic-\(message)"
-        }
-    }
-}
-
 @Observable
 @MainActor
 final class DocumentListViewModel {
     private(set) var rows: [DocumentRow] = []
-    private(set) var isSaving = false
     private(set) var savedBanner: SavedBanner?
-    var alert: DocumentListAlert?
-    var isScannerPresented = false
+    var errorMessage: String?
 
     // Rename, delete and share
     var isRenaming = false
@@ -67,44 +49,20 @@ final class DocumentListViewModel {
     var isChoosingShareFormat = false
     private(set) var shareChoiceID: UUID?
 
-    let importer: ImportViewModel
-
     private let repository: DocumentRepository
     private let namer: DocumentNamer
-    private let pdfBuilder: PDFBuilding
-    private let scanEnhancer: ScanEnhancing
-    private let scannerAvailability: ScannerAvailability
     private let exporter: DocumentExporting
     private var documents: [Document] = []
     private var thumbnails: [UUID: UIImage] = [:]
-    /// Pages kept after a failed save, so the user can try again without scanning again.
-    private var pendingPages: [UIImage] = []
 
     init(
         repository: DocumentRepository,
-        namer: DocumentNamer? = nil,
-        pdfBuilder: PDFBuilding? = nil,
-        scannerAvailability: ScannerAvailability? = nil,
-        exporter: DocumentExporting? = nil,
-        converter: DocumentConverter? = nil,
-        scanEnhancer: ScanEnhancing? = nil
+        namer: DocumentNamer,
+        exporter: DocumentExporting
     ) {
-        // Defaults are created here (not as default arguments) so they run on the main actor.
-        let pdfBuilder = pdfBuilder ?? ImagePDFBuilder()
         self.repository = repository
-        self.namer = namer ?? DocumentNamer()
-        self.pdfBuilder = pdfBuilder
-        self.scanEnhancer = scanEnhancer ?? DocumentScanEnhancer()
-        self.scannerAvailability = scannerAvailability ?? SystemScannerAvailability()
-        self.exporter = exporter ?? TemporaryFileExporter()
-        self.importer = ImportViewModel(
-            repository: repository,
-            pdfBuilder: pdfBuilder,
-            converter: converter ?? WebKitDocumentConverter()
-        )
-        importer.onSaved = { [weak self] id in
-            self?.documentAdded(id: id)
-        }
+        self.namer = namer
+        self.exporter = exporter
     }
 
     func makeViewerViewModel(for id: UUID) -> DocumentViewerViewModel {
@@ -116,69 +74,6 @@ final class DocumentListViewModel {
     func load() {
         perform {
             documents = try repository.fetchAll()
-        }
-    }
-
-    // MARK: - Scanning
-
-    /// Called by the Scan button. Opens the scanner or explains why it can't.
-    /// Returns sample pages on the simulator, which has no camera.
-    func scanTapped() async {
-        guard scannerAvailability.isScannerSupported else {
-            #if DEBUG && targetEnvironment(simulator)
-            await saveScannedPages(SampleScan.pages())
-            #else
-            alert = .scannerUnavailable
-            #endif
-            return
-        }
-        guard scannerAvailability.cameraAccess != .denied else {
-            alert = .cameraDenied
-            return
-        }
-        isScannerPresented = true
-    }
-
-    func scannerFinished(with pages: [UIImage]) async {
-        isScannerPresented = false
-        await saveScannedPages(pages)
-    }
-
-    func scannerCancelled() {
-        isScannerPresented = false
-    }
-
-    func scannerFailed(_ error: Error) {
-        isScannerPresented = false
-        alert = .generic(error.localizedDescription)
-    }
-
-    func retrySave() async {
-        await saveScannedPages(pendingPages)
-    }
-
-    func discardPendingPages() {
-        pendingPages = []
-    }
-
-    func saveScannedPages(_ pages: [UIImage]) async {
-        guard !pages.isEmpty, !isSaving else { return }
-        isSaving = true
-        defer { isSaving = false }
-
-        do {
-            let builder = pdfBuilder
-            let enhancer = scanEnhancer
-            let data = try await Task.detached(priority: .userInitiated) {
-                // Clean up the pages (shadows, folds, white paper) before building the PDF.
-                try builder.makePDF(from: pages.map { enhancer.enhance($0) })
-            }.value
-            let document = try repository.create(NewDocument(pdfData: data, pageCount: pages.count))
-            pendingPages = []
-            documentAdded(id: document.id)
-        } catch {
-            pendingPages = pages
-            alert = .saveFailed
         }
     }
 
@@ -309,7 +204,7 @@ final class DocumentListViewModel {
         do {
             try work()
         } catch {
-            alert = .generic(error.localizedDescription)
+            errorMessage = error.localizedDescription
         }
         rebuildRows()
     }
