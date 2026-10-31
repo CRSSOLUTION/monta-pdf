@@ -20,7 +20,7 @@ func makeInMemoryContainer() throws -> ModelContainer {
 }
 
 /// A fixed reference date so tests don't depend on the clock.
-let referenceDate = Date(timeIntervalSince1970: 1_800_000_000)
+let referenceDate = Date(timeIntervalSince1970: 1_700_000_000) // Nov 2023, always in the past
 
 func date(minutesAfterReference minutes: Double) -> Date {
     referenceDate.addingTimeInterval(minutes * 60)
