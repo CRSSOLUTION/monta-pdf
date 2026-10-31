@@ -1,0 +1,600 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 110;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CAE987D030963273006E5594 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CAE987CF30963273006E5594 /* Localizable.xcstrings */; };
+		CAE987D4309632CA006E5594 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CAE987D3309632CA006E5594 /* InfoPlist.xcstrings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CAE987B430962EEE006E5594 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE9879A30962EEB006E5594 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CAE987A130962EEB006E5594;
+			remoteInfo = MontaPDF;
+		};
+		CAE987BE30962EEE006E5594 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAE9879A30962EEB006E5594 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CAE987A130962EEB006E5594;
+			remoteInfo = MontaPDF;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CAE987A230962EEB006E5594 /* MontaPDF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MontaPDF.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAE987B330962EEE006E5594 /* MontaPDFTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MontaPDFTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAE987BD30962EEE006E5594 /* MontaPDFUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MontaPDFUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAE987CF30963273006E5594 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = Localizable.xcstrings; path = MontaPDF/Localizable.xcstrings; sourceTree = "<group>"; };
+		CAE987D3309632CA006E5594 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = InfoPlist.xcstrings; path = MontaPDF/Assets.xcassets/InfoPlist.xcstrings; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CAE987C330962EEE006E5594 /* Exceptions for "MontaPDF" folder in "MontaPDF" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = CAE987A130962EEB006E5594 /* MontaPDF */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		CAE987A430962EEB006E5594 /* MontaPDF */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CAE987C330962EEE006E5594 /* Exceptions for "MontaPDF" folder in "MontaPDF" target */,
+			);
+			path = MontaPDF;
+			sourceTree = "<group>";
+		};
+		CAE987B630962EEE006E5594 /* MontaPDFTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MontaPDFTests;
+			sourceTree = "<group>";
+		};
+		CAE987C030962EEE006E5594 /* MontaPDFUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MontaPDFUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CAE9879F30962EEB006E5594 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+		CAE987B030962EEE006E5594 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+		CAE987BA30962EEE006E5594 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CAE9879930962EEB006E5594 = {
+			isa = PBXGroup;
+			children = (
+				CAE987D3309632CA006E5594 /* InfoPlist.xcstrings */,
+				CAE987CF30963273006E5594 /* Localizable.xcstrings */,
+				CAE987A430962EEB006E5594 /* MontaPDF */,
+				CAE987B630962EEE006E5594 /* MontaPDFTests */,
+				CAE987C030962EEE006E5594 /* MontaPDFUITests */,
+				CAE987A330962EEB006E5594 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CAE987A330962EEB006E5594 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CAE987A230962EEB006E5594 /* MontaPDF.app */,
+				CAE987B330962EEE006E5594 /* MontaPDFTests.xctest */,
+				CAE987BD30962EEE006E5594 /* MontaPDFUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CAE987A130962EEB006E5594 /* MontaPDF */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAE987C430962EEE006E5594 /* Build configuration list for PBXNativeTarget "MontaPDF" */;
+			buildPhases = (
+				CAE9879E30962EEB006E5594 /* Sources */,
+				CAE9879F30962EEB006E5594 /* Frameworks */,
+				CAE987A030962EEB006E5594 /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				CAE987A430962EEB006E5594 /* MontaPDF */,
+			);
+			name = MontaPDF;
+			productName = MontaPDF;
+			productReference = CAE987A230962EEB006E5594 /* MontaPDF.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CAE987B230962EEE006E5594 /* MontaPDFTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAE987C930962EEE006E5594 /* Build configuration list for PBXNativeTarget "MontaPDFTests" */;
+			buildPhases = (
+				CAE987AF30962EEE006E5594 /* Sources */,
+				CAE987B030962EEE006E5594 /* Frameworks */,
+				CAE987B130962EEE006E5594 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CAE987B530962EEE006E5594 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CAE987B630962EEE006E5594 /* MontaPDFTests */,
+			);
+			name = MontaPDFTests;
+			productName = MontaPDFTests;
+			productReference = CAE987B330962EEE006E5594 /* MontaPDFTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CAE987BC30962EEE006E5594 /* MontaPDFUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAE987CC30962EEE006E5594 /* Build configuration list for PBXNativeTarget "MontaPDFUITests" */;
+			buildPhases = (
+				CAE987B930962EEE006E5594 /* Sources */,
+				CAE987BA30962EEE006E5594 /* Frameworks */,
+				CAE987BB30962EEE006E5594 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CAE987BF30962EEE006E5594 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CAE987C030962EEE006E5594 /* MontaPDFUITests */,
+			);
+			name = MontaPDFUITests;
+			productName = MontaPDFUITests;
+			productReference = CAE987BD30962EEE006E5594 /* MontaPDFUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CAE9879A30962EEB006E5594 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2700;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					CAE987A130962EEB006E5594 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					CAE987B230962EEE006E5594 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = CAE987A130962EEB006E5594;
+					};
+					CAE987BC30962EEE006E5594 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = CAE987A130962EEB006E5594;
+					};
+				};
+			};
+			buildConfigurationList = CAE9879D30962EEB006E5594 /* Build configuration list for PBXProject "MontaPDF" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"pt-BR",
+				"es-419",
+			);
+			mainGroup = CAE9879930962EEB006E5594;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = CAE987A330962EEB006E5594 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CAE987A130962EEB006E5594 /* MontaPDF */,
+				CAE987B230962EEE006E5594 /* MontaPDFTests */,
+				CAE987BC30962EEE006E5594 /* MontaPDFUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CAE987A030962EEB006E5594 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+				CAE987D030963273006E5594 /* Localizable.xcstrings in Resources */,
+				CAE987D4309632CA006E5594 /* InfoPlist.xcstrings in Resources */,
+			);
+		};
+		CAE987B130962EEE006E5594 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		CAE987BB30962EEE006E5594 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CAE9879E30962EEB006E5594 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		CAE987AF30962EEE006E5594 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		CAE987B930962EEE006E5594 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CAE987B530962EEE006E5594 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CAE987A130962EEB006E5594 /* MontaPDF */;
+			targetProxy = CAE987B430962EEE006E5594 /* PBXContainerItemProxy */;
+		};
+		CAE987BF30962EEE006E5594 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CAE987A130962EEB006E5594 /* MontaPDF */;
+			targetProxy = CAE987BE30962EEE006E5594 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		CAE987C530962EEE006E5594 /* Debug configuration for PBXNativeTarget "MontaPDF" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MontaPDF/MontaPDF.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9796AVNA2V;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MontaPDF/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Monta PDF";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We use the camera to scan your documents";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crlsribeiro.MontaPDF;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		CAE987C630962EEE006E5594 /* Release configuration for PBXNativeTarget "MontaPDF" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MontaPDF/MontaPDF.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9796AVNA2V;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MontaPDF/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Monta PDF";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We use the camera to scan your documents";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crlsribeiro.MontaPDF;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		CAE987C730962EEE006E5594 /* Debug configuration for PBXProject "MontaPDF" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 9796AVNA2V;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CAE987C830962EEE006E5594 /* Release configuration for PBXProject "MontaPDF" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 9796AVNA2V;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CAE987CA30962EEE006E5594 /* Debug configuration for PBXNativeTarget "MontaPDFTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9796AVNA2V;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crlsribeiro.MontaPDFTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MontaPDF.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MontaPDF";
+			};
+			name = Debug;
+		};
+		CAE987CB30962EEE006E5594 /* Release configuration for PBXNativeTarget "MontaPDFTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9796AVNA2V;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crlsribeiro.MontaPDFTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MontaPDF.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MontaPDF";
+			};
+			name = Release;
+		};
+		CAE987CD30962EEE006E5594 /* Debug configuration for PBXNativeTarget "MontaPDFUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9796AVNA2V;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crlsribeiro.MontaPDFUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MontaPDF;
+			};
+			name = Debug;
+		};
+		CAE987CE30962EEE006E5594 /* Release configuration for PBXNativeTarget "MontaPDFUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9796AVNA2V;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crlsribeiro.MontaPDFUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MontaPDF;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CAE9879D30962EEB006E5594 /* Build configuration list for PBXProject "MontaPDF" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAE987C730962EEE006E5594 /* Debug configuration for PBXProject "MontaPDF" */,
+				CAE987C830962EEE006E5594 /* Release configuration for PBXProject "MontaPDF" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		CAE987C430962EEE006E5594 /* Build configuration list for PBXNativeTarget "MontaPDF" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAE987C530962EEE006E5594 /* Debug configuration for PBXNativeTarget "MontaPDF" */,
+				CAE987C630962EEE006E5594 /* Release configuration for PBXNativeTarget "MontaPDF" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		CAE987C930962EEE006E5594 /* Build configuration list for PBXNativeTarget "MontaPDFTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAE987CA30962EEE006E5594 /* Debug configuration for PBXNativeTarget "MontaPDFTests" */,
+				CAE987CB30962EEE006E5594 /* Release configuration for PBXNativeTarget "MontaPDFTests" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		CAE987CC30962EEE006E5594 /* Build configuration list for PBXNativeTarget "MontaPDFUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAE987CD30962EEE006E5594 /* Debug configuration for PBXNativeTarget "MontaPDFUITests" */,
+				CAE987CE30962EEE006E5594 /* Release configuration for PBXNativeTarget "MontaPDFUITests" */,
+			);
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CAE9879A30962EEB006E5594 /* Project object */;
+	validationLevel = 1;
+}
