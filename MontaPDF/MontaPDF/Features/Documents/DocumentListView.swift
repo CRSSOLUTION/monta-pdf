@@ -8,6 +8,8 @@ import SwiftUI
 
 struct DocumentListView: View {
     @Bindable var viewModel: DocumentListViewModel
+    @Bindable var scanner: ScannerViewModel
+    let importer: ImportViewModel
     let onShowAccount: () -> Void
     @Environment(\.openURL) private var openURL
     @State private var path: [UUID] = []
@@ -15,8 +17,15 @@ struct DocumentListView: View {
     @State private var isPhotoPickerPresented = false
     @State private var photoSelection: [PhotosPickerItem] = []
 
-    init(viewModel: DocumentListViewModel, onShowAccount: @escaping () -> Void = {}) {
+    init(
+        viewModel: DocumentListViewModel,
+        scanner: ScannerViewModel,
+        importer: ImportViewModel,
+        onShowAccount: @escaping () -> Void = {}
+    ) {
         _viewModel = Bindable(viewModel)
+        _scanner = Bindable(scanner)
+        self.importer = importer
         self.onShowAccount = onShowAccount
     }
 
@@ -49,7 +58,7 @@ struct DocumentListView: View {
                     allowsMultipleSelection: true
                 ) { result in
                     if case .success(let urls) = result {
-                        Task { await viewModel.importer.importFiles(at: urls) }
+                        Task { await importer.importFiles(at: urls) }
                     }
                 }
                 .photosPicker(
@@ -67,19 +76,19 @@ struct DocumentListView: View {
                 .sheet(item: importPreview) { preview in
                     ImportPreviewView(
                         preview: preview,
-                        onSave: { viewModel.importer.savePreview() },
-                        onKeepOriginal: { viewModel.importer.keepOriginal() },
-                        onCancel: { viewModel.importer.cancelPreview() }
+                        onSave: { importer.savePreview() },
+                        onKeepOriginal: { importer.keepOriginal() },
+                        onCancel: { importer.cancelPreview() }
                     )
                 }
                 .alert(
-                    importAlertTitle(viewModel.importer.alert),
+                    importAlertTitle(importer.alert),
                     isPresented: isImportAlertPresented,
-                    presenting: viewModel.importer.alert
+                    presenting: importer.alert
                 ) { alert in
                     if alert == .conversionFailed {
-                        Button("Keep Original") { viewModel.importer.keepOriginal() }
-                        Button("Cancel", role: .cancel) { viewModel.importer.cancelPreview() }
+                        Button("Keep Original") { importer.keepOriginal() }
+                        Button("Cancel", role: .cancel) { importer.cancelPreview() }
                     } else {
                         Button("OK", role: .cancel) {}
                     }
@@ -101,17 +110,17 @@ struct DocumentListView: View {
                 }
                 .overlay(alignment: .bottom) { bottomBar }
                 .overlay {
-                    if viewModel.isSaving || viewModel.importer.isConverting {
+                    if scanner.isSaving || importer.isConverting {
                         SavingOverlay()
                     }
                 }
-                .fullScreenCover(isPresented: $viewModel.isScannerPresented) {
+                .fullScreenCover(isPresented: $scanner.isScannerPresented) {
                     DocumentScannerView(
                         onFinish: { pages in
-                            Task { await viewModel.scannerFinished(with: pages) }
+                            Task { await scanner.scannerFinished(with: pages) }
                         },
-                        onCancel: { viewModel.scannerCancelled() },
-                        onError: { error in viewModel.scannerFailed(error) }
+                        onCancel: { scanner.scannerCancelled() },
+                        onError: { error in scanner.scannerFailed(error) }
                     )
                     .ignoresSafeArea()
                 }
@@ -138,13 +147,21 @@ struct DocumentListView: View {
                     viewModel.load()
                 }
                 .alert(
-                    alertTitle(viewModel.alert),
-                    isPresented: isAlertPresented,
-                    presenting: viewModel.alert
+                    scannerAlertTitle(scanner.alert),
+                    isPresented: isScannerAlertPresented,
+                    presenting: scanner.alert
                 ) { alert in
-                    alertActions(alert)
+                    scannerAlertActions(alert)
                 } message: { alert in
-                    alertMessage(alert)
+                    scannerAlertMessage(alert)
+                }
+                .alert(
+                    "Something went wrong",
+                    isPresented: isErrorPresented
+                ) {
+                    Button("OK", role: .cancel) {}
+                } message: {
+                    Text(viewModel.errorMessage ?? "")
                 }
         }
     }
@@ -158,7 +175,7 @@ struct DocumentListView: View {
                 Text("Scan paper documents and keep them as PDFs, synced with iCloud.")
             } actions: {
                 Button {
-                    Task { await viewModel.scanTapped() }
+                    Task { await scanner.scanTapped() }
                 } label: {
                     Label("Scan", systemImage: "camera")
                         .padding(.horizontal, 8)
@@ -223,7 +240,7 @@ struct DocumentListView: View {
             }
             if !viewModel.rows.isEmpty {
                 ScanButton {
-                    Task { await viewModel.scanTapped() }
+                    Task { await scanner.scanTapped() }
                 }
             }
         }
@@ -241,20 +258,20 @@ struct DocumentListView: View {
                 photos.append(data)
             }
         }
-        await viewModel.importer.importPhotos(photos)
+        await importer.importPhotos(photos)
     }
 
     private var importPreview: Binding<ImportPreview?> {
         Binding(
-            get: { viewModel.importer.preview },
-            set: { viewModel.importer.preview = $0 }
+            get: { importer.preview },
+            set: { importer.preview = $0 }
         )
     }
 
     private var isImportAlertPresented: Binding<Bool> {
         Binding(
-            get: { viewModel.importer.alert != nil },
-            set: { if !$0 { viewModel.importer.alert = nil } }
+            get: { importer.alert != nil },
+            set: { if !$0 { importer.alert = nil } }
         )
     }
 
@@ -268,24 +285,31 @@ struct DocumentListView: View {
 
     // MARK: - Alerts
 
-    private var isAlertPresented: Binding<Bool> {
+    private var isErrorPresented: Binding<Bool> {
         Binding(
-            get: { viewModel.alert != nil },
-            set: { if !$0 { viewModel.alert = nil } }
+            get: { viewModel.errorMessage != nil },
+            set: { if !$0 { viewModel.errorMessage = nil } }
         )
     }
 
-    private func alertTitle(_ alert: DocumentListAlert?) -> Text {
-        switch alert ?? .generic("") {
+    private var isScannerAlertPresented: Binding<Bool> {
+        Binding(
+            get: { scanner.alert != nil },
+            set: { if !$0 { scanner.alert = nil } }
+        )
+    }
+
+    private func scannerAlertTitle(_ alert: ScannerAlert?) -> Text {
+        switch alert ?? .failed("") {
         case .scannerUnavailable: Text("Scanner unavailable")
         case .cameraDenied: Text("Camera access needed")
         case .saveFailed: Text("Couldn't save. Please try again.")
-        case .generic: Text("Something went wrong")
+        case .failed: Text("Something went wrong")
         }
     }
 
     @ViewBuilder
-    private func alertActions(_ alert: DocumentListAlert) -> some View {
+    private func scannerAlertActions(_ alert: ScannerAlert) -> some View {
         switch alert {
         case .cameraDenied:
             Button("Open Settings") {
@@ -296,23 +320,23 @@ struct DocumentListView: View {
             Button("Cancel", role: .cancel) {}
         case .saveFailed:
             Button("Try Again") {
-                Task { await viewModel.retrySave() }
+                Task { await scanner.retrySave() }
             }
             Button("Discard", role: .destructive) {
-                viewModel.discardPendingPages()
+                scanner.discardPendingPages()
             }
-        case .scannerUnavailable, .generic:
+        case .scannerUnavailable, .failed:
             Button("OK", role: .cancel) {}
         }
     }
 
     @ViewBuilder
-    private func alertMessage(_ alert: DocumentListAlert) -> some View {
+    private func scannerAlertMessage(_ alert: ScannerAlert) -> some View {
         switch alert {
         case .scannerUnavailable: Text("This device can't scan documents.")
         case .cameraDenied: Text("Allow camera access in Settings to scan your documents.")
         case .saveFailed: Text("Your scanned pages were kept.")
-        case .generic(let message): Text(message)
+        case .failed(let message): Text(message)
         }
     }
 }

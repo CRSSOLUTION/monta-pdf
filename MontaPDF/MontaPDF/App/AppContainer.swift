@@ -42,11 +42,39 @@ final class AppContainer {
         sessionViewModel = SessionViewModel(store: UserDefaultsSessionStore(defaults: defaults))
     }
 
-    func makeDocumentListViewModel() -> DocumentListViewModel {
-        DocumentListViewModel(repository: documentRepository)
+    /// The three ViewModels of the My Documents screen, already wired together:
+    /// after a scan or an import is saved, the list reloads and shows the "saved" banner.
+    func makeDocumentsFeature() -> DocumentsFeature {
+        let pdfBuilder = ImagePDFBuilder()
+        let list = DocumentListViewModel(
+            repository: documentRepository,
+            namer: DocumentNamer(),
+            exporter: TemporaryFileExporter()
+        )
+        let scanner = ScannerViewModel(
+            repository: documentRepository,
+            pdfBuilder: pdfBuilder,
+            scanEnhancer: DocumentScanEnhancer(),
+            availability: SystemScannerAvailability()
+        )
+        let importer = ImportViewModel(
+            repository: documentRepository,
+            pdfBuilder: pdfBuilder,
+            converter: WebKitDocumentConverter()
+        )
+        scanner.onSaved = { [weak list] id in list?.documentAdded(id: id) }
+        importer.onSaved = { [weak list] id in list?.documentAdded(id: id) }
+        return DocumentsFeature(list: list, scanner: scanner, importer: importer)
     }
 
     func makeAccountViewModel() -> AccountViewModel {
         AccountViewModel(session: sessionViewModel, repository: documentRepository)
     }
+}
+
+/// ViewModels used by the My Documents screen.
+struct DocumentsFeature {
+    let list: DocumentListViewModel
+    let scanner: ScannerViewModel
+    let importer: ImportViewModel
 }
