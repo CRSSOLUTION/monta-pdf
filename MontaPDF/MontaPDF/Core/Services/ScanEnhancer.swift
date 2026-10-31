@@ -15,7 +15,7 @@ nonisolated protocol ScanEnhancing: Sendable {
 
 nonisolated struct DocumentScanEnhancer: ScanEnhancing {
     /// Creating a CIContext is expensive, so one is shared. CIContext is thread-safe.
-    nonisolated(unsafe) private static let context = CIContext()
+    private static let context = CIContext()
 
     /// 0 keeps the page as captured, 1 is the strongest cleanup.
     var amount: Float = 1
