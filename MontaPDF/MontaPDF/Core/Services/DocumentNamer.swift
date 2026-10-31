@@ -26,7 +26,7 @@ struct DocumentNamer {
 
         let automatic = documents
             .filter { !$0.isCustomTitle }
-            .sorted(by: Self.creationOrder)
+            .sorted { Self.creationOrder($0, $1) }
 
         for (index, document) in automatic.enumerated() {
             titles[document.id] = automaticTitle(index + 1)

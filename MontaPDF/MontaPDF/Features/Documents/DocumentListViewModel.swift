@@ -81,18 +81,24 @@ final class DocumentListViewModel {
 
     init(
         repository: DocumentRepository,
-        namer: DocumentNamer = DocumentNamer(),
-        pdfBuilder: PDFBuilding = ImagePDFBuilder(),
-        scannerAvailability: ScannerAvailability = SystemScannerAvailability(),
-        exporter: DocumentExporting = TemporaryFileExporter(),
-        converter: DocumentConverter = WebKitDocumentConverter()
+        namer: DocumentNamer? = nil,
+        pdfBuilder: PDFBuilding? = nil,
+        scannerAvailability: ScannerAvailability? = nil,
+        exporter: DocumentExporting? = nil,
+        converter: DocumentConverter? = nil
     ) {
+        // Defaults are created here (not as default arguments) so they run on the main actor.
+        let pdfBuilder = pdfBuilder ?? ImagePDFBuilder()
         self.repository = repository
-        self.namer = namer
+        self.namer = namer ?? DocumentNamer()
         self.pdfBuilder = pdfBuilder
-        self.scannerAvailability = scannerAvailability
-        self.exporter = exporter
-        self.importer = ImportViewModel(repository: repository, pdfBuilder: pdfBuilder, converter: converter)
+        self.scannerAvailability = scannerAvailability ?? SystemScannerAvailability()
+        self.exporter = exporter ?? TemporaryFileExporter()
+        self.importer = ImportViewModel(
+            repository: repository,
+            pdfBuilder: pdfBuilder,
+            converter: converter ?? WebKitDocumentConverter()
+        )
         importer.onSaved = { [weak self] id in
             self?.documentAdded(id: id)
         }
