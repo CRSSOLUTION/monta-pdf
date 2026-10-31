@@ -35,7 +35,7 @@ final class DocumentViewerViewModel {
 
     private let repository: DocumentRepository
     private let namer: DocumentNamer
-    private let exporter: DocumentExporting
+    private let shareFiles: DocumentShareFiles
 
     init(
         documentID: UUID,
@@ -46,7 +46,7 @@ final class DocumentViewerViewModel {
         self.documentID = documentID
         self.repository = repository
         self.namer = namer ?? DocumentNamer()
-        self.exporter = exporter ?? TemporaryFileExporter()
+        self.shareFiles = DocumentShareFiles(exporter: exporter ?? TemporaryFileExporter())
     }
 
     func load() {
@@ -58,16 +58,10 @@ final class DocumentViewerViewModel {
             let titles = namer.displayTitles(for: try repository.fetchAll())
             title = titles[documentID] ?? document.title
             pdfData = document.pdfData
-            if let original = document.originalData {
-                let ext = ((document.originalFileName ?? "") as NSString).pathExtension
-                originalShareURL = try? exporter.export(
-                    original,
-                    fileName: DocumentTitleRules.fileName(for: title, fileExtension: ext.isEmpty ? "docx" : ext)
-                )
-            }
-            if let data = document.pdfData {
+            originalShareURL = try? shareFiles.originalURL(for: document, title: title)
+            shareURL = try? shareFiles.pdfURL(for: document, title: title)
+            if document.pdfData != nil {
                 state = .ready
-                shareURL = try? exporter.export(data, fileName: DocumentTitleRules.fileName(for: title))
             } else {
                 state = document.originalData == nil ? .downloading : .originalOnly
             }
@@ -82,11 +76,10 @@ final class DocumentViewerViewModel {
     }
 
     func confirmRename() {
-        let newTitle = DocumentTitleRules.sanitize(renameDraft)
-        guard !newTitle.isEmpty else { return }
+        guard !DocumentTitleRules.sanitize(renameDraft).isEmpty else { return }
         do {
             guard let document = try repository.document(id: documentID) else { return }
-            try repository.rename(document, to: newTitle)
+            try repository.rename(document, to: renameDraft)
             load()
         } catch {
             errorMessage = error.localizedDescription

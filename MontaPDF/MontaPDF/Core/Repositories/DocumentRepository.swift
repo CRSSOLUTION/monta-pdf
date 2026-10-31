@@ -16,7 +16,8 @@ protocol DocumentRepository {
     @discardableResult
     func create(_ newDocument: NewDocument) throws -> Document
 
-    /// Sets a custom title. An empty (or whitespace only) title brings back the automatic name.
+    /// Sets a custom title, applying `DocumentTitleRules`. A title that ends up empty
+    /// brings back the automatic name.
     func rename(_ document: Document, to title: String) throws
 
     func delete(_ document: Document) throws
