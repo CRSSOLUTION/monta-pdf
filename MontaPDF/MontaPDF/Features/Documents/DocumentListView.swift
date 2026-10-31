@@ -3,7 +3,6 @@
 //  MontaPDF
 //
 
-import PhotosUI
 import SwiftUI
 
 struct DocumentListView: View {
@@ -11,11 +10,9 @@ struct DocumentListView: View {
     @Bindable var scanner: ScannerViewModel
     let importer: ImportViewModel
     let onShowAccount: () -> Void
-    @Environment(\.openURL) private var openURL
     @State private var path: [UUID] = []
     @State private var isFileImporterPresented = false
     @State private var isPhotoPickerPresented = false
-    @State private var photoSelection: [PhotosPickerItem] = []
 
     init(
         viewModel: DocumentListViewModel,
@@ -52,53 +49,11 @@ struct DocumentListView: View {
                         }
                     }
                 }
-                .fileImporter(
-                    isPresented: $isFileImporterPresented,
-                    allowedContentTypes: ImportKind.supportedTypes,
-                    allowsMultipleSelection: true
-                ) { result in
-                    if case .success(let urls) = result {
-                        Task { await importer.importFiles(at: urls) }
-                    }
-                }
-                .photosPicker(
-                    isPresented: $isPhotoPickerPresented,
-                    selection: $photoSelection,
-                    maxSelectionCount: 30,
-                    selectionBehavior: .ordered,
-                    matching: .images
+                .importFlow(
+                    importer: importer,
+                    isFileImporterPresented: $isFileImporterPresented,
+                    isPhotoPickerPresented: $isPhotoPickerPresented
                 )
-                .onChange(of: photoSelection) { _, items in
-                    guard !items.isEmpty else { return }
-                    photoSelection = []
-                    Task { await importPhotos(items) }
-                }
-                .sheet(item: importPreview) { preview in
-                    ImportPreviewView(
-                        preview: preview,
-                        onSave: { importer.savePreview() },
-                        onKeepOriginal: { importer.keepOriginal() },
-                        onCancel: { importer.cancelPreview() }
-                    )
-                }
-                .alert(
-                    importAlertTitle(importer.alert),
-                    isPresented: isImportAlertPresented,
-                    presenting: importer.alert
-                ) { alert in
-                    if alert == .conversionFailed {
-                        Button("Keep Original") { importer.keepOriginal() }
-                        Button("Cancel", role: .cancel) { importer.cancelPreview() }
-                    } else {
-                        Button("OK", role: .cancel) {}
-                    }
-                } message: { alert in
-                    switch alert {
-                    case .unsupported: Text("Send an image, a PDF or a Word file.")
-                    case .conversionFailed: Text("You can keep the original file and share it as it is.")
-                    case .failed: Text("Please try again.")
-                    }
-                }
                 .confirmationDialog(
                     "Share as",
                     isPresented: $viewModel.isChoosingShareFormat,
@@ -146,15 +101,7 @@ struct DocumentListView: View {
                 .onAppear {
                     viewModel.load()
                 }
-                .alert(
-                    scannerAlertTitle(scanner.alert),
-                    isPresented: isScannerAlertPresented,
-                    presenting: scanner.alert
-                ) { alert in
-                    scannerAlertActions(alert)
-                } message: { alert in
-                    scannerAlertMessage(alert)
-                }
+                .scannerAlerts(scanner)
                 .alert(
                     "Something went wrong",
                     isPresented: isErrorPresented
@@ -249,40 +196,6 @@ struct DocumentListView: View {
         .animation(.default, value: viewModel.savedBanner)
     }
 
-    // MARK: - Import
-
-    private func importPhotos(_ items: [PhotosPickerItem]) async {
-        var photos: [Data] = []
-        for item in items {
-            if let data = try? await item.loadTransferable(type: Data.self) {
-                photos.append(data)
-            }
-        }
-        await importer.importPhotos(photos)
-    }
-
-    private var importPreview: Binding<ImportPreview?> {
-        Binding(
-            get: { importer.preview },
-            set: { importer.preview = $0 }
-        )
-    }
-
-    private var isImportAlertPresented: Binding<Bool> {
-        Binding(
-            get: { importer.alert != nil },
-            set: { if !$0 { importer.alert = nil } }
-        )
-    }
-
-    private func importAlertTitle(_ alert: ImportAlert?) -> Text {
-        switch alert ?? .failed {
-        case .unsupported: Text("Unsupported format")
-        case .conversionFailed: Text("Couldn't convert this document")
-        case .failed: Text("Couldn't import the file")
-        }
-    }
-
     // MARK: - Alerts
 
     private var isErrorPresented: Binding<Bool> {
@@ -290,152 +203,5 @@ struct DocumentListView: View {
             get: { viewModel.errorMessage != nil },
             set: { if !$0 { viewModel.errorMessage = nil } }
         )
-    }
-
-    private var isScannerAlertPresented: Binding<Bool> {
-        Binding(
-            get: { scanner.alert != nil },
-            set: { if !$0 { scanner.alert = nil } }
-        )
-    }
-
-    private func scannerAlertTitle(_ alert: ScannerAlert?) -> Text {
-        switch alert ?? .failed("") {
-        case .scannerUnavailable: Text("Scanner unavailable")
-        case .cameraDenied: Text("Camera access needed")
-        case .saveFailed: Text("Couldn't save. Please try again.")
-        case .failed: Text("Something went wrong")
-        }
-    }
-
-    @ViewBuilder
-    private func scannerAlertActions(_ alert: ScannerAlert) -> some View {
-        switch alert {
-        case .cameraDenied:
-            Button("Open Settings") {
-                if let url = URL(string: UIApplication.openSettingsURLString) {
-                    openURL(url)
-                }
-            }
-            Button("Cancel", role: .cancel) {}
-        case .saveFailed:
-            Button("Try Again") {
-                Task { await scanner.retrySave() }
-            }
-            Button("Discard", role: .destructive) {
-                scanner.discardPendingPages()
-            }
-        case .scannerUnavailable, .failed:
-            Button("OK", role: .cancel) {}
-        }
-    }
-
-    @ViewBuilder
-    private func scannerAlertMessage(_ alert: ScannerAlert) -> some View {
-        switch alert {
-        case .scannerUnavailable: Text("This device can't scan documents.")
-        case .cameraDenied: Text("Allow camera access in Settings to scan your documents.")
-        case .saveFailed: Text("Your scanned pages were kept.")
-        case .failed(let message): Text(message)
-        }
-    }
-}
-
-private struct DocumentRowView: View {
-    let row: DocumentRow
-    let loadThumbnail: () async -> UIImage?
-    @State private var thumbnail: UIImage?
-
-    var body: some View {
-        HStack(spacing: 12) {
-            Group {
-                if let thumbnail {
-                    Image(uiImage: thumbnail)
-                        .resizable()
-                        .scaledToFill()
-                } else {
-                    Image(systemName: "doc.text")
-                        .font(.title2)
-                        .foregroundStyle(.secondary)
-                }
-            }
-            .frame(width: 44, height: 58)
-            .background(Color(.secondarySystemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 6))
-            .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color(.separator), lineWidth: 0.5))
-            .accessibilityHidden(true)
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text(row.title)
-                    .font(.headline)
-                    .lineLimit(2)
-                HStack(spacing: 8) {
-                    Text(row.createdAt, format: .dateTime.day().month().year())
-                    if row.hasPDF || !row.hasOriginal {
-                        Text("\(row.pageCount) pages")
-                    } else {
-                        Text("Original file")
-                    }
-                }
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-            }
-        }
-        .padding(.vertical, 4)
-        .task(id: row.id) {
-            thumbnail = await loadThumbnail()
-        }
-    }
-}
-
-private struct ScanButton: View {
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            Label("Scan", systemImage: "camera.fill")
-                .font(.headline)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 6)
-        }
-        .buttonStyle(.borderedProminent)
-        .controlSize(.large)
-        .shadow(radius: 4, y: 2)
-    }
-}
-
-private struct SavedBannerView: View {
-    let banner: SavedBanner
-    let onRename: () -> Void
-    let onDismiss: () -> Void
-
-    var body: some View {
-        HStack {
-            Image(systemName: "checkmark.circle.fill")
-                .foregroundStyle(.green)
-            Text("\(banner.title) saved")
-                .font(.subheadline.weight(.semibold))
-                .lineLimit(1)
-            Spacer()
-            Button("Rename", action: onRename)
-                .font(.subheadline.weight(.semibold))
-        }
-        .padding()
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 14))
-        .task(id: banner.id) {
-            try? await Task.sleep(for: .seconds(5))
-            onDismiss()
-        }
-    }
-}
-
-private struct SavingOverlay: View {
-    var body: some View {
-        ZStack {
-            Color.black.opacity(0.2).ignoresSafeArea()
-            ProgressView("Building your PDF...")
-                .padding(24)
-                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
-        }
     }
 }
