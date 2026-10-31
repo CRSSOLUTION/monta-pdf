@@ -29,7 +29,7 @@ MontaPDF/
 ├── App/          # Entry point and configuration
 ├── Features/     # Login, Documents, Scanner, Import, Viewer, Account
 ├── Core/         # Models, Storage, DocumentConverter, Naming
-└── Resources/    # Assets, String Catalogs
+└── Resources/    # Assets, String Catalogs, Info.plist, entitlements
 ShareExtension/
 ```
 
