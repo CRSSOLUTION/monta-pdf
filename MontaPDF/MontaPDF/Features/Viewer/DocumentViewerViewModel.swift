@@ -40,13 +40,13 @@ final class DocumentViewerViewModel {
     init(
         documentID: UUID,
         repository: DocumentRepository,
-        namer: DocumentNamer = DocumentNamer(),
-        exporter: DocumentExporting = TemporaryFileExporter()
+        namer: DocumentNamer? = nil,
+        exporter: DocumentExporting? = nil
     ) {
         self.documentID = documentID
         self.repository = repository
-        self.namer = namer
-        self.exporter = exporter
+        self.namer = namer ?? DocumentNamer()
+        self.exporter = exporter ?? TemporaryFileExporter()
     }
 
     func load() {

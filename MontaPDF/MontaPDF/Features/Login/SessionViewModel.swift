@@ -22,12 +22,12 @@ final class SessionViewModel {
 
     init(
         store: SessionStore,
-        credentialChecker: AppleCredentialChecking = SystemAppleCredentialChecker(),
-        cloudStatus: CloudStatusProviding = SystemCloudStatus()
+        credentialChecker: AppleCredentialChecking? = nil,
+        cloudStatus: CloudStatusProviding? = nil
     ) {
         self.store = store
-        self.credentialChecker = credentialChecker
-        self.cloudStatus = cloudStatus
+        self.credentialChecker = credentialChecker ?? SystemAppleCredentialChecker()
+        self.cloudStatus = cloudStatus ?? SystemCloudStatus()
         self.session = store.loadSession()
     }
 
