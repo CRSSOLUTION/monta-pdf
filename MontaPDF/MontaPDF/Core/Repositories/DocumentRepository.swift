@@ -20,4 +20,7 @@ protocol DocumentRepository {
     func rename(_ document: Document, to title: String) throws
 
     func delete(_ document: Document) throws
+
+    /// Deletes every document (used when the account is deleted).
+    func deleteAll() throws
 }

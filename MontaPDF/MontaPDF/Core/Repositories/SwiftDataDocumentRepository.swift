@@ -60,4 +60,12 @@ final class SwiftDataDocumentRepository: DocumentRepository {
         context.delete(document)
         try context.save()
     }
+
+    func deleteAll() throws {
+        // One by one (not a batch delete) so CloudKit also removes each record.
+        for document in try fetchAll() {
+            context.delete(document)
+        }
+        try context.save()
+    }
 }

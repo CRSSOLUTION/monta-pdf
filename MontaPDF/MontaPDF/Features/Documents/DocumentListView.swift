@@ -7,13 +7,26 @@ import SwiftUI
 
 struct DocumentListView: View {
     @Bindable var viewModel: DocumentListViewModel
+    let onShowAccount: () -> Void
     @Environment(\.openURL) private var openURL
     @State private var path: [UUID] = []
+
+    init(viewModel: DocumentListViewModel, onShowAccount: @escaping () -> Void = {}) {
+        _viewModel = Bindable(viewModel)
+        self.onShowAccount = onShowAccount
+    }
 
     var body: some View {
         NavigationStack(path: $path) {
             content
                 .navigationTitle("My Documents")
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action: onShowAccount) {
+                            Label("Account", systemImage: "person.crop.circle")
+                        }
+                    }
+                }
                 .overlay(alignment: .bottom) { bottomBar }
                 .overlay {
                     if viewModel.isSaving {

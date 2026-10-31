@@ -42,6 +42,8 @@ final class FailingDocumentRepository: DocumentRepository {
     func rename(_ document: Document, to title: String) throws { throw TestError() }
 
     func delete(_ document: Document) throws { throw TestError() }
+
+    func deleteAll() throws { throw TestError() }
 }
 
 /// PDF builder that returns fixed bytes. It fails the first `failures` calls.
@@ -86,4 +88,42 @@ final class FakeExporter: DocumentExporting {
         exportedFileNames.append(fileName)
         return URL(fileURLWithPath: "/tmp/\(fileName)")
     }
+}
+
+/// Session store kept in memory.
+final class InMemorySessionStore: SessionStore {
+    private var currentUserID: String?
+    private var profiles: [String: UserSession] = [:]
+
+    func loadSession() -> UserSession? {
+        currentUserID.flatMap { profiles[$0] }
+    }
+
+    func save(_ session: UserSession) {
+        profiles[session.userID] = session
+        currentUserID = session.userID
+    }
+
+    func signOut() {
+        currentUserID = nil
+    }
+
+    func deleteAll() {
+        if let currentUserID { profiles[currentUserID] = nil }
+        currentUserID = nil
+    }
+
+    func rememberedProfile(for userID: String) -> UserSession? {
+        profiles[userID]
+    }
+}
+
+struct FakeCredentialChecker: AppleCredentialChecking {
+    var authorized = true
+
+    func isAuthorized(userID: String) async -> Bool { authorized }
+}
+
+struct FakeCloudStatus: CloudStatusProviding {
+    var isICloudAvailable = true
 }

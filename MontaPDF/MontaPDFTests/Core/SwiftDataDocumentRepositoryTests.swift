@@ -82,4 +82,21 @@ struct SwiftDataDocumentRepositoryTests {
 
         #expect(try repository.fetchAll().map(\.id) == [kept.id])
     }
+
+    @Test func documentByIdFindsOnlyThatDocument() throws {
+        let wanted = try repository.create(NewDocument(pdfData: nil, pageCount: 1))
+        try repository.create(NewDocument(pdfData: nil, pageCount: 2))
+
+        #expect(try repository.document(id: wanted.id)?.id == wanted.id)
+        #expect(try repository.document(id: UUID()) == nil)
+    }
+
+    @Test func deleteAllRemovesEverything() throws {
+        try repository.create(NewDocument(pdfData: nil, pageCount: 1))
+        try repository.create(NewDocument(pdfData: nil, pageCount: 1))
+
+        try repository.deleteAll()
+
+        #expect(try repository.fetchAll().isEmpty)
+    }
 }

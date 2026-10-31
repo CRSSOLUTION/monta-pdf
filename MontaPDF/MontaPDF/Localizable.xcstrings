@@ -75,6 +75,38 @@
         }
       }
     },
+    "Account" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conta"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta"
+          }
+        }
+      }
+    },
+    "All your documents will be deleted from this iPhone and from iCloud. This can't be undone. Type %@ to confirm." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos os seus documentos serão apagados deste iPhone e do iCloud. Isso não pode ser desfeito. Digite %@ para confirmar."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos tus documentos se eliminarán de este iPhone y de iCloud. Esto no se puede deshacer. Escribe %@ para confirmar."
+          }
+        }
+      }
+    },
     "Allow camera access in Settings to scan your documents." : {
       "localizations" : {
         "pt-BR" : {
@@ -87,6 +119,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Permite el acceso a la cámara en Configuración para escanear tus documentos."
+          }
+        }
+      }
+    },
+    "Apple Account" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conta Apple"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta de Apple"
           }
         }
       }
@@ -155,6 +203,38 @@
         }
       }
     },
+    "Couldn't sign in. Please try again." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível entrar. Tente novamente."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo iniciar sesión. Inténtalo de nuevo."
+          }
+        }
+      }
+    },
+    "DELETE" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EXCLUIR"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ELIMINAR"
+          }
+        }
+      }
+    },
     "Delete" : {
       "localizations" : {
         "pt-BR" : {
@@ -167,6 +247,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eliminar"
+          }
+        }
+      }
+    },
+    "Delete Account" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excluir conta"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar cuenta"
+          }
+        }
+      }
+    },
+    "Delete your account?" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excluir sua conta?"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Eliminar tu cuenta?"
           }
         }
       }
@@ -247,6 +359,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Documento no encontrado"
+          }
+        }
+      }
+    },
+    "Documents" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documentos"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documentos"
+          }
+        }
+      }
+    },
+    "Done" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
           }
         }
       }
@@ -395,6 +539,22 @@
         }
       }
     },
+    "Privacy Policy" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de Privacidade"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de Privacidad"
+          }
+        }
+      }
+    },
     "Rename" : {
       "localizations" : {
         "pt-BR" : {
@@ -475,6 +635,22 @@
         }
       }
     },
+    "Scan, convert and keep your documents as PDFs." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escaneie, converta e guarde seus documentos em PDF."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escanea, convierte y guarda tus documentos en PDF."
+          }
+        }
+      }
+    },
     "Scanner unavailable" : {
       "localizations" : {
         "pt-BR" : {
@@ -507,6 +683,54 @@
         }
       }
     },
+    "Sign Out" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sair"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar sesión"
+          }
+        }
+      }
+    },
+    "Sign out?" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sair da conta?"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Cerrar sesión?"
+          }
+        }
+      }
+    },
+    "Signing out keeps your documents in your iCloud." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ao sair, seus documentos continuam no seu iCloud."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Al cerrar sesión, tus documentos se quedan en tu iCloud."
+          }
+        }
+      }
+    },
     "Something went wrong" : {
       "localizations" : {
         "pt-BR" : {
@@ -519,6 +743,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Algo salió mal"
+          }
+        }
+      }
+    },
+    "Space used" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Espaço usado"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Espacio usado"
+          }
+        }
+      }
+    },
+    "Support" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suporte"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soporte"
+          }
+        }
+      }
+    },
+    "Terms of Use" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Termos de Uso"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Términos de Uso"
           }
         }
       }
@@ -571,6 +843,22 @@
         }
       }
     },
+    "Version" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versão"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versión"
+          }
+        }
+      }
+    },
     "Your scanned pages were kept." : {
       "localizations" : {
         "pt-BR" : {
@@ -583,6 +871,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Las páginas escaneadas se conservaron."
+          }
+        }
+      }
+    },
+    "iCloud" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iCloud"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iCloud"
+          }
+        }
+      }
+    },
+    "iCloud is off. Your documents will stay only on this iPhone until you turn on iCloud." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O iCloud está desligado. Seus documentos ficam só neste iPhone até você ativar o iCloud."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iCloud está desactivado. Tus documentos se quedarán solo en este iPhone hasta que actives iCloud."
           }
         }
       }
