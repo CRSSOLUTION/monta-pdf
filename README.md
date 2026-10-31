@@ -42,3 +42,8 @@ ShareExtension/
 ## Requirements
 - Xcode 26+
 - Apple Developer account with Sign in with Apple, iCloud (CloudKit) and App Groups capabilities
+
+## CI/CD (GitHub Actions)
+- **CI** (`.github/workflows/ci.yml`): on every pull request and push to `main`, builds the app and runs the unit tests on an iPhone simulator.
+- **Release** (`.github/workflows/release.yml`): run it manually or push a tag like `v1.0.0` to archive the app and upload it to TestFlight. The build number is the workflow run number.
+- Release secrets (Settings > Secrets and variables > Actions): `ASC_KEY_ID`, `ASC_ISSUER_ID` and `ASC_KEY_P8` (contents of the App Store Connect API key `.p8` file, Admin role).

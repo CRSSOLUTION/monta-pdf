@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Build and test
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Show versions
+        run: |
+          xcodebuild -version
+          xcrun simctl list runtimes
+
+      - name: Find simulator
+        id: simulator
+        run: echo "udid=$(ci/find-simulator.sh)" >> "$GITHUB_OUTPUT"
+
+      - name: Build and run unit tests
+        working-directory: MontaPDF
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project MontaPDF.xcodeproj \
+            -scheme MontaPDF \
+            -destination "id=${{ steps.simulator.outputs.udid }}" \
+            -only-testing:MontaPDFTests \
+            -resultBundlePath "$RUNNER_TEMP/TestResults.xcresult" \
+            -quiet \
+            CODE_SIGNING_ALLOWED=NO \
+            2>&1 | tee "$RUNNER_TEMP/xcodebuild.log"
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            ${{ runner.temp }}/TestResults.xcresult
+            ${{ runner.temp }}/xcodebuild.log
