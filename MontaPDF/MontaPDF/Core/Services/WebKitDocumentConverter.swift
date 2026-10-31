@@ -12,6 +12,8 @@ import WebKit
 final class WebKitDocumentConverter: NSObject, DocumentConverter, WKNavigationDelegate {
     static let a4 = CGRect(x: 0, y: 0, width: 595.2, height: 841.8)
     static let margin: CGFloat = 36
+    /// Gives up if WebKit can't open the file in time (e.g. a damaged document).
+    static let loadTimeout: Duration = .seconds(20)
 
     private var continuation: CheckedContinuation<Void, Error>?
 
@@ -26,6 +28,11 @@ final class WebKitDocumentConverter: NSObject, DocumentConverter, WKNavigationDe
 
         let webView = WKWebView(frame: Self.a4)
         webView.navigationDelegate = self
+        let timeout = Task { [weak self] in
+            try await Task.sleep(for: Self.loadTimeout)
+            self?.finishLoading(with: .failure(DocumentConverterError.timedOut))
+        }
+        defer { timeout.cancel() }
         try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
             self.continuation = continuation
             webView.loadFileURL(fileURL, allowingReadAccessTo: folder)
@@ -40,11 +47,8 @@ final class WebKitDocumentConverter: NSObject, DocumentConverter, WKNavigationDe
     }
 
     private static func renderPDF(from webView: WKWebView) -> ConvertedPDF {
-        let renderer = UIPrintPageRenderer()
+        let renderer = A4PageRenderer()
         renderer.addPrintFormatter(webView.viewPrintFormatter(), startingAtPageAt: 0)
-        let printable = a4.insetBy(dx: margin, dy: margin)
-        renderer.setValue(NSValue(cgRect: a4), forKey: "paperRect")
-        renderer.setValue(NSValue(cgRect: printable), forKey: "printableRect")
 
         let pageCount = renderer.numberOfPages
         let data = NSMutableData()
@@ -58,20 +62,35 @@ final class WebKitDocumentConverter: NSObject, DocumentConverter, WKNavigationDe
         return ConvertedPDF(data: data as Data, pageCount: pageCount)
     }
 
+    /// Resumes the waiting conversion once: load finished, failed or timed out.
+    private func finishLoading(with result: Result<Void, Error>) {
+        continuation?.resume(with: result)
+        continuation = nil
+    }
+
     // MARK: - WKNavigationDelegate
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        continuation?.resume()
-        continuation = nil
+        finishLoading(with: .success(()))
     }
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        continuation?.resume(throwing: error)
-        continuation = nil
+        finishLoading(with: .failure(error))
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        continuation?.resume(throwing: error)
-        continuation = nil
+        finishLoading(with: .failure(error))
+    }
+}
+
+/// Lays the document out on A4 pages with margins, using the public
+/// paperRect / printableRect overrides (no private key-value coding).
+private final class A4PageRenderer: UIPrintPageRenderer {
+    override var paperRect: CGRect {
+        WebKitDocumentConverter.a4
+    }
+
+    override var printableRect: CGRect {
+        WebKitDocumentConverter.a4.insetBy(dx: WebKitDocumentConverter.margin, dy: WebKitDocumentConverter.margin)
     }
 }

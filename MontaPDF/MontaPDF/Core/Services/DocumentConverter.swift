@@ -13,6 +13,7 @@ nonisolated struct ConvertedPDF: Sendable {
 nonisolated enum DocumentConverterError: Error {
     case loadFailed
     case emptyDocument
+    case timedOut
 }
 
 /// Converts a document (e.g. Word) into PDF. The engine can be swapped later
