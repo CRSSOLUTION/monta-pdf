@@ -1,0 +1,62 @@
+name: Release to TestFlight
+
+# Runs manually (Actions > Release to TestFlight > Run workflow) or when a tag like v1.0.0 is pushed.
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  testflight:
+    name: Archive and upload
+    runs-on: macos-26
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Write App Store Connect API key
+        env:
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+        run: |
+          echo "$ASC_KEY_P8" > "$RUNNER_TEMP/AuthKey.p8"
+
+      - name: Archive
+        working-directory: MontaPDF
+        run: |
+          xcodebuild archive \
+            -project MontaPDF.xcodeproj \
+            -scheme MontaPDF \
+            -configuration Release \
+            -destination "generic/platform=iOS" \
+            -archivePath "$RUNNER_TEMP/MontaPDF.xcarchive" \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$RUNNER_TEMP/AuthKey.p8" \
+            -authenticationKeyID "${{ secrets.ASC_KEY_ID }}" \
+            -authenticationKeyIssuerID "${{ secrets.ASC_ISSUER_ID }}" \
+            -quiet \
+            CURRENT_PROJECT_VERSION=${{ github.run_number }}
+
+      - name: Upload to App Store Connect
+        working-directory: MontaPDF
+        run: |
+          xcodebuild -exportArchive \
+            -archivePath "$RUNNER_TEMP/MontaPDF.xcarchive" \
+            -exportOptionsPlist ../ci/ExportOptions.plist \
+            -exportPath "$RUNNER_TEMP/export" \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$RUNNER_TEMP/AuthKey.p8" \
+            -authenticationKeyID "${{ secrets.ASC_KEY_ID }}" \
+            -authenticationKeyIssuerID "${{ secrets.ASC_ISSUER_ID }}"
+
+      - name: Remove API key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/AuthKey.p8"
