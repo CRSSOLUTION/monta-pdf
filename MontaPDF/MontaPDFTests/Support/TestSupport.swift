@@ -163,3 +163,14 @@ final class FakeScanEnhancer: ScanEnhancing, @unchecked Sendable {
         return image
     }
 }
+
+/// Records revocation calls, or fails when asked to.
+final class FakeTokenRevoker: AppleTokenRevoking {
+    var shouldFail = false
+    private(set) var revokedCodes: [String] = []
+
+    func revoke(authorizationCode: String) async throws {
+        if shouldFail { throw TestError() }
+        revokedCodes.append(authorizationCode)
+    }
+}

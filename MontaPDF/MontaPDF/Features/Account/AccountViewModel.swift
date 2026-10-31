@@ -3,6 +3,7 @@
 //  MontaPDF
 //
 
+import AuthenticationServices
 import Foundation
 import Observation
 
@@ -16,14 +17,25 @@ final class AccountViewModel {
     var isConfirmingSignOut = false
     var isConfirmingDelete = false
     var deleteConfirmationText = ""
+    /// After typing the confirmation word, the user confirms with Apple once more.
+    /// That fresh authorization code is what lets us revoke the Sign in with Apple token.
+    var isConfirmingWithApple = false
+    private(set) var isDeleting = false
 
     private let session: SessionViewModel
     private let repository: DocumentRepository
+    private let tokenRevoker: AppleTokenRevoking
     private let bundle: Bundle
 
-    init(session: SessionViewModel, repository: DocumentRepository, bundle: Bundle = .main) {
+    init(
+        session: SessionViewModel,
+        repository: DocumentRepository,
+        tokenRevoker: AppleTokenRevoking? = nil,
+        bundle: Bundle = .main
+    ) {
         self.session = session
         self.repository = repository
+        self.tokenRevoker = tokenRevoker ?? WorkerAppleTokenRevoker()
         self.bundle = bundle
     }
 
@@ -68,13 +80,54 @@ final class AccountViewModel {
         isConfirmingDelete = true
     }
 
+    /// Step 2: the confirmation word was typed, so ask Apple to confirm it's the user.
     func confirmDeleteAccount() {
         guard canDeleteAccount else { return }
+        isConfirmingWithApple = true
+    }
+
+    func cancelAppleConfirmation() {
+        isConfirmingWithApple = false
+    }
+
+    /// Step 3: result of "Continue with Apple" in the confirmation sheet.
+    func handleAppleConfirmation(_ result: Result<ASAuthorization, Error>) async {
+        switch result {
+        case .success(let authorization):
+            guard
+                let credential = authorization.credential as? ASAuthorizationAppleIDCredential,
+                let codeData = credential.authorizationCode,
+                let code = String(data: codeData, encoding: .utf8)
+            else {
+                isConfirmingWithApple = false
+                errorMessage = String(localized: "Couldn't delete your account. Please try again.")
+                return
+            }
+            await deleteAccount(authorizationCode: code)
+        case .failure(let error):
+            isConfirmingWithApple = false
+            if let authError = error as? ASAuthorizationError, authError.code == .canceled {
+                return
+            }
+            errorMessage = String(localized: "Couldn't delete your account. Please try again.")
+        }
+    }
+
+    /// Revokes the Apple token first; only then deletes the documents and signs out.
+    /// If revoking fails (e.g. offline), nothing is deleted and the user can try again.
+    func deleteAccount(authorizationCode: String) async {
+        guard !isDeleting else { return }
+        isDeleting = true
+        defer { isDeleting = false }
+
         do {
+            try await tokenRevoker.revoke(authorizationCode: authorizationCode)
             try repository.deleteAll()
+            isConfirmingWithApple = false
             session.accountDeleted()
         } catch {
-            errorMessage = error.localizedDescription
+            isConfirmingWithApple = false
+            errorMessage = String(localized: "Couldn't delete your account. Check your connection and try again.")
         }
     }
 
