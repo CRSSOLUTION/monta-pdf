@@ -46,11 +46,21 @@ final class DocumentListViewModel {
     var alert: DocumentListAlert?
     var isScannerPresented = false
 
+    // Rename, delete and share
+    var isRenaming = false
+    var renameDraft = ""
+    private(set) var renameTargetID: UUID?
+    var isConfirmingDelete = false
+    private(set) var deleteTarget: DocumentRow?
+    var shareItem: ShareItem?
+
     private let repository: DocumentRepository
     private let namer: DocumentNamer
     private let pdfBuilder: PDFBuilding
     private let scannerAvailability: ScannerAvailability
+    private let exporter: DocumentExporting
     private var documents: [Document] = []
+    private var thumbnails: [UUID: UIImage] = [:]
     /// Pages kept after a failed save, so the user can try again without scanning again.
     private var pendingPages: [UIImage] = []
 
@@ -58,12 +68,18 @@ final class DocumentListViewModel {
         repository: DocumentRepository,
         namer: DocumentNamer = DocumentNamer(),
         pdfBuilder: PDFBuilding = ImagePDFBuilder(),
-        scannerAvailability: ScannerAvailability = SystemScannerAvailability()
+        scannerAvailability: ScannerAvailability = SystemScannerAvailability(),
+        exporter: DocumentExporting = TemporaryFileExporter()
     ) {
         self.repository = repository
         self.namer = namer
         self.pdfBuilder = pdfBuilder
         self.scannerAvailability = scannerAvailability
+        self.exporter = exporter
+    }
+
+    func makeViewerViewModel(for id: UUID) -> DocumentViewerViewModel {
+        DocumentViewerViewModel(documentID: id, repository: repository, namer: namer, exporter: exporter)
     }
 
     // MARK: - Loading
@@ -161,9 +177,61 @@ final class DocumentListViewModel {
     func rename(id: UUID, to title: String) {
         guard let document = documents.first(where: { $0.id == id }) else { return }
         perform {
-            try repository.rename(document, to: title)
+            try repository.rename(document, to: DocumentTitleRules.sanitize(title))
             documents = try repository.fetchAll()
         }
+    }
+
+    func startRename(id: UUID) {
+        guard let row = rows.first(where: { $0.id == id }) else { return }
+        renameTargetID = id
+        renameDraft = row.title
+        isRenaming = true
+    }
+
+    func confirmRename() {
+        guard let id = renameTargetID else { return }
+        let newTitle = DocumentTitleRules.sanitize(renameDraft)
+        guard !newTitle.isEmpty else { return }
+        rename(id: id, to: newTitle)
+        renameTargetID = nil
+        if savedBanner?.id == id {
+            savedBanner = nil
+        }
+    }
+
+    func startDelete(id: UUID) {
+        guard let row = rows.first(where: { $0.id == id }) else { return }
+        deleteTarget = row
+        isConfirmingDelete = true
+    }
+
+    func confirmDelete() {
+        guard let target = deleteTarget else { return }
+        delete(ids: [target.id])
+        thumbnails[target.id] = nil
+        deleteTarget = nil
+    }
+
+    func share(id: UUID) {
+        guard
+            let document = documents.first(where: { $0.id == id }),
+            let data = document.pdfData,
+            let row = rows.first(where: { $0.id == id })
+        else { return }
+        perform {
+            let url = try exporter.export(data, fileName: DocumentTitleRules.fileName(for: row.title))
+            shareItem = ShareItem(url: url)
+        }
+    }
+
+    /// First page of the PDF, cached after the first render.
+    func thumbnail(for id: UUID) async -> UIImage? {
+        if let cached = thumbnails[id] { return cached }
+        guard let data = documents.first(where: { $0.id == id })?.pdfData else { return nil }
+        let image = await ThumbnailRenderer.render(data, size: CGSize(width: 120, height: 160))
+        thumbnails[id] = image
+        return image
     }
 
     // MARK: - Private

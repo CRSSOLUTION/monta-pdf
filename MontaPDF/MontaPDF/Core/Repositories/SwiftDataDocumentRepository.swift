@@ -23,6 +23,12 @@ final class SwiftDataDocumentRepository: DocumentRepository {
         return try context.fetch(descriptor)
     }
 
+    func document(id: UUID) throws -> Document? {
+        var descriptor = FetchDescriptor<Document>(predicate: #Predicate { $0.id == id })
+        descriptor.fetchLimit = 1
+        return try context.fetch(descriptor).first
+    }
+
     @discardableResult
     func create(_ newDocument: NewDocument) throws -> Document {
         let id = UUID()

@@ -8,9 +8,10 @@ import SwiftUI
 struct DocumentListView: View {
     @Bindable var viewModel: DocumentListViewModel
     @Environment(\.openURL) private var openURL
+    @State private var path: [UUID] = []
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             content
                 .navigationTitle("My Documents")
                 .overlay(alignment: .bottom) { bottomBar }
@@ -29,6 +30,28 @@ struct DocumentListView: View {
                     )
                     .ignoresSafeArea()
                 }
+                .navigationDestination(for: UUID.self) { id in
+                    DocumentViewerView(viewModel: viewModel.makeViewerViewModel(for: id))
+                }
+                .renameDocumentAlert(
+                    isPresented: $viewModel.isRenaming,
+                    name: $viewModel.renameDraft
+                ) { _ in
+                    viewModel.confirmRename()
+                }
+                .deleteDocumentAlert(
+                    isPresented: $viewModel.isConfirmingDelete,
+                    title: viewModel.deleteTarget?.title ?? ""
+                ) {
+                    viewModel.confirmDelete()
+                }
+                .sheet(item: $viewModel.shareItem) { item in
+                    ActivityView(items: [item.url])
+                        .presentationDetents([.medium, .large])
+                }
+                .onAppear {
+                    viewModel.load()
+                }
                 .alert(
                     alertTitle(viewModel.alert),
                     isPresented: isAlertPresented,
@@ -38,9 +61,6 @@ struct DocumentListView: View {
                 } message: { alert in
                     alertMessage(alert)
                 }
-        }
-        .task {
-            viewModel.load()
         }
     }
 
@@ -64,9 +84,35 @@ struct DocumentListView: View {
         } else {
             List {
                 ForEach(viewModel.rows) { row in
-                    DocumentRowView(row: row)
+                    NavigationLink(value: row.id) {
+                        DocumentRowView(row: row) {
+                            await viewModel.thumbnail(for: row.id)
+                        }
+                    }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        Button("Delete", systemImage: "trash", role: .destructive) {
+                            viewModel.startDelete(id: row.id)
+                        }
+                        Button("Rename", systemImage: "pencil") {
+                            viewModel.startRename(id: row.id)
+                        }
+                        .tint(.orange)
+                    }
+                    .contextMenu {
+                        Button("Open", systemImage: "doc.text") {
+                            path.append(row.id)
+                        }
+                        Button("Rename", systemImage: "pencil") {
+                            viewModel.startRename(id: row.id)
+                        }
+                        Button("Share", systemImage: "square.and.arrow.up") {
+                            viewModel.share(id: row.id)
+                        }
+                        Button("Delete", systemImage: "trash", role: .destructive) {
+                            viewModel.startDelete(id: row.id)
+                        }
+                    }
                 }
-                .onDelete(perform: viewModel.delete(at:))
             }
             .listStyle(.plain)
             .safeAreaInset(edge: .bottom) {
@@ -79,9 +125,11 @@ struct DocumentListView: View {
     private var bottomBar: some View {
         VStack(spacing: 12) {
             if let banner = viewModel.savedBanner {
-                SavedBannerView(banner: banner) {
-                    viewModel.dismissBanner()
-                }
+                SavedBannerView(
+                    banner: banner,
+                    onRename: { viewModel.startRename(id: banner.id) },
+                    onDismiss: { viewModel.dismissBanner() }
+                )
                 .transition(.move(edge: .bottom).combined(with: .opacity))
             }
             if !viewModel.rows.isEmpty {
@@ -148,19 +196,44 @@ struct DocumentListView: View {
 
 private struct DocumentRowView: View {
     let row: DocumentRow
+    let loadThumbnail: () async -> UIImage?
+    @State private var thumbnail: UIImage?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(row.title)
-                .font(.headline)
-            HStack(spacing: 8) {
-                Text(row.createdAt, format: .dateTime.day().month().year())
-                Text("\(row.pageCount) pages")
+        HStack(spacing: 12) {
+            Group {
+                if let thumbnail {
+                    Image(uiImage: thumbnail)
+                        .resizable()
+                        .scaledToFill()
+                } else {
+                    Image(systemName: "doc.text")
+                        .font(.title2)
+                        .foregroundStyle(.secondary)
+                }
             }
-            .font(.subheadline)
-            .foregroundStyle(.secondary)
+            .frame(width: 44, height: 58)
+            .background(Color(.secondarySystemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 6))
+            .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color(.separator), lineWidth: 0.5))
+            .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(row.title)
+                    .font(.headline)
+                    .lineLimit(2)
+                HStack(spacing: 8) {
+                    Text(row.createdAt, format: .dateTime.day().month().year())
+                    Text("\(row.pageCount) pages")
+                }
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+            }
         }
         .padding(.vertical, 4)
+        .task(id: row.id) {
+            thumbnail = await loadThumbnail()
+        }
     }
 }
 
@@ -182,6 +255,7 @@ private struct ScanButton: View {
 
 private struct SavedBannerView: View {
     let banner: SavedBanner
+    let onRename: () -> Void
     let onDismiss: () -> Void
 
     var body: some View {
@@ -190,12 +264,15 @@ private struct SavedBannerView: View {
                 .foregroundStyle(.green)
             Text("\(banner.title) saved")
                 .font(.subheadline.weight(.semibold))
+                .lineLimit(1)
             Spacer()
+            Button("Rename", action: onRename)
+                .font(.subheadline.weight(.semibold))
         }
         .padding()
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 14))
         .task(id: banner.id) {
-            try? await Task.sleep(for: .seconds(4))
+            try? await Task.sleep(for: .seconds(5))
             onDismiss()
         }
     }

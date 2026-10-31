@@ -11,6 +11,8 @@ protocol DocumentRepository {
     /// All documents, newest first.
     func fetchAll() throws -> [Document]
 
+    func document(id: UUID) throws -> Document?
+
     @discardableResult
     func create(_ newDocument: NewDocument) throws -> Document
 

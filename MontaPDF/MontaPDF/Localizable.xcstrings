@@ -155,6 +155,38 @@
         }
       }
     },
+    "Delete" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excluir"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
+          }
+        }
+      }
+    },
+    "Delete “%@”?" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excluir “%@”?"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Eliminar “%@”?"
+          }
+        }
+      }
+    },
     "Discard" : {
       "localizations" : {
         "pt-BR" : {
@@ -203,6 +235,70 @@
         }
       }
     },
+    "Document not found" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documento não encontrado"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documento no encontrado"
+          }
+        }
+      }
+    },
+    "Downloading from iCloud..." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baixando do iCloud..."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descargando de iCloud..."
+          }
+        }
+      }
+    },
+    "If you're offline, connect to the internet to open this document." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se estiver sem internet, conecte-se para abrir este documento."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si no tienes conexión, conéctate a internet para abrir este documento."
+          }
+        }
+      }
+    },
+    "More" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mais opções"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Más opciones"
+          }
+        }
+      }
+    },
     "My Documents" : {
       "localizations" : {
         "pt-BR" : {
@@ -215,6 +311,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mis documentos"
+          }
+        }
+      }
+    },
+    "Name" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
           }
         }
       }
@@ -235,6 +347,22 @@
         }
       }
     },
+    "Open" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir"
+          }
+        }
+      }
+    },
     "Open Settings" : {
       "localizations" : {
         "pt-BR" : {
@@ -247,6 +375,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abrir Configuración"
+          }
+        }
+      }
+    },
+    "Page %lld of %lld" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Página %lld de %lld"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Página %lld de %lld"
+          }
+        }
+      }
+    },
+    "Rename" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renomear"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renombrar"
+          }
+        }
+      }
+    },
+    "Rename Document" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renomear documento"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renombrar documento"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvar"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
           }
         }
       }
@@ -299,6 +491,22 @@
         }
       }
     },
+    "Share" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartilhar"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir"
+          }
+        }
+      }
+    },
     "Something went wrong" : {
       "localizations" : {
         "pt-BR" : {
@@ -311,6 +519,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Algo salió mal"
+          }
+        }
+      }
+    },
+    "The document will be deleted from this iPhone and from iCloud." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O documento será apagado deste iPhone e do iCloud."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El documento se eliminará de este iPhone y de iCloud."
           }
         }
       }

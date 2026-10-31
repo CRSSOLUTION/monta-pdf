@@ -12,6 +12,7 @@ import UIKit
 @MainActor
 struct DocumentListViewModelTests {
     private let repository: SwiftDataDocumentRepository
+    private let exporter = FakeExporter()
 
     init() throws {
         repository = SwiftDataDocumentRepository(container: try makeInMemoryContainer())
@@ -25,7 +26,8 @@ struct DocumentListViewModelTests {
             repository: repository,
             namer: DocumentNamer(automaticTitle: { "Document \($0)" }),
             pdfBuilder: builder,
-            scannerAvailability: availability
+            scannerAvailability: availability,
+            exporter: exporter
         )
     }
 
@@ -161,5 +163,72 @@ struct DocumentListViewModelTests {
         viewModel.dismissBanner()
 
         #expect(viewModel.savedBanner == nil)
+    }
+
+    // MARK: - Rename, delete, share
+
+    @Test func renameFlowUsesTheCurrentTitleAndSanitizes() throws {
+        let document = try addDocument(minute: 1)
+        let viewModel = makeViewModel()
+        viewModel.load()
+
+        viewModel.startRename(id: document.id)
+        #expect(viewModel.isRenaming)
+        #expect(viewModel.renameDraft == "Document 1")
+
+        viewModel.renameDraft = " Bills/October "
+        viewModel.confirmRename()
+
+        #expect(viewModel.rows.first?.title == "BillsOctober")
+    }
+
+    @Test func renamingWithEmptyNameDoesNothing() throws {
+        let document = try addDocument(minute: 1)
+        let viewModel = makeViewModel()
+        viewModel.load()
+
+        viewModel.startRename(id: document.id)
+        viewModel.renameDraft = "  "
+        viewModel.confirmRename()
+
+        #expect(viewModel.rows.first?.title == "Document 1")
+        #expect(document.isCustomTitle == false)
+    }
+
+    @Test func deleteAsksFirstThenDeletes() throws {
+        let document = try addDocument(minute: 1)
+        let viewModel = makeViewModel()
+        viewModel.load()
+
+        viewModel.startDelete(id: document.id)
+        #expect(viewModel.isConfirmingDelete)
+        #expect(viewModel.deleteTarget?.title == "Document 1")
+        #expect(viewModel.rows.count == 1)
+
+        viewModel.confirmDelete()
+
+        #expect(viewModel.rows.isEmpty)
+        #expect(viewModel.deleteTarget == nil)
+    }
+
+    @Test func shareExportsThePDFWithTheDocumentName() throws {
+        let document = try repository.create(NewDocument(pdfData: Data("pdf".utf8), pageCount: 1, customTitle: "Contract"))
+        let viewModel = makeViewModel()
+        viewModel.load()
+
+        viewModel.share(id: document.id)
+
+        #expect(viewModel.shareItem?.url.lastPathComponent == "Contract.pdf")
+        #expect(exporter.exportedFileNames == ["Contract.pdf"])
+    }
+
+    @Test func shareWithoutPDFDoesNothing() throws {
+        let document = try addDocument(minute: 1)
+        let viewModel = makeViewModel()
+        viewModel.load()
+
+        viewModel.share(id: document.id)
+
+        #expect(viewModel.shareItem == nil)
     }
 }

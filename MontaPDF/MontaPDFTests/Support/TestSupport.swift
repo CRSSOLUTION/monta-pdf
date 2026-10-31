@@ -35,6 +35,8 @@ struct TestError: Error, LocalizedError {
 final class FailingDocumentRepository: DocumentRepository {
     func fetchAll() throws -> [Document] { throw TestError() }
 
+    func document(id: UUID) throws -> Document? { throw TestError() }
+
     func create(_ newDocument: NewDocument) throws -> Document { throw TestError() }
 
     func rename(_ document: Document, to title: String) throws { throw TestError() }
@@ -73,5 +75,15 @@ func makeTestImage(width: CGFloat = 20, height: CGFloat = 30) -> UIImage {
     return UIGraphicsImageRenderer(size: CGSize(width: width, height: height), format: format).image { context in
         UIColor.gray.setFill()
         context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+    }
+}
+
+/// Exporter that records what it was asked to export, without touching the disk.
+final class FakeExporter: DocumentExporting {
+    private(set) var exportedFileNames: [String] = []
+
+    func export(_ data: Data, fileName: String) throws -> URL {
+        exportedFileNames.append(fileName)
+        return URL(fileURLWithPath: "/tmp/\(fileName)")
     }
 }
