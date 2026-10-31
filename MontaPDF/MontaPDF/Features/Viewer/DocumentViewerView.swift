@@ -31,11 +31,7 @@ struct DocumentViewerView: View {
                     .accessibilityHint(Text("Rename"))
                 }
                 ToolbarItemGroup(placement: .topBarTrailing) {
-                    if let url = viewModel.shareURL {
-                        ShareLink(item: url) {
-                            Label("Share", systemImage: "square.and.arrow.up")
-                        }
-                    }
+                    shareButton
                     Menu {
                         Button("Rename", systemImage: "pencil") {
                             viewModel.startRename()
@@ -79,6 +75,30 @@ struct DocumentViewerView: View {
             }
     }
 
+    /// Word imports offer the PDF or the original file.
+    @ViewBuilder
+    private var shareButton: some View {
+        switch (viewModel.shareURL, viewModel.originalShareURL) {
+        case let (pdf?, original?):
+            Menu {
+                ShareLink("PDF", item: pdf)
+                ShareLink("Original File", item: original)
+            } label: {
+                Label("Share", systemImage: "square.and.arrow.up")
+            }
+        case let (pdf?, nil):
+            ShareLink(item: pdf) {
+                Label("Share", systemImage: "square.and.arrow.up")
+            }
+        case let (nil, original?):
+            ShareLink(item: original) {
+                Label("Share", systemImage: "square.and.arrow.up")
+            }
+        case (nil, nil):
+            EmptyView()
+        }
+    }
+
     @ViewBuilder
     private var content: some View {
         switch viewModel.state {
@@ -89,6 +109,12 @@ struct DocumentViewerView: View {
                 Label("Downloading from iCloud...", systemImage: "icloud.and.arrow.down")
             } description: {
                 Text("If you're offline, connect to the internet to open this document.")
+            }
+        case .originalOnly:
+            ContentUnavailableView {
+                Label("Original file kept", systemImage: "doc.richtext")
+            } description: {
+                Text("This document was saved without converting to PDF. You can share the original file.")
             }
         case .notFound:
             ContentUnavailableView("Document not found", systemImage: "doc.questionmark")

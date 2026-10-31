@@ -11,6 +11,8 @@ nonisolated enum DocumentViewerState: Equatable, Sendable {
     case ready
     /// The PDF hasn't arrived from iCloud yet.
     case downloading
+    /// Imported Word file kept without a PDF.
+    case originalOnly
     case notFound
 }
 
@@ -21,6 +23,8 @@ final class DocumentViewerViewModel {
     private(set) var title = ""
     private(set) var pdfData: Data?
     private(set) var shareURL: URL?
+    /// Imported original (e.g. .docx), offered next to the PDF when sharing.
+    private(set) var originalShareURL: URL?
     private(set) var state: DocumentViewerState = .loading
     private(set) var isDeleted = false
     private(set) var errorMessage: String?
@@ -54,11 +58,18 @@ final class DocumentViewerViewModel {
             let titles = namer.displayTitles(for: try repository.fetchAll())
             title = titles[documentID] ?? document.title
             pdfData = document.pdfData
+            if let original = document.originalData {
+                let ext = ((document.originalFileName ?? "") as NSString).pathExtension
+                originalShareURL = try? exporter.export(
+                    original,
+                    fileName: DocumentTitleRules.fileName(for: title, fileExtension: ext.isEmpty ? "docx" : ext)
+                )
+            }
             if let data = document.pdfData {
                 state = .ready
                 shareURL = try? exporter.export(data, fileName: DocumentTitleRules.fileName(for: title))
             } else {
-                state = .downloading
+                state = document.originalData == nil ? .downloading : .originalOnly
             }
         } catch {
             errorMessage = error.localizedDescription

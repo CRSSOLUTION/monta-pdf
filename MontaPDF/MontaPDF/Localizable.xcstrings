@@ -187,6 +187,38 @@
         }
       }
     },
+    "Couldn't convert this document" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível converter este documento"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo convertir este documento"
+          }
+        }
+      }
+    },
+    "Couldn't import the file" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível importar o arquivo"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo importar el archivo"
+          }
+        }
+      }
+    },
     "Couldn't save. Please try again." : {
       "localizations" : {
         "pt-BR" : {
@@ -379,6 +411,22 @@
         }
       }
     },
+    "Does the document look right?" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O documento ficou correto?"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿El documento quedó bien?"
+          }
+        }
+      }
+    },
     "Done" : {
       "localizations" : {
         "pt-BR" : {
@@ -411,6 +459,22 @@
         }
       }
     },
+    "Files" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivos"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivos"
+          }
+        }
+      }
+    },
     "If you're offline, connect to the internet to open this document." : {
       "localizations" : {
         "pt-BR" : {
@@ -423,6 +487,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Si no tienes conexión, conéctate a internet para abrir este documento."
+          }
+        }
+      }
+    },
+    "Import" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar"
+          }
+        }
+      }
+    },
+    "Keep Original" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar o original"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar el original"
           }
         }
       }
@@ -523,6 +619,70 @@
         }
       }
     },
+    "Original File" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo original"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivo original"
+          }
+        }
+      }
+    },
+    "Original file" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo original"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivo original"
+          }
+        }
+      }
+    },
+    "Original file kept" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Original guardado"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Original guardado"
+          }
+        }
+      }
+    },
+    "PDF" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PDF"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PDF"
+          }
+        }
+      }
+    },
     "Page %lld of %lld" : {
       "localizations" : {
         "pt-BR" : {
@@ -535,6 +695,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Página %lld de %lld"
+          }
+        }
+      }
+    },
+    "Photos" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotos"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotos"
+          }
+        }
+      }
+    },
+    "Please try again." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tente novamente."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inténtalo de nuevo."
+          }
+        }
+      }
+    },
+    "Preview" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prévia"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vista previa"
           }
         }
       }
@@ -603,6 +811,22 @@
         }
       }
     },
+    "Save PDF" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvar PDF"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar PDF"
+          }
+        }
+      }
+    },
     "Scan" : {
       "localizations" : {
         "pt-BR" : {
@@ -667,6 +891,22 @@
         }
       }
     },
+    "Send an image, a PDF or a Word file." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envie uma imagem, um PDF ou um arquivo Word."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envía una imagen, un PDF o un archivo Word."
+          }
+        }
+      }
+    },
     "Share" : {
       "localizations" : {
         "pt-BR" : {
@@ -679,6 +919,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Compartir"
+          }
+        }
+      }
+    },
+    "Share as" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartilhar como"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir como"
           }
         }
       }
@@ -827,6 +1083,22 @@
         }
       }
     },
+    "This document was saved without converting to PDF. You can share the original file." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este documento foi guardado sem converter para PDF. Você pode compartilhar o arquivo original."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este documento se guardó sin convertir a PDF. Puedes compartir el archivo original."
+          }
+        }
+      }
+    },
     "Try Again" : {
       "localizations" : {
         "pt-BR" : {
@@ -843,6 +1115,22 @@
         }
       }
     },
+    "Unsupported format" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Formato não suportado"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Formato no compatible"
+          }
+        }
+      }
+    },
     "Version" : {
       "localizations" : {
         "pt-BR" : {
@@ -855,6 +1143,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Versión"
+          }
+        }
+      }
+    },
+    "You can keep the original file and share it as it is." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você pode guardar o arquivo original e compartilhar como está."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puedes guardar el archivo original y compartirlo tal cual."
           }
         }
       }
@@ -903,6 +1207,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "iCloud está desactivado. Tus documentos se quedarán solo en este iPhone hasta que actives iCloud."
+          }
+        }
+      }
+    },
+    "or import a file" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ou importe um arquivo"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "o importa un archivo"
           }
         }
       }

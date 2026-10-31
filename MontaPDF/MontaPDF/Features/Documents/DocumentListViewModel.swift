@@ -13,6 +13,16 @@ nonisolated struct DocumentRow: Identifiable, Sendable {
     let title: String
     let createdAt: Date
     let pageCount: Int
+    /// `false` for imported Word files kept without a PDF.
+    var hasPDF = true
+    /// Set for imported files (e.g. "Contract.docx").
+    var originalFileName: String?
+    var hasOriginal = false
+}
+
+nonisolated enum ShareFormat: Sendable {
+    case pdf
+    case original
 }
 
 /// Shown at the bottom of the list after a document is saved.
@@ -53,6 +63,11 @@ final class DocumentListViewModel {
     var isConfirmingDelete = false
     private(set) var deleteTarget: DocumentRow?
     var shareItem: ShareItem?
+    /// Word imports ask whether to share the PDF or the original file.
+    var isChoosingShareFormat = false
+    private(set) var shareChoiceID: UUID?
+
+    let importer: ImportViewModel
 
     private let repository: DocumentRepository
     private let namer: DocumentNamer
@@ -69,13 +84,18 @@ final class DocumentListViewModel {
         namer: DocumentNamer = DocumentNamer(),
         pdfBuilder: PDFBuilding = ImagePDFBuilder(),
         scannerAvailability: ScannerAvailability = SystemScannerAvailability(),
-        exporter: DocumentExporting = TemporaryFileExporter()
+        exporter: DocumentExporting = TemporaryFileExporter(),
+        converter: DocumentConverter = WebKitDocumentConverter()
     ) {
         self.repository = repository
         self.namer = namer
         self.pdfBuilder = pdfBuilder
         self.scannerAvailability = scannerAvailability
         self.exporter = exporter
+        self.importer = ImportViewModel(repository: repository, pdfBuilder: pdfBuilder, converter: converter)
+        importer.onSaved = { [weak self] id in
+            self?.documentAdded(id: id)
+        }
     }
 
     func makeViewerViewModel(for id: UUID) -> DocumentViewerViewModel {
@@ -144,13 +164,18 @@ final class DocumentListViewModel {
             }.value
             let document = try repository.create(NewDocument(pdfData: data, pageCount: pages.count))
             pendingPages = []
-            documents = try repository.fetchAll()
-            rebuildRows()
-            let title = rows.first(where: { $0.id == document.id })?.title ?? document.title
-            savedBanner = SavedBanner(id: document.id, title: title)
+            documentAdded(id: document.id)
         } catch {
             pendingPages = pages
             alert = .saveFailed
+        }
+    }
+
+    /// Reloads the list and shows the "saved" banner for a new document.
+    func documentAdded(id: UUID) {
+        load()
+        if let row = rows.first(where: { $0.id == id }) {
+            savedBanner = SavedBanner(id: id, title: row.title)
         }
     }
 
@@ -213,16 +238,49 @@ final class DocumentListViewModel {
         deleteTarget = nil
     }
 
+    /// Shares the PDF. Word imports first ask: PDF or original?
     func share(id: UUID) {
+        guard let document = documents.first(where: { $0.id == id }) else { return }
+        switch (document.pdfData != nil, document.originalData != nil) {
+        case (true, true):
+            shareChoiceID = id
+            isChoosingShareFormat = true
+        case (true, false):
+            share(id: id, format: .pdf)
+        case (false, true):
+            share(id: id, format: .original)
+        case (false, false):
+            break
+        }
+    }
+
+    func share(id: UUID, format: ShareFormat) {
         guard
             let document = documents.first(where: { $0.id == id }),
-            let data = document.pdfData,
             let row = rows.first(where: { $0.id == id })
         else { return }
         perform {
-            let url = try exporter.export(data, fileName: DocumentTitleRules.fileName(for: row.title))
-            shareItem = ShareItem(url: url)
+            switch format {
+            case .pdf:
+                guard let data = document.pdfData else { return }
+                let url = try exporter.export(data, fileName: DocumentTitleRules.fileName(for: row.title))
+                shareItem = ShareItem(url: url)
+            case .original:
+                guard let data = document.originalData else { return }
+                let ext = ((document.originalFileName ?? "") as NSString).pathExtension
+                let url = try exporter.export(
+                    data,
+                    fileName: DocumentTitleRules.fileName(for: row.title, fileExtension: ext.isEmpty ? "docx" : ext)
+                )
+                shareItem = ShareItem(url: url)
+            }
         }
+    }
+
+    func shareChosen(_ format: ShareFormat) {
+        guard let id = shareChoiceID else { return }
+        shareChoiceID = nil
+        share(id: id, format: format)
     }
 
     /// First page of the PDF, cached after the first render.
@@ -254,7 +312,10 @@ final class DocumentListViewModel {
                     id: document.id,
                     title: titles[document.id] ?? document.title,
                     createdAt: document.createdAt,
-                    pageCount: document.pageCount
+                    pageCount: document.pageCount,
+                    hasPDF: document.pdfData != nil,
+                    originalFileName: document.originalFileName,
+                    hasOriginal: document.originalData != nil
                 )
             }
     }

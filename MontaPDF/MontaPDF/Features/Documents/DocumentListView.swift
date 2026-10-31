@@ -3,6 +3,7 @@
 //  MontaPDF
 //
 
+import PhotosUI
 import SwiftUI
 
 struct DocumentListView: View {
@@ -10,6 +11,9 @@ struct DocumentListView: View {
     let onShowAccount: () -> Void
     @Environment(\.openURL) private var openURL
     @State private var path: [UUID] = []
+    @State private var isFileImporterPresented = false
+    @State private var isPhotoPickerPresented = false
+    @State private var photoSelection: [PhotosPickerItem] = []
 
     init(viewModel: DocumentListViewModel, onShowAccount: @escaping () -> Void = {}) {
         _viewModel = Bindable(viewModel)
@@ -22,14 +26,82 @@ struct DocumentListView: View {
                 .navigationTitle("My Documents")
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
+                        Menu {
+                            Button("Files", systemImage: "folder") {
+                                isFileImporterPresented = true
+                            }
+                            Button("Photos", systemImage: "photo.on.rectangle") {
+                                isPhotoPickerPresented = true
+                            }
+                        } label: {
+                            Label("Import", systemImage: "square.and.arrow.down")
+                        }
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
                         Button(action: onShowAccount) {
                             Label("Account", systemImage: "person.crop.circle")
                         }
                     }
                 }
+                .fileImporter(
+                    isPresented: $isFileImporterPresented,
+                    allowedContentTypes: ImportKind.supportedTypes,
+                    allowsMultipleSelection: true
+                ) { result in
+                    if case .success(let urls) = result {
+                        Task { await viewModel.importer.importFiles(at: urls) }
+                    }
+                }
+                .photosPicker(
+                    isPresented: $isPhotoPickerPresented,
+                    selection: $photoSelection,
+                    maxSelectionCount: 30,
+                    selectionBehavior: .ordered,
+                    matching: .images
+                )
+                .onChange(of: photoSelection) { _, items in
+                    guard !items.isEmpty else { return }
+                    photoSelection = []
+                    Task { await importPhotos(items) }
+                }
+                .sheet(item: importPreview) { preview in
+                    ImportPreviewView(
+                        preview: preview,
+                        onSave: { viewModel.importer.savePreview() },
+                        onKeepOriginal: { viewModel.importer.keepOriginal() },
+                        onCancel: { viewModel.importer.cancelPreview() }
+                    )
+                }
+                .alert(
+                    importAlertTitle(viewModel.importer.alert),
+                    isPresented: isImportAlertPresented,
+                    presenting: viewModel.importer.alert
+                ) { alert in
+                    if alert == .conversionFailed {
+                        Button("Keep Original") { viewModel.importer.keepOriginal() }
+                        Button("Cancel", role: .cancel) { viewModel.importer.cancelPreview() }
+                    } else {
+                        Button("OK", role: .cancel) {}
+                    }
+                } message: { alert in
+                    switch alert {
+                    case .unsupported: Text("Send an image, a PDF or a Word file.")
+                    case .conversionFailed: Text("You can keep the original file and share it as it is.")
+                    case .failed: Text("Please try again.")
+                    }
+                }
+                .confirmationDialog(
+                    "Share as",
+                    isPresented: $viewModel.isChoosingShareFormat,
+                    titleVisibility: .visible
+                ) {
+                    Button("PDF") { viewModel.shareChosen(.pdf) }
+                    Button("Original File") { viewModel.shareChosen(.original) }
+                    Button("Cancel", role: .cancel) {}
+                }
                 .overlay(alignment: .bottom) { bottomBar }
                 .overlay {
-                    if viewModel.isSaving {
+                    if viewModel.isSaving || viewModel.importer.isConverting {
                         SavingOverlay()
                     }
                 }
@@ -93,6 +165,10 @@ struct DocumentListView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
+
+                Button("or import a file") {
+                    isFileImporterPresented = true
+                }
             }
         } else {
             List {
@@ -154,6 +230,40 @@ struct DocumentListView: View {
         .padding(.horizontal)
         .padding(.bottom, 8)
         .animation(.default, value: viewModel.savedBanner)
+    }
+
+    // MARK: - Import
+
+    private func importPhotos(_ items: [PhotosPickerItem]) async {
+        var photos: [Data] = []
+        for item in items {
+            if let data = try? await item.loadTransferable(type: Data.self) {
+                photos.append(data)
+            }
+        }
+        await viewModel.importer.importPhotos(photos)
+    }
+
+    private var importPreview: Binding<ImportPreview?> {
+        Binding(
+            get: { viewModel.importer.preview },
+            set: { viewModel.importer.preview = $0 }
+        )
+    }
+
+    private var isImportAlertPresented: Binding<Bool> {
+        Binding(
+            get: { viewModel.importer.alert != nil },
+            set: { if !$0 { viewModel.importer.alert = nil } }
+        )
+    }
+
+    private func importAlertTitle(_ alert: ImportAlert?) -> Text {
+        switch alert ?? .failed {
+        case .unsupported: Text("Unsupported format")
+        case .conversionFailed: Text("Couldn't convert this document")
+        case .failed: Text("Couldn't import the file")
+        }
     }
 
     // MARK: - Alerts
@@ -237,7 +347,11 @@ private struct DocumentRowView: View {
                     .lineLimit(2)
                 HStack(spacing: 8) {
                     Text(row.createdAt, format: .dateTime.day().month().year())
-                    Text("\(row.pageCount) pages")
+                    if row.hasPDF || !row.hasOriginal {
+                        Text("\(row.pageCount) pages")
+                    } else {
+                        Text("Original file")
+                    }
                 }
                 .font(.subheadline)
                 .foregroundStyle(.secondary)

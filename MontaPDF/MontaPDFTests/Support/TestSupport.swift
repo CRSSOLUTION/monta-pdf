@@ -127,3 +127,20 @@ struct FakeCredentialChecker: AppleCredentialChecking {
 struct FakeCloudStatus: CloudStatusProviding {
     var isICloudAvailable = true
 }
+
+/// Word converter that returns a fixed PDF, or fails.
+final class FakeDocumentConverter: DocumentConverter {
+    var shouldFail = false
+    private(set) var convertedFileNames: [String] = []
+
+    func convertToPDF(data: Data, fileName: String) async throws -> ConvertedPDF {
+        convertedFileNames.append(fileName)
+        if shouldFail { throw TestError() }
+        return ConvertedPDF(data: Data("converted".utf8), pageCount: 4)
+    }
+}
+
+/// A real one-page PDF, for code that opens the PDF with PDFKit.
+func makeTestPDF(pages: Int = 1) throws -> Data {
+    try ImagePDFBuilder().makePDF(from: (0..<pages).map { _ in makeTestImage() })
+}
