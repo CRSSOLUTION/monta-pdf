@@ -72,6 +72,7 @@ final class DocumentListViewModel {
     private let repository: DocumentRepository
     private let namer: DocumentNamer
     private let pdfBuilder: PDFBuilding
+    private let scanEnhancer: ScanEnhancing
     private let scannerAvailability: ScannerAvailability
     private let exporter: DocumentExporting
     private var documents: [Document] = []
@@ -85,13 +86,15 @@ final class DocumentListViewModel {
         pdfBuilder: PDFBuilding? = nil,
         scannerAvailability: ScannerAvailability? = nil,
         exporter: DocumentExporting? = nil,
-        converter: DocumentConverter? = nil
+        converter: DocumentConverter? = nil,
+        scanEnhancer: ScanEnhancing? = nil
     ) {
         // Defaults are created here (not as default arguments) so they run on the main actor.
         let pdfBuilder = pdfBuilder ?? ImagePDFBuilder()
         self.repository = repository
         self.namer = namer ?? DocumentNamer()
         self.pdfBuilder = pdfBuilder
+        self.scanEnhancer = scanEnhancer ?? DocumentScanEnhancer()
         self.scannerAvailability = scannerAvailability ?? SystemScannerAvailability()
         self.exporter = exporter ?? TemporaryFileExporter()
         self.importer = ImportViewModel(
@@ -165,8 +168,10 @@ final class DocumentListViewModel {
 
         do {
             let builder = pdfBuilder
+            let enhancer = scanEnhancer
             let data = try await Task.detached(priority: .userInitiated) {
-                try builder.makePDF(from: pages)
+                // Clean up the pages (shadows, folds, white paper) before building the PDF.
+                try builder.makePDF(from: pages.map { enhancer.enhance($0) })
             }.value
             let document = try repository.create(NewDocument(pdfData: data, pageCount: pages.count))
             pendingPages = []

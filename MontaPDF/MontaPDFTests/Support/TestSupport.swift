@@ -144,3 +144,22 @@ final class FakeDocumentConverter: DocumentConverter {
 func makeTestPDF(pages: Int = 1) throws -> Data {
     try ImagePDFBuilder().makePDF(from: (0..<pages).map { _ in makeTestImage() })
 }
+
+/// Records how many pages went through the enhancer.
+final class FakeScanEnhancer: ScanEnhancing, @unchecked Sendable {
+    private let lock = NSLock()
+    private var count = 0
+
+    var enhancedCount: Int {
+        lock.lock()
+        defer { lock.unlock() }
+        return count
+    }
+
+    func enhance(_ image: UIImage) -> UIImage {
+        lock.lock()
+        count += 1
+        lock.unlock()
+        return image
+    }
+}

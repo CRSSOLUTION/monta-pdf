@@ -231,4 +231,23 @@ struct DocumentListViewModelTests {
 
         #expect(viewModel.shareItem == nil)
     }
+
+    // MARK: - Scan enhancement
+
+    @Test func everyScannedPageIsEnhancedBeforeBuildingThePDF() async throws {
+        let enhancer = FakeScanEnhancer()
+        let viewModel = DocumentListViewModel(
+            repository: repository,
+            namer: DocumentNamer(automaticTitle: { "Document \($0)" }),
+            pdfBuilder: FakePDFBuilder(),
+            scannerAvailability: FakeScannerAvailability(),
+            exporter: exporter,
+            scanEnhancer: enhancer
+        )
+
+        await viewModel.saveScannedPages([makeTestImage(), makeTestImage(), makeTestImage()])
+
+        #expect(enhancer.enhancedCount == 3)
+        #expect(viewModel.rows.first?.pageCount == 3)
+    }
 }
