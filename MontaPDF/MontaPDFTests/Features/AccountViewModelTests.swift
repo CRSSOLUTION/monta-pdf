@@ -3,6 +3,7 @@
 //  MontaPDFTests
 //
 
+import AuthenticationServices
 import Foundation
 import SwiftData
 import Testing
@@ -12,6 +13,7 @@ import Testing
 struct AccountViewModelTests {
     private let repository: SwiftDataDocumentRepository
     private let session: SessionViewModel
+    private let revoker = FakeTokenRevoker()
 
     init() throws {
         repository = SwiftDataDocumentRepository(container: try makeInMemoryContainer())
@@ -24,7 +26,7 @@ struct AccountViewModelTests {
     }
 
     private func makeViewModel() -> AccountViewModel {
-        AccountViewModel(session: session, repository: repository)
+        AccountViewModel(session: session, repository: repository, tokenRevoker: revoker)
     }
 
     @Test func showsAccountAndUsage() throws {
@@ -64,7 +66,7 @@ struct AccountViewModelTests {
         #expect(try repository.fetchAll().count == 1)
     }
 
-    @Test func deleteAccountRemovesDocumentsAndSignsOut() throws {
+    @Test func typingTheWordAsksToConfirmWithApple() throws {
         try repository.create(NewDocument(pdfData: nil, pageCount: 1))
         let viewModel = makeViewModel()
         viewModel.startDeleteAccount()
@@ -73,7 +75,48 @@ struct AccountViewModelTests {
         #expect(viewModel.canDeleteAccount)
         viewModel.confirmDeleteAccount()
 
-        #expect(session.isSignedIn == false)
+        #expect(viewModel.isConfirmingWithApple)
+        // Nothing is deleted until Apple confirms.
+        #expect(session.isSignedIn)
+        #expect(try repository.fetchAll().count == 1)
+    }
+
+    @Test func deleteAccountRevokesThenDeletesAndSignsOut() async throws {
+        try repository.create(NewDocument(pdfData: nil, pageCount: 1))
+        let viewModel = makeViewModel()
+        viewModel.isConfirmingWithApple = true
+
+        await viewModel.deleteAccount(authorizationCode: "code-123")
+
+        #expect(revoker.revokedCodes == ["code-123"])
         #expect(try repository.fetchAll().isEmpty)
+        #expect(session.isSignedIn == false)
+        #expect(viewModel.isConfirmingWithApple == false)
+        #expect(viewModel.isDeleting == false)
+    }
+
+    @Test func failedRevocationKeepsEverythingAndShowsAnError() async throws {
+        try repository.create(NewDocument(pdfData: nil, pageCount: 1))
+        revoker.shouldFail = true
+        let viewModel = makeViewModel()
+
+        await viewModel.deleteAccount(authorizationCode: "code-123")
+
+        #expect(viewModel.errorMessage != nil)
+        #expect(try repository.fetchAll().count == 1)
+        #expect(session.isSignedIn)
+    }
+
+    @Test func cancellingTheAppleConfirmationDeletesNothing() async throws {
+        try repository.create(NewDocument(pdfData: nil, pageCount: 1))
+        let viewModel = makeViewModel()
+        viewModel.isConfirmingWithApple = true
+
+        await viewModel.handleAppleConfirmation(.failure(ASAuthorizationError(.canceled)))
+
+        #expect(viewModel.isConfirmingWithApple == false)
+        #expect(viewModel.errorMessage == nil)
+        #expect(revoker.revokedCodes.isEmpty)
+        #expect(try repository.fetchAll().count == 1)
     }
 }

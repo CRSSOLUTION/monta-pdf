@@ -187,6 +187,22 @@
         }
       }
     },
+    "Confirm with Apple" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirme com a Apple"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirma con Apple"
+          }
+        }
+      }
+    },
     "Couldn't convert this document" : {
       "localizations" : {
         "pt-BR" : {
@@ -199,6 +215,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No se pudo convertir este documento"
+          }
+        }
+      }
+    },
+    "Couldn't delete your account. Check your connection and try again." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível excluir sua conta. Verifique sua conexão e tente novamente."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo eliminar tu cuenta. Revisa tu conexión e inténtalo de nuevo."
+          }
+        }
+      }
+    },
+    "Couldn't delete your account. Please try again." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível excluir sua conta. Tente novamente."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo eliminar tu cuenta. Inténtalo de nuevo."
           }
         }
       }
@@ -327,6 +375,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿Eliminar “%@”?"
+          }
+        }
+      }
+    },
+    "Deleting your account..." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excluindo sua conta..."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminando tu cuenta..."
           }
         }
       }
@@ -1095,6 +1159,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Este documento se guardó sin convertir a PDF. Puedes compartir el archivo original."
+          }
+        }
+      }
+    },
+    "To delete your account, confirm it's you with your Apple ID. This also removes Monta PDF from the apps that use your Apple ID." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para excluir sua conta, confirme que é você com seu Apple ID. Isso também remove o Monta PDF dos apps que usam seu Apple ID."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para eliminar tu cuenta, confirma que eres tú con tu Apple ID. Esto también quita Monta PDF de las apps que usan tu Apple ID."
           }
         }
       }
