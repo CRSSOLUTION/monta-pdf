@@ -182,17 +182,12 @@ Monta PDF es gratis.
 | Preço | Grátis (Preços e disponibilidade) |
 
 ## Privacidade do app (questionário)
-Em **Privacidade do app → Começar**:
-1. "Você ou seus parceiros coletam dados deste app?" → **Sim**
-2. Marque só estes tipos:
-   - **Informações de contato → Nome**
-   - **Informações de contato → Endereço de e-mail**
-   - **Identificadores → ID do usuário**
-3. Para **cada um** dos três:
-   - Uso: **Funcionalidade do app** (só essa)
-   - Vinculado à identidade do usuário? **Sim**
-   - Usado para rastreamento? **Não**
-4. Os documentos **não** entram no questionário: eles ficam no iCloud do próprio usuário e o desenvolvedor não tem acesso.
+Em **Privacidade do app**:
+1. **URL da política de privacidade:** `https://crssolution.github.io/monta-pdf/privacy.html`
+2. "Você ou seus parceiros coletam dados deste app?" → **Não, nós não coletamos dados deste app**
+3. Clique em **Publicar**.
+
+Por quê: para a Apple, "coletar" é enviar dados para fora do aparelho, para o desenvolvedor ou parceiros. O app não tem servidor nem SDKs de terceiros: nome, e-mail e ID da Apple ficam só no aparelho, e os documentos ficam no iCloud privado do próprio usuário, sem acesso do desenvolvedor. A loja mostra o selo "Dados não coletados".
 
 ## Classificação etária
 Responda **Não / Nenhum** em tudo → resultado **4+**.
