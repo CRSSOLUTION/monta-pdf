@@ -60,3 +60,17 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+## macOS
+.DS_Store
+
+## Local AI tooling (never commit)
+.claude/
+CLAUDE.md
+AGENTS.md
+
+## Secrets
+*.p8
+*.p12
+*.mobileprovision
+.env
