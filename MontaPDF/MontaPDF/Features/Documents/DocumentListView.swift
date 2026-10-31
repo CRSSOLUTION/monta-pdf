@@ -9,6 +9,7 @@ struct DocumentListView: View {
     @Bindable var viewModel: DocumentListViewModel
     @Bindable var scanner: ScannerViewModel
     let importer: ImportViewModel
+    let makeViewer: (UUID) -> DocumentViewerViewModel
     let onShowAccount: () -> Void
     @State private var path: [UUID] = []
     @State private var isFileImporterPresented = false
@@ -18,11 +19,13 @@ struct DocumentListView: View {
         viewModel: DocumentListViewModel,
         scanner: ScannerViewModel,
         importer: ImportViewModel,
+        makeViewer: @escaping (UUID) -> DocumentViewerViewModel,
         onShowAccount: @escaping () -> Void = {}
     ) {
         _viewModel = Bindable(viewModel)
         _scanner = Bindable(scanner)
         self.importer = importer
+        self.makeViewer = makeViewer
         self.onShowAccount = onShowAccount
     }
 
@@ -80,7 +83,7 @@ struct DocumentListView: View {
                     .ignoresSafeArea()
                 }
                 .navigationDestination(for: UUID.self) { id in
-                    DocumentViewerView(viewModel: viewModel.makeViewerViewModel(for: id))
+                    DocumentViewerView(viewModel: makeViewer(id))
                 }
                 .renameDocumentAlert(
                     isPresented: $viewModel.isRenaming,
