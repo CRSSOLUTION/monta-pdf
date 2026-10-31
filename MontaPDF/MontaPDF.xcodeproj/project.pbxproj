@@ -6,11 +6,6 @@
 	objectVersion = 110;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		CAE987D030963273006E5594 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CAE987CF30963273006E5594 /* Localizable.xcstrings */; };
-		CAE987D4309632CA006E5594 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CAE987D3309632CA006E5594 /* InfoPlist.xcstrings */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		CAE987B430962EEE006E5594 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -32,8 +27,6 @@
 		CAE987A230962EEB006E5594 /* MontaPDF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MontaPDF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAE987B330962EEE006E5594 /* MontaPDFTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MontaPDFTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAE987BD30962EEE006E5594 /* MontaPDFUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MontaPDFUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CAE987CF30963273006E5594 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = Localizable.xcstrings; path = MontaPDF/Localizable.xcstrings; sourceTree = "<group>"; };
-		CAE987D3309632CA006E5594 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = InfoPlist.xcstrings; path = MontaPDF/Assets.xcassets/InfoPlist.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -89,8 +82,6 @@
 		CAE9879930962EEB006E5594 = {
 			isa = PBXGroup;
 			children = (
-				CAE987D3309632CA006E5594 /* InfoPlist.xcstrings */,
-				CAE987CF30963273006E5594 /* Localizable.xcstrings */,
 				CAE987A430962EEB006E5594 /* MontaPDF */,
 				CAE987B630962EEE006E5594 /* MontaPDFTests */,
 				CAE987C030962EEE006E5594 /* MontaPDFUITests */,
@@ -221,8 +212,6 @@
 		CAE987A030962EEB006E5594 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
-				CAE987D030963273006E5594 /* Localizable.xcstrings in Resources */,
-				CAE987D4309632CA006E5594 /* InfoPlist.xcstrings in Resources */,
 			);
 		};
 		CAE987B130962EEE006E5594 /* Resources */ = {
