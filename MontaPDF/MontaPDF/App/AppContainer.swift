@@ -38,8 +38,8 @@ final class AppContainer {
         }
 
         documentRepository = SwiftDataDocumentRepository(container: modelContainer)
-        let defaults = inMemory ? (UserDefaults(suiteName: "MontaPDF.InMemory") ?? .standard) : .standard
-        sessionViewModel = SessionViewModel(store: UserDefaultsSessionStore(defaults: defaults))
+        let sessionService = inMemory ? "com.crlsribeiro.MontaPDF.session.tests" : "com.crlsribeiro.MontaPDF.session"
+        sessionViewModel = SessionViewModel(store: KeychainSessionStore(service: sessionService))
     }
 
     /// The three ViewModels of the My Documents screen, already wired together:
