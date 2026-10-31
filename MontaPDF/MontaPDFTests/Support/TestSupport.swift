@@ -5,6 +5,7 @@
 
 import Foundation
 import SwiftData
+import UIKit
 @testable import MontaPDF
 
 @MainActor
@@ -34,11 +35,43 @@ struct TestError: Error, LocalizedError {
 final class FailingDocumentRepository: DocumentRepository {
     func fetchAll() throws -> [Document] { throw TestError() }
 
-    func create(pageCount: Int, fileName: String, originalFileName: String?, createdAt: Date) throws -> Document {
-        throw TestError()
-    }
+    func create(_ newDocument: NewDocument) throws -> Document { throw TestError() }
 
     func rename(_ document: Document, to title: String) throws { throw TestError() }
 
     func delete(_ document: Document) throws { throw TestError() }
+}
+
+/// PDF builder that returns fixed bytes. It fails the first `failures` calls.
+final class FakePDFBuilder: PDFBuilding, @unchecked Sendable {
+    private let lock = NSLock()
+    private var failuresLeft: Int
+
+    init(failures: Int = 0) {
+        failuresLeft = failures
+    }
+
+    func makePDF(from images: [UIImage]) throws -> Data {
+        lock.lock()
+        defer { lock.unlock() }
+        if failuresLeft > 0 {
+            failuresLeft -= 1
+            throw TestError()
+        }
+        return Data("pdf-\(images.count)".utf8)
+    }
+}
+
+struct FakeScannerAvailability: ScannerAvailability {
+    var isScannerSupported = true
+    var cameraAccess: CameraAccess = .allowed
+}
+
+func makeTestImage(width: CGFloat = 20, height: CGFloat = 30) -> UIImage {
+    let format = UIGraphicsImageRendererFormat()
+    format.scale = 1
+    return UIGraphicsImageRenderer(size: CGSize(width: width, height: height), format: format).image { context in
+        UIColor.gray.setFill()
+        context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+    }
 }

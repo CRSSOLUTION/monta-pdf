@@ -19,10 +19,15 @@ final class Document {
     var isCustomTitle: Bool = false
     var createdAt: Date = Date()
     var pageCount: Int = 0
-    /// Name of the PDF file saved by the app (e.g. "<uuid>.pdf").
+    /// Name used when the PDF is written to disk (e.g. "<uuid>.pdf").
     var fileName: String = ""
     /// Name of the imported file, when the document came from an import.
     var originalFileName: String?
+    /// The PDF itself. External storage keeps it out of the database row and
+    /// CloudKit syncs it as an asset, so files follow the user to every device.
+    @Attribute(.externalStorage) var pdfData: Data?
+    /// The imported original (e.g. a .docx), kept untouched.
+    @Attribute(.externalStorage) var originalData: Data?
 
     init(
         id: UUID = UUID(),
@@ -31,7 +36,9 @@ final class Document {
         createdAt: Date = Date(),
         pageCount: Int = 0,
         fileName: String = "",
-        originalFileName: String? = nil
+        originalFileName: String? = nil,
+        pdfData: Data? = nil,
+        originalData: Data? = nil
     ) {
         self.id = id
         self.title = title
@@ -40,5 +47,7 @@ final class Document {
         self.pageCount = pageCount
         self.fileName = fileName
         self.originalFileName = originalFileName
+        self.pdfData = pdfData
+        self.originalData = originalData
     }
 }

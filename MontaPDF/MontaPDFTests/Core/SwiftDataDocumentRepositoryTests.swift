@@ -17,37 +17,45 @@ struct SwiftDataDocumentRepositoryTests {
     }
 
     @Test func createStoresAnAutomaticallyNamedDocument() throws {
-        let document = try repository.create(
-            pageCount: 3,
-            fileName: "a.pdf",
-            originalFileName: "photo.heic",
-            createdAt: referenceDate
-        )
+        let pdf = Data("pdf".utf8)
+        let document = try repository.create(NewDocument(pdfData: pdf, pageCount: 3, createdAt: referenceDate))
 
         #expect(document.title.isEmpty)
         #expect(document.isCustomTitle == false)
         #expect(document.pageCount == 3)
-        #expect(document.fileName == "a.pdf")
-        #expect(document.originalFileName == "photo.heic")
+        #expect(document.pdfData == pdf)
+        #expect(document.fileName == "\(document.id.uuidString).pdf")
+        #expect(document.originalFileName == nil)
+        #expect(document.originalData == nil)
         #expect(document.createdAt == referenceDate)
         #expect(try repository.fetchAll().map(\.id) == [document.id])
     }
 
-    @Test func originalFileNameIsOptional() throws {
-        let document = try repository.create(pageCount: 1, fileName: "scan.pdf")
+    @Test func createWithCustomTitleKeepsTheOriginal() throws {
+        let original = Data("docx".utf8)
+        let document = try repository.create(NewDocument(
+            pdfData: Data("pdf".utf8),
+            pageCount: 1,
+            customTitle: " Contract ",
+            originalFileName: "Contract.docx",
+            originalData: original
+        ))
 
-        #expect(document.originalFileName == nil)
+        #expect(document.title == "Contract")
+        #expect(document.isCustomTitle)
+        #expect(document.originalFileName == "Contract.docx")
+        #expect(document.originalData == original)
     }
 
     @Test func fetchAllReturnsNewestFirst() throws {
-        let old = try repository.create(pageCount: 1, fileName: "old.pdf", originalFileName: nil, createdAt: date(minutesAfterReference: 1))
-        let new = try repository.create(pageCount: 1, fileName: "new.pdf", originalFileName: nil, createdAt: date(minutesAfterReference: 2))
+        let old = try repository.create(NewDocument(pdfData: nil, pageCount: 1, createdAt: date(minutesAfterReference: 1)))
+        let new = try repository.create(NewDocument(pdfData: nil, pageCount: 1, createdAt: date(minutesAfterReference: 2)))
 
         #expect(try repository.fetchAll().map(\.id) == [new.id, old.id])
     }
 
     @Test func renameSetsATrimmedCustomTitle() throws {
-        let document = try repository.create(pageCount: 1, fileName: "a.pdf")
+        let document = try repository.create(NewDocument(pdfData: nil, pageCount: 1))
 
         try repository.rename(document, to: "  Contract  ")
 
@@ -57,7 +65,7 @@ struct SwiftDataDocumentRepositoryTests {
 
     @Test(arguments: ["", "   ", "\n"])
     func renameWithBlankTitleBringsBackTheAutomaticName(blank: String) throws {
-        let document = try repository.create(pageCount: 1, fileName: "a.pdf")
+        let document = try repository.create(NewDocument(pdfData: nil, pageCount: 1))
         try repository.rename(document, to: "Contract")
 
         try repository.rename(document, to: blank)
@@ -67,8 +75,8 @@ struct SwiftDataDocumentRepositoryTests {
     }
 
     @Test func deleteRemovesTheDocument() throws {
-        let kept = try repository.create(pageCount: 1, fileName: "kept.pdf")
-        let removed = try repository.create(pageCount: 1, fileName: "removed.pdf")
+        let kept = try repository.create(NewDocument(pdfData: nil, pageCount: 1))
+        let removed = try repository.create(NewDocument(pdfData: nil, pageCount: 1))
 
         try repository.delete(removed)
 

@@ -24,17 +24,19 @@ final class SwiftDataDocumentRepository: DocumentRepository {
     }
 
     @discardableResult
-    func create(
-        pageCount: Int,
-        fileName: String,
-        originalFileName: String?,
-        createdAt: Date
-    ) throws -> Document {
+    func create(_ newDocument: NewDocument) throws -> Document {
+        let id = UUID()
+        let title = newDocument.customTitle?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let document = Document(
-            createdAt: createdAt,
-            pageCount: pageCount,
-            fileName: fileName,
-            originalFileName: originalFileName
+            id: id,
+            title: title,
+            isCustomTitle: !title.isEmpty,
+            createdAt: newDocument.createdAt,
+            pageCount: newDocument.pageCount,
+            fileName: "\(id.uuidString).pdf",
+            originalFileName: newDocument.originalFileName,
+            pdfData: newDocument.pdfData,
+            originalData: newDocument.originalData
         )
         context.insert(document)
         try context.save()
