@@ -12,6 +12,8 @@ final class AppContainer {
     static let cloudKitContainerIdentifier = "iCloud.com.crlsribeiro.MontaPDF"
 
     let modelContainer: ModelContainer
+    let documentRepository: DocumentRepository
+    let sessionViewModel: SessionViewModel
 
     init(inMemory: Bool = false) {
         let schema = Schema([Document.self])
@@ -34,13 +36,17 @@ final class AppContainer {
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
-    }
 
-    lazy var documentRepository: DocumentRepository = SwiftDataDocumentRepository(
-        container: modelContainer
-    )
+        documentRepository = SwiftDataDocumentRepository(container: modelContainer)
+        let defaults = inMemory ? (UserDefaults(suiteName: "MontaPDF.InMemory") ?? .standard) : .standard
+        sessionViewModel = SessionViewModel(store: UserDefaultsSessionStore(defaults: defaults))
+    }
 
     func makeDocumentListViewModel() -> DocumentListViewModel {
         DocumentListViewModel(repository: documentRepository)
+    }
+
+    func makeAccountViewModel() -> AccountViewModel {
+        AccountViewModel(session: sessionViewModel, repository: documentRepository)
     }
 }

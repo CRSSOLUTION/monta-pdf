@@ -7,64 +7,42 @@
 
 import SwiftUI
 
+/// Shows Login when there is no session, otherwise My Documents.
 struct ContentView: View {
-    let viewModel: DocumentListViewModel
+    let container: AppContainer
+    @State private var documentsViewModel: DocumentListViewModel
+    @State private var isAccountPresented = false
+
+    init(container: AppContainer) {
+        self.container = container
+        _documentsViewModel = State(initialValue: container.makeDocumentListViewModel())
+    }
+
+    private var session: SessionViewModel { container.sessionViewModel }
 
     var body: some View {
-        NavigationStack {
-            Group {
-                if viewModel.rows.isEmpty {
-                    ContentUnavailableView(
-                        "No documents yet",
-                        systemImage: "doc.text",
-                        description: Text("Scanned and imported documents will appear here.")
-                    )
-                } else {
-                    List {
-                        ForEach(viewModel.rows) { row in
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(row.title)
-                                    .font(.headline)
-                                HStack(spacing: 8) {
-                                    Text(row.createdAt, format: .dateTime.day().month().year())
-                                    Text("\(row.pageCount) pages")
-                                }
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
-                            }
-                        }
-                        .onDelete(perform: viewModel.delete(at:))
-                    }
+        Group {
+            if session.isSignedIn {
+                DocumentListView(viewModel: documentsViewModel) {
+                    isAccountPresented = true
                 }
-            }
-            .navigationTitle("Documents")
-            .toolbar {
-                #if DEBUG
-                ToolbarItem(placement: .primaryAction) {
-                    Button("Add sample document", systemImage: "plus") {
-                        viewModel.addSampleDocument()
-                    }
+                .sheet(isPresented: $isAccountPresented, onDismiss: documentsViewModel.load) {
+                    AccountView(viewModel: container.makeAccountViewModel())
                 }
-                #endif
-            }
-            .alert(
-                "Something went wrong",
-                isPresented: Binding(
-                    get: { viewModel.errorMessage != nil },
-                    set: { if !$0 { viewModel.dismissError() } }
-                )
-            ) {
-                Button("OK", role: .cancel) {}
-            } message: {
-                Text(viewModel.errorMessage ?? "")
+            } else {
+                LoginView(viewModel: session)
             }
         }
+        .animation(.default, value: session.isSignedIn)
+        .onChange(of: session.isSignedIn) { _, signedIn in
+            if !signedIn { isAccountPresented = false }
+        }
         .task {
-            viewModel.load()
+            await session.validateCredential()
         }
     }
 }
 
 #Preview {
-    ContentView(viewModel: AppContainer(inMemory: true).makeDocumentListViewModel())
+    ContentView(container: AppContainer(inMemory: true))
 }
