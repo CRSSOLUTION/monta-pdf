@@ -65,10 +65,6 @@ final class DocumentListViewModel {
         self.exporter = exporter
     }
 
-    func makeViewerViewModel(for id: UUID) -> DocumentViewerViewModel {
-        DocumentViewerViewModel(documentID: id, repository: repository, namer: namer, exporter: exporter)
-    }
-
     // MARK: - Loading
 
     func load() {

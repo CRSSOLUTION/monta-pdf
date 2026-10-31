@@ -26,7 +26,8 @@ struct ContentView: View {
                 DocumentListView(
                     viewModel: documents.list,
                     scanner: documents.scanner,
-                    importer: documents.importer
+                    importer: documents.importer,
+                    makeViewer: documents.makeViewer
                 ) {
                     isAccountPresented = true
                 }

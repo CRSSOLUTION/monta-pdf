@@ -64,7 +64,21 @@ final class AppContainer {
         )
         scanner.onSaved = { [weak list] id in list?.documentAdded(id: id) }
         importer.onSaved = { [weak list] id in list?.documentAdded(id: id) }
-        return DocumentsFeature(list: list, scanner: scanner, importer: importer)
+        return DocumentsFeature(
+            list: list,
+            scanner: scanner,
+            importer: importer,
+            makeViewer: { [unowned self] id in self.makeDocumentViewerViewModel(for: id) }
+        )
+    }
+
+    func makeDocumentViewerViewModel(for id: UUID) -> DocumentViewerViewModel {
+        DocumentViewerViewModel(
+            documentID: id,
+            repository: documentRepository,
+            namer: DocumentNamer(),
+            exporter: TemporaryFileExporter()
+        )
     }
 
     func makeAccountViewModel() -> AccountViewModel {
@@ -77,4 +91,6 @@ struct DocumentsFeature {
     let list: DocumentListViewModel
     let scanner: ScannerViewModel
     let importer: ImportViewModel
+    /// Builds the ViewModel of the PDF viewer for a document.
+    let makeViewer: (UUID) -> DocumentViewerViewModel
 }
