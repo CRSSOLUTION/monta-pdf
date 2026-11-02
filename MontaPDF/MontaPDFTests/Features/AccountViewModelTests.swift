@@ -3,7 +3,6 @@
 //  MontaPDFTests
 //
 
-import AuthenticationServices
 import Foundation
 import SwiftData
 import Testing
@@ -12,17 +11,13 @@ import Testing
 @MainActor
 struct AccountViewModelTests {
     private let repository: SwiftDataDocumentRepository
-    private let session: SessionViewModel
+    private let session: SessionManager
     private let revoker = FakeTokenRevoker()
 
     init() throws {
         repository = SwiftDataDocumentRepository(container: try makeInMemoryContainer())
-        session = SessionViewModel(
-            store: InMemorySessionStore(),
-            credentialChecker: FakeCredentialChecker(),
-            cloudStatus: FakeCloudStatus()
-        )
-        session.completeSignIn(userID: "abc", name: "Ana", email: "ana@example.com")
+        session = makeSessionManager()
+        session.signIn(with: appleCredential(name: "Ana", email: "ana@example.com"))
     }
 
     private func makeViewModel() -> AccountViewModel {
@@ -112,10 +107,32 @@ struct AccountViewModelTests {
         let viewModel = makeViewModel()
         viewModel.isConfirmingWithApple = true
 
-        await viewModel.handleAppleConfirmation(.failure(ASAuthorizationError(.canceled)))
+        await viewModel.handleAppleConfirmation(.cancelled)
 
         #expect(viewModel.isConfirmingWithApple == false)
         #expect(viewModel.errorMessage == nil)
+        #expect(revoker.revokedCodes.isEmpty)
+        #expect(try repository.fetchAll().count == 1)
+    }
+
+    @Test func confirmingWithAppleUsesTheFreshCodeToDelete() async throws {
+        try repository.create(NewDocument(pdfData: nil, pageCount: 1))
+        let viewModel = makeViewModel()
+        viewModel.isConfirmingWithApple = true
+
+        await viewModel.handleAppleConfirmation(.signedIn(appleCredential(code: "fresh-code")))
+
+        #expect(revoker.revokedCodes == ["fresh-code"])
+        #expect(session.isSignedIn == false)
+    }
+
+    @Test func confirmationWithoutCodeShowsAnError() async throws {
+        try repository.create(NewDocument(pdfData: nil, pageCount: 1))
+        let viewModel = makeViewModel()
+
+        await viewModel.handleAppleConfirmation(.signedIn(appleCredential(code: nil)))
+
+        #expect(viewModel.errorMessage != nil)
         #expect(revoker.revokedCodes.isEmpty)
         #expect(try repository.fetchAll().count == 1)
     }

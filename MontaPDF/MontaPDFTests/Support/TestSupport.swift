@@ -55,14 +55,14 @@ final class FakePDFBuilder: PDFBuilding, @unchecked Sendable {
         failuresLeft = failures
     }
 
-    func makePDF(from images: [UIImage]) throws -> Data {
+    func makePDF(from images: [PageImage]) throws -> Data {
         lock.lock()
         defer { lock.unlock() }
         if failuresLeft > 0 {
             failuresLeft -= 1
             throw TestError()
         }
-        return Data("pdf-\(images.count)".utf8)
+        return blankPDF(pages: images.count)
     }
 }
 
@@ -142,7 +142,7 @@ final class FakeDocumentConverter: DocumentConverter {
 
 /// A real one-page PDF, for code that opens the PDF with PDFKit.
 func makeTestPDF(pages: Int = 1) throws -> Data {
-    try ImagePDFBuilder().makePDF(from: (0..<pages).map { _ in makeTestImage() })
+    try ImagePDFBuilder().makePDF(from: (0..<pages).map { _ in makeTestPage() })
 }
 
 /// Records how many pages went through the enhancer.
@@ -156,7 +156,7 @@ final class FakeScanEnhancer: ScanEnhancing, @unchecked Sendable {
         return count
     }
 
-    func enhance(_ image: UIImage) -> UIImage {
+    func enhance(_ image: PageImage) -> PageImage {
         lock.lock()
         count += 1
         lock.unlock()
@@ -172,5 +172,40 @@ final class FakeTokenRevoker: AppleTokenRevoking {
     func revoke(authorizationCode: String) async throws {
         if shouldFail { throw TestError() }
         revokedCodes.append(authorizationCode)
+    }
+}
+
+@MainActor
+func makeSessionManager(
+    store: SessionStore = InMemorySessionStore(),
+    authorized: Bool = true,
+    iCloud: Bool = true
+) -> SessionManager {
+    SessionManager(
+        store: store,
+        credentialChecker: FakeCredentialChecker(authorized: authorized),
+        cloudStatus: FakeCloudStatus(isICloudAvailable: iCloud)
+    )
+}
+
+func appleCredential(
+    userID: String = "abc",
+    name: String? = nil,
+    email: String? = nil,
+    code: String? = "code-123"
+) -> AppleSignInCredential {
+    AppleSignInCredential(userID: userID, fullName: name, email: email, authorizationCode: code)
+}
+
+/// A small valid PNG page, as the scanner and the importer hand pages over.
+func makeTestPage(width: CGFloat = 20, height: CGFloat = 30) -> PageImage {
+    PageImage(data: makeTestImage(width: width, height: height).pngData() ?? Data())
+}
+
+/// A real PDF with blank A4 pages, so code that counts pages with PDFKit works.
+func blankPDF(pages: Int) -> Data {
+    let renderer = UIGraphicsPDFRenderer(bounds: CGRect(x: 0, y: 0, width: 595, height: 842))
+    return renderer.pdfData { context in
+        for _ in 0..<pages { context.beginPage() }
     }
 }

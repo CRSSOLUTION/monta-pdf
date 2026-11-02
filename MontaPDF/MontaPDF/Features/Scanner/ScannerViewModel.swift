@@ -5,24 +5,6 @@
 
 import Foundation
 import Observation
-import UIKit
-
-nonisolated enum ScannerAlert: Identifiable, Equatable, Sendable {
-    case scannerUnavailable
-    case cameraDenied
-    /// Building or saving the PDF failed; the pages are kept for a retry.
-    case saveFailed
-    case failed(String)
-
-    var id: String {
-        switch self {
-        case .scannerUnavailable: "scannerUnavailable"
-        case .cameraDenied: "cameraDenied"
-        case .saveFailed: "saveFailed"
-        case .failed(let message): "failed-\(message)"
-        }
-    }
-}
 
 /// Opens the VisionKit scanner and turns the captured pages into a saved PDF document.
 @Observable
@@ -40,7 +22,7 @@ final class ScannerViewModel {
     private let scanEnhancer: ScanEnhancing
     private let availability: ScannerAvailability
     /// Pages kept after a failed save, so the user can try again without scanning again.
-    private var pendingPages: [UIImage] = []
+    private var pendingPages: [PageImage] = []
 
     init(
         repository: DocumentRepository,
@@ -72,7 +54,7 @@ final class ScannerViewModel {
         isScannerPresented = true
     }
 
-    func scannerFinished(with pages: [UIImage]) async {
+    func scannerFinished(with pages: [PageImage]) async {
         isScannerPresented = false
         await saveScannedPages(pages)
     }
@@ -94,7 +76,7 @@ final class ScannerViewModel {
         pendingPages = []
     }
 
-    func saveScannedPages(_ pages: [UIImage]) async {
+    func saveScannedPages(_ pages: [PageImage]) async {
         guard !pages.isEmpty, !isSaving else { return }
         isSaving = true
         defer { isSaving = false }

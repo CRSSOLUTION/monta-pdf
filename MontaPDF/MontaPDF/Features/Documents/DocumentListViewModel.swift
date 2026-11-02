@@ -5,31 +5,6 @@
 
 import Foundation
 import Observation
-import UIKit
-
-/// What the document list shows for each document.
-nonisolated struct DocumentRow: Identifiable, Sendable {
-    let id: UUID
-    let title: String
-    let createdAt: Date
-    let pageCount: Int
-    /// `false` for imported Word files kept without a PDF.
-    var hasPDF = true
-    /// Set for imported files (e.g. "Contract.docx").
-    var originalFileName: String?
-    var hasOriginal = false
-}
-
-nonisolated enum ShareFormat: Sendable {
-    case pdf
-    case original
-}
-
-/// Shown at the bottom of the list after a document is saved.
-nonisolated struct SavedBanner: Identifiable, Equatable, Sendable {
-    let id: UUID
-    let title: String
-}
 
 @Observable
 @MainActor
@@ -51,9 +26,9 @@ final class DocumentListViewModel {
 
     private let repository: DocumentRepository
     private let namer: DocumentNamer
-    private let exporter: DocumentExporting
+    private let shareFiles: DocumentShareFiles
     private var documents: [Document] = []
-    private var thumbnails: [UUID: UIImage] = [:]
+    private var thumbnails: [UUID: Data] = [:]
 
     init(
         repository: DocumentRepository,
@@ -62,7 +37,7 @@ final class DocumentListViewModel {
     ) {
         self.repository = repository
         self.namer = namer
-        self.exporter = exporter
+        self.shareFiles = DocumentShareFiles(exporter: exporter)
     }
 
     // MARK: - Loading
@@ -104,7 +79,7 @@ final class DocumentListViewModel {
     func rename(id: UUID, to title: String) {
         guard let document = documents.first(where: { $0.id == id }) else { return }
         perform {
-            try repository.rename(document, to: DocumentTitleRules.sanitize(title))
+            try repository.rename(document, to: title)
             documents = try repository.fetchAll()
         }
     }
@@ -118,9 +93,8 @@ final class DocumentListViewModel {
 
     func confirmRename() {
         guard let id = renameTargetID else { return }
-        let newTitle = DocumentTitleRules.sanitize(renameDraft)
-        guard !newTitle.isEmpty else { return }
-        rename(id: id, to: newTitle)
+        guard !DocumentTitleRules.sanitize(renameDraft).isEmpty else { return }
+        rename(id: id, to: renameDraft)
         renameTargetID = nil
         if savedBanner?.id == id {
             savedBanner = nil
@@ -162,18 +136,12 @@ final class DocumentListViewModel {
             let row = rows.first(where: { $0.id == id })
         else { return }
         perform {
+            let url: URL?
             switch format {
-            case .pdf:
-                guard let data = document.pdfData else { return }
-                let url = try exporter.export(data, fileName: DocumentTitleRules.fileName(for: row.title))
-                shareItem = ShareItem(url: url)
-            case .original:
-                guard let data = document.originalData else { return }
-                let ext = ((document.originalFileName ?? "") as NSString).pathExtension
-                let url = try exporter.export(
-                    data,
-                    fileName: DocumentTitleRules.fileName(for: row.title, fileExtension: ext.isEmpty ? "docx" : ext)
-                )
+            case .pdf: url = try shareFiles.pdfURL(for: document, title: row.title)
+            case .original: url = try shareFiles.originalURL(for: document, title: row.title)
+            }
+            if let url {
                 shareItem = ShareItem(url: url)
             }
         }
@@ -186,7 +154,7 @@ final class DocumentListViewModel {
     }
 
     /// First page of the PDF, cached after the first render.
-    func thumbnail(for id: UUID) async -> UIImage? {
+    func thumbnail(for id: UUID) async -> Data? {
         if let cached = thumbnails[id] { return cached }
         guard let data = documents.first(where: { $0.id == id })?.pdfData else { return nil }
         let image = await ThumbnailRenderer.render(data, size: CGSize(width: 120, height: 160))

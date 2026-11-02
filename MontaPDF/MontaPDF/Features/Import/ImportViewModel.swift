@@ -5,30 +5,6 @@
 
 import Foundation
 import Observation
-import UIKit
-
-/// A converted file waiting for the user to confirm it.
-nonisolated struct ImportPreview: Identifiable, Sendable {
-    let id = UUID()
-    let pdfData: Data
-    let pageCount: Int
-    /// Custom title (from the file name). `nil` gives an automatic "Document N".
-    let title: String?
-    let originalFileName: String?
-    /// Kept only for Word files.
-    let originalData: Data?
-
-    var isWord: Bool { originalData != nil }
-}
-
-nonisolated enum ImportAlert: Identifiable, Equatable, Sendable {
-    case unsupported
-    /// Word conversion failed; the user can still keep the original.
-    case conversionFailed
-    case failed
-
-    var id: Self { self }
-}
 
 @Observable
 @MainActor
@@ -71,9 +47,9 @@ final class ImportViewModel {
         let kinds = files.map(\.kind)
 
         if kinds.allSatisfy({ $0 == .image }) {
-            let images = files.compactMap { UIImage(data: $0.data) }
+            let pages = files.map { PageImage(data: $0.data) }
             let title = files.count == 1 ? DocumentTitleRules.title(fromFileName: files[0].name) : nil
-            await buildImagePreview(images, title: title, originalFileName: files.count == 1 ? files[0].name : nil)
+            await buildImagePreview(pages, title: title, originalFileName: files.count == 1 ? files[0].name : nil)
             return
         }
 
@@ -94,8 +70,7 @@ final class ImportViewModel {
 
     /// Photos picked from the library, in selection order.
     func importPhotos(_ photos: [Data]) async {
-        let images = photos.compactMap { UIImage(data: $0) }
-        await buildImagePreview(images, title: nil, originalFileName: nil)
+        await buildImagePreview(photos.map { PageImage(data: $0) }, title: nil, originalFileName: nil)
     }
 
     // MARK: - Preview actions
@@ -130,8 +105,8 @@ final class ImportViewModel {
 
     // MARK: - Private
 
-    private func buildImagePreview(_ images: [UIImage], title: String?, originalFileName: String?) async {
-        guard !images.isEmpty else {
+    private func buildImagePreview(_ pages: [PageImage], title: String?, originalFileName: String?) async {
+        guard !pages.isEmpty else {
             alert = .unsupported
             return
         }
@@ -140,15 +115,18 @@ final class ImportViewModel {
         do {
             let builder = pdfBuilder
             let data = try await Task.detached(priority: .userInitiated) {
-                try builder.makePDF(from: images)
+                try builder.makePDF(from: pages)
             }.value
             preview = ImportPreview(
                 pdfData: data,
-                pageCount: images.count,
+                // Unreadable pictures are skipped, so count the pages actually in the PDF.
+                pageCount: PDFPageCounter.count(data),
                 title: title,
                 originalFileName: originalFileName,
                 originalData: nil
             )
+        } catch PDFBuilderError.noPages {
+            alert = .unsupported
         } catch {
             alert = .failed
         }

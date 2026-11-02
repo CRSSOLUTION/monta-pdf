@@ -11,14 +11,16 @@ import SwiftUI
 struct ContentView: View {
     let container: AppContainer
     @State private var documents: DocumentsFeature
+    @State private var login: LoginViewModel
     @State private var isAccountPresented = false
 
     init(container: AppContainer) {
         self.container = container
         _documents = State(initialValue: container.makeDocumentsFeature())
+        _login = State(initialValue: container.makeLoginViewModel())
     }
 
-    private var session: SessionViewModel { container.sessionViewModel }
+    private var session: SessionManager { container.sessionManager }
 
     var body: some View {
         Group {
@@ -35,7 +37,7 @@ struct ContentView: View {
                     AccountView(viewModel: container.makeAccountViewModel())
                 }
             } else {
-                LoginView(viewModel: session)
+                LoginView(viewModel: login)
             }
         }
         .animation(.default, value: session.isSignedIn)
@@ -49,5 +51,9 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(container: AppContainer(inMemory: true))
+    if let container = try? AppContainer(inMemory: true) {
+        ContentView(container: container)
+    } else {
+        StorageErrorView {}
+    }
 }

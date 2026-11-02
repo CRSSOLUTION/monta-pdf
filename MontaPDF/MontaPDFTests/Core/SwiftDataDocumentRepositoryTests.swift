@@ -99,4 +99,13 @@ struct SwiftDataDocumentRepositoryTests {
 
         #expect(try repository.fetchAll().isEmpty)
     }
+
+    @Test func renameAppliesTheTitleRules() throws {
+        let document = try repository.create(NewDocument(pdfData: nil, pageCount: 1))
+
+        try repository.rename(document, to: " Bills/October: paid ")
+
+        #expect(document.title == "BillsOctober paid")
+        #expect(document.isCustomTitle)
+    }
 }

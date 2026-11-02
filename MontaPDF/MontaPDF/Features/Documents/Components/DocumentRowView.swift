@@ -8,10 +8,10 @@ import SwiftUI
 /// One row of My Documents: first-page thumbnail, name, date and page count.
 struct DocumentRowView: View {
     let row: DocumentRow
-    let loadThumbnail: () async -> UIImage?
+    let loadThumbnail: () async -> Data?
     @State private var thumbnail: UIImage?
 
-    init(row: DocumentRow, loadThumbnail: @escaping () async -> UIImage?) {
+    init(row: DocumentRow, loadThumbnail: @escaping () async -> Data?) {
         self.row = row
         self.loadThumbnail = loadThumbnail
     }
@@ -53,7 +53,7 @@ struct DocumentRowView: View {
         }
         .padding(.vertical, 4)
         .task(id: row.id) {
-            thumbnail = await loadThumbnail()
+            thumbnail = await loadThumbnail().flatMap { UIImage(data: $0) }
         }
     }
 }

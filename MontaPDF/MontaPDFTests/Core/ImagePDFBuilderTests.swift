@@ -19,7 +19,7 @@ struct ImagePDFBuilderTests {
     }
 
     @Test func everyImageBecomesAPageInOrder() throws {
-        let images = [makeTestImage(width: 20, height: 30), makeTestImage(width: 40, height: 20)]
+        let images = [makeTestPage(width: 20, height: 30), makeTestPage(width: 40, height: 20)]
 
         let data = try builder.makePDF(from: images)
 
@@ -36,5 +36,17 @@ struct ImagePDFBuilderTests {
 
         #expect(rect.width == ImagePDFBuilder.pageWidth)
         #expect(rect.height == ImagePDFBuilder.pageWidth * 2)
+    }
+
+    @Test func unreadablePagesAreSkipped() throws {
+        let data = try builder.makePDF(from: [PageImage(data: Data("not an image".utf8)), makeTestPage()])
+
+        #expect(try #require(PDFDocument(data: data)).pageCount == 1)
+    }
+
+    @Test func onlyUnreadablePagesThrow() {
+        #expect(throws: PDFBuilderError.self) {
+            try builder.makePDF(from: [PageImage(data: Data("not an image".utf8))])
+        }
     }
 }
