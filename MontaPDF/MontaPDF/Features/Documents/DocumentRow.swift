@@ -1,5 +1,5 @@
 //
-//  DocumentListModels.swift
+//  DocumentRow.swift
 //  MontaPDF
 //
 
@@ -16,15 +16,4 @@ nonisolated struct DocumentRow: Identifiable, Sendable {
     /// Set for imported files (e.g. "Contract.docx").
     var originalFileName: String?
     var hasOriginal = false
-}
-
-nonisolated enum ShareFormat: Sendable {
-    case pdf
-    case original
-}
-
-/// Shown at the bottom of the list after a document is saved.
-nonisolated struct SavedBanner: Identifiable, Equatable, Sendable {
-    let id: UUID
-    let title: String
 }
