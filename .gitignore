@@ -74,3 +74,7 @@ AGENTS.md
 *.p12
 *.mobileprovision
 .env
+
+# Python cache (CI scripts)
+__pycache__/
+*.pyc
