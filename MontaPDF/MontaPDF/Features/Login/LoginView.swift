@@ -51,6 +51,7 @@ struct LoginView: View {
                 viewModel.handleSignIn(AppleSignInMapper.map(result))
             }
             .signInWithAppleButtonStyle(colorScheme == .dark ? .white : .black)
+            .accessibilityIdentifier("signInWithAppleButton")
             .frame(height: 52)
 
             HStack(spacing: 16) {

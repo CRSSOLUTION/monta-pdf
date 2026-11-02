@@ -23,5 +23,6 @@ struct ScanButton: View {
         .buttonStyle(.borderedProminent)
         .controlSize(.large)
         .shadow(radius: 4, y: 2)
+        .accessibilityIdentifier("scanButton")
     }
 }

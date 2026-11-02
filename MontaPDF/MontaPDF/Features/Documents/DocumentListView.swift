@@ -45,11 +45,13 @@ struct DocumentListView: View {
                         } label: {
                             Label("Import", systemImage: "square.and.arrow.down")
                         }
+                        .accessibilityIdentifier("importMenu")
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: onShowAccount) {
                             Label("Account", systemImage: "person.crop.circle")
                         }
+                        .accessibilityIdentifier("accountButton")
                     }
                 }
                 .importFlow(
@@ -132,6 +134,7 @@ struct DocumentListView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
+                .accessibilityIdentifier("emptyStateScanButton")
 
                 Button("or import a file") {
                     isFileImporterPresented = true
@@ -145,6 +148,7 @@ struct DocumentListView: View {
                             await viewModel.thumbnail(for: row.id)
                         }
                     }
+                    .accessibilityIdentifier("documentRow")
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                         Button("Delete", systemImage: "trash", role: .destructive) {
                             viewModel.startDelete(id: row.id)

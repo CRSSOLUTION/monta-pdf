@@ -19,9 +19,11 @@ final class AppContainer {
     init(inMemory: Bool = false) throws {
         modelContainer = try Self.makeModelContainer(inMemory: inMemory)
         documentRepository = SwiftDataDocumentRepository(container: modelContainer)
-        let sessionService = inMemory ? "com.crlsribeiro.MontaPDF.session.tests" : "com.crlsribeiro.MontaPDF.session"
+        let sessionStore: SessionStore = inMemory
+            ? InMemorySessionStore()
+            : KeychainSessionStore(service: "com.crlsribeiro.MontaPDF.session")
         sessionManager = SessionManager(
-            store: KeychainSessionStore(service: sessionService),
+            store: sessionStore,
             credentialChecker: SystemAppleCredentialChecker(),
             cloudStatus: SystemCloudStatus()
         )

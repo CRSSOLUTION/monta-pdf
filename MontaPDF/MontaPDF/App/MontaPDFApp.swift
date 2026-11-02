@@ -12,9 +12,19 @@ struct MontaPDFApp: App {
     @State private var startup: AppStartup
 
     init() {
-        // Unit tests run inside the app, so they get an in-memory store without CloudKit.
-        let isRunningTests = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
-        _startup = State(initialValue: AppStartup { try AppContainer(inMemory: isRunningTests) })
+        let options = LaunchOptions()
+        _startup = State(initialValue: AppStartup {
+            let container = try AppContainer(inMemory: options.usesInMemoryStore)
+            if options.startsSignedIn {
+                container.sessionManager.signIn(with: AppleSignInCredential(
+                    userID: "ui-test",
+                    fullName: "UI Test",
+                    email: "ui-test@example.com",
+                    authorizationCode: nil
+                ))
+            }
+            return container
+        })
     }
 
     var body: some Scene {
