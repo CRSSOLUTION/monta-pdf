@@ -5,7 +5,6 @@
 
 import Foundation
 import Observation
-import UIKit
 
 @Observable
 @MainActor
@@ -29,7 +28,7 @@ final class DocumentListViewModel {
     private let namer: DocumentNamer
     private let shareFiles: DocumentShareFiles
     private var documents: [Document] = []
-    private var thumbnails: [UUID: UIImage] = [:]
+    private var thumbnails: [UUID: Data] = [:]
 
     init(
         repository: DocumentRepository,
@@ -155,7 +154,7 @@ final class DocumentListViewModel {
     }
 
     /// First page of the PDF, cached after the first render.
-    func thumbnail(for id: UUID) async -> UIImage? {
+    func thumbnail(for id: UUID) async -> Data? {
         if let cached = thumbnails[id] { return cached }
         guard let data = documents.first(where: { $0.id == id })?.pdfData else { return nil }
         let image = await ThumbnailRenderer.render(data, size: CGSize(width: 120, height: 160))

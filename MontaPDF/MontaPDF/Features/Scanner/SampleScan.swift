@@ -8,8 +8,8 @@ import UIKit
 
 /// The simulator has no camera, so the Scan button uses these fake pages there.
 enum SampleScan {
-    static func pages(count: Int = 2) -> [UIImage] {
-        (1...count).map { page(number: $0) }
+    static func pages(count: Int = 2) -> [PageImage] {
+        (1...count).compactMap { page(number: $0).jpegData(compressionQuality: 0.9).map { PageImage(data: $0) } }
     }
 
     private static func page(number: Int) -> UIImage {

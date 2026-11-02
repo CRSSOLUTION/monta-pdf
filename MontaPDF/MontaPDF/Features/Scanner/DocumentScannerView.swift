@@ -9,7 +9,7 @@ import VisionKit
 /// The native VisionKit scanner. It already detects edges, fixes perspective
 /// and asks before discarding captured pages when the user cancels.
 struct DocumentScannerView: UIViewControllerRepresentable {
-    var onFinish: ([UIImage]) -> Void
+    var onFinish: ([PageImage]) -> Void
     var onCancel: () -> Void
     var onError: (Error) -> Void
 
@@ -38,8 +38,11 @@ struct DocumentScannerView: UIViewControllerRepresentable {
             _ controller: VNDocumentCameraViewController,
             didFinishWith scan: VNDocumentCameraScan
         ) {
-            let images = (0..<scan.pageCount).map { scan.imageOfPage(at: $0) }
-            parent.onFinish(images)
+            // Hand the pages over as JPEG bytes, so ViewModels don't depend on UIKit.
+            let pages = (0..<scan.pageCount).compactMap { index in
+                scan.imageOfPage(at: index).jpegData(compressionQuality: 0.95).map { PageImage(data: $0) }
+            }
+            parent.onFinish(pages)
         }
 
         func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
