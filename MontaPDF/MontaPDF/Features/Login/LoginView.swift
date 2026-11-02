@@ -45,14 +45,23 @@ struct LoginView: View {
                 .foregroundStyle(.secondary)
             }
 
-            SignInWithAppleButton(.continue) { request in
-                request.requestedScopes = [.fullName, .email]
-            } onCompletion: { result in
-                viewModel.handleSignIn(AppleSignInMapper.map(result))
+            VStack(spacing: 10) {
+                SignInWithAppleButton(.continue) { request in
+                    request.requestedScopes = [.fullName, .email]
+                } onCompletion: { result in
+                    viewModel.handleSignIn(AppleSignInMapper.map(result))
+                }
+                .signInWithAppleButtonStyle(colorScheme == .dark ? .white : .black)
+                .accessibilityIdentifier("signInWithAppleButton")
+                .frame(height: 52)
+
+                // Many people think they need an iCloud address: any Apple ID works,
+                // including one created with a Gmail address.
+                Text("Use your Apple ID. Works with any email, including Gmail. You can hide your email.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
             }
-            .signInWithAppleButtonStyle(colorScheme == .dark ? .white : .black)
-            .accessibilityIdentifier("signInWithAppleButton")
-            .frame(height: 52)
 
             HStack(spacing: 16) {
                 Link("Privacy Policy", destination: AppLinks.privacyPolicy)
