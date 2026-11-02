@@ -1259,6 +1259,22 @@
         }
       }
     },
+    "Use your Apple ID. Works with any email, including Gmail. You can hide your email." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use seu Apple ID. Funciona com qualquer e-mail, inclusive Gmail. Você pode ocultar seu e-mail."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usa tu Apple ID. Funciona con cualquier correo, incluido Gmail. Puedes ocultar tu correo."
+          }
+        }
+      }
+    },
     "Version" : {
       "localizations" : {
         "pt-BR" : {
