@@ -21,14 +21,3 @@ struct SystemAppleCredentialChecker: AppleCredentialChecking {
         }
     }
 }
-
-/// Tells whether iCloud is on, so we can warn that documents stay only on this device.
-protocol CloudStatusProviding {
-    var isICloudAvailable: Bool { get }
-}
-
-struct SystemCloudStatus: CloudStatusProviding {
-    var isICloudAvailable: Bool {
-        FileManager.default.ubiquityIdentityToken != nil
-    }
-}
