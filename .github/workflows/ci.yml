@@ -47,6 +47,7 @@ jobs:
             -scheme MontaPDF \
             -destination "id=${{ steps.simulator.outputs.udid }}" \
             -only-testing:MontaPDFTests \
+            -derivedDataPath "$RUNNER_TEMP/DerivedData" \
             -resultBundlePath "$RUNNER_TEMP/TestResults.xcresult" \
             -enableCodeCoverage YES \
             -quiet \
@@ -68,21 +69,46 @@ jobs:
           xcrun simctl boot "${{ steps.simulator.outputs.udid }}" || true
           xcrun simctl bootstatus "${{ steps.simulator.outputs.udid }}" -b
 
+      - name: Build UI tests
+        working-directory: MontaPDF
+        run: |
+          set -o pipefail
+          xcodebuild build-for-testing \
+            -project MontaPDF.xcodeproj \
+            -scheme MontaPDF \
+            -destination "id=${{ steps.simulator.outputs.udid }}" \
+            -derivedDataPath "$RUNNER_TEMP/DerivedData" \
+            -quiet \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Warm up the app on the simulator
+        # The first launch on a freshly booted simulator is slow (the app is registered
+        # with the system) and XCUITest gave up ("Timed out while launching application").
+        # Install and open the app once so the tests start from a warm simulator.
+        run: |
+          APP="$RUNNER_TEMP/DerivedData/Build/Products/Debug-iphonesimulator/MontaPDF.app"
+          UDID="${{ steps.simulator.outputs.udid }}"
+          xcrun simctl install "$UDID" "$APP"
+          xcrun simctl launch "$UDID" com.crlsribeiro.MontaPDF -ui-testing
+          sleep 20
+          xcrun simctl terminate "$UDID" com.crlsribeiro.MontaPDF || true
+
       - name: Run UI tests
         working-directory: MontaPDF
         # One simulator, tests in series: parallel clones on the shared runner
         # fail to launch the app ("Failed to send signal 19").
         run: |
           set -o pipefail
-          xcodebuild test \
+          xcodebuild test-without-building \
             -project MontaPDF.xcodeproj \
             -scheme MontaPDF \
             -destination "id=${{ steps.simulator.outputs.udid }}" \
+            -derivedDataPath "$RUNNER_TEMP/DerivedData" \
             -only-testing:MontaPDFUITests \
             -parallel-testing-enabled NO \
             -resultBundlePath "$RUNNER_TEMP/UITestResults.xcresult" \
             CODE_SIGNING_ALLOWED=NO \
-            2>&1 | tee "$RUNNER_TEMP/xcodebuild-ui.log" | grep -E "Test (Case|case|Suite)|error:|XCTAssert|failed|passed|\*\*" 
+            2>&1 | tee "$RUNNER_TEMP/xcodebuild-ui.log" | grep -E "Test (Case|case|Suite)|error:|XCTAssert|failed|passed|\*\*"
 
       - name: Upload test results
         if: failure()
