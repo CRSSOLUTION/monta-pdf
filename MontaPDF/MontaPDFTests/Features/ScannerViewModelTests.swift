@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import PDFKit
 import SwiftData
 import Testing
 import UIKit
@@ -54,13 +55,14 @@ struct ScannerViewModelTests {
         viewModel.onSaved = { savedID = $0 }
         viewModel.isScannerPresented = true
 
-        await viewModel.scannerFinished(with: [makeTestImage(), makeTestImage(), makeTestImage()])
+        await viewModel.scannerFinished(with: [makeTestPage(), makeTestPage(), makeTestPage()])
 
         #expect(viewModel.isScannerPresented == false)
         #expect(viewModel.isSaving == false)
         let stored = try #require(try repository.fetchAll().first)
         #expect(stored.pageCount == 3)
-        #expect(stored.pdfData == Data("pdf-3".utf8))
+        let pdf = try #require(stored.pdfData.flatMap { PDFDocument(data: $0) })
+        #expect(pdf.pageCount == 3)
         #expect(savedID == stored.id)
     }
 
@@ -68,7 +70,7 @@ struct ScannerViewModelTests {
         let enhancer = FakeScanEnhancer()
         let viewModel = makeViewModel(enhancer: enhancer)
 
-        await viewModel.saveScannedPages([makeTestImage(), makeTestImage(), makeTestImage()])
+        await viewModel.saveScannedPages([makeTestPage(), makeTestPage(), makeTestPage()])
 
         #expect(enhancer.enhancedCount == 3)
     }
@@ -76,7 +78,7 @@ struct ScannerViewModelTests {
     @Test func failedSaveKeepsPagesAndRetrySavesThem() async throws {
         let viewModel = makeViewModel(builder: FakePDFBuilder(failures: 1))
 
-        await viewModel.saveScannedPages([makeTestImage(), makeTestImage()])
+        await viewModel.saveScannedPages([makeTestPage(), makeTestPage()])
 
         #expect(viewModel.alert == .saveFailed)
         #expect(try repository.fetchAll().isEmpty)
@@ -88,7 +90,7 @@ struct ScannerViewModelTests {
 
     @Test func discardingPendingPagesMakesRetryDoNothing() async throws {
         let viewModel = makeViewModel(builder: FakePDFBuilder(failures: 1))
-        await viewModel.saveScannedPages([makeTestImage()])
+        await viewModel.saveScannedPages([makeTestPage()])
 
         viewModel.discardPendingPages()
         await viewModel.retrySave()

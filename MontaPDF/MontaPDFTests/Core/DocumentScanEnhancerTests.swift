@@ -8,20 +8,25 @@ import UIKit
 @testable import MontaPDF
 
 struct DocumentScanEnhancerTests {
-    @Test func keepsThePageSizeAndOrientation() {
-        let page = makeTestImage(width: 40, height: 60)
+    @Test func keepsThePageSize() throws {
+        let page = makeTestPage(width: 40, height: 60)
 
         let enhanced = DocumentScanEnhancer().enhance(page)
 
-        #expect(enhanced.size == page.size)
-        #expect(enhanced.imageOrientation == page.imageOrientation)
+        let image = try #require(UIImage(data: enhanced.data))
+        #expect(image.size.width * image.scale == 40)
+        #expect(image.size.height * image.scale == 60)
     }
 
     @Test func zeroAmountStillReturnsAnImage() {
-        let page = makeTestImage()
+        let enhanced = DocumentScanEnhancer(amount: 0).enhance(makeTestPage())
 
-        let enhanced = DocumentScanEnhancer(amount: 0).enhance(page)
+        #expect(UIImage(data: enhanced.data) != nil)
+    }
 
-        #expect(enhanced.size == page.size)
+    @Test func unreadablePageIsReturnedUnchanged() {
+        let page = PageImage(data: Data("not an image".utf8))
+
+        #expect(DocumentScanEnhancer().enhance(page) == page)
     }
 }

@@ -55,14 +55,14 @@ final class FakePDFBuilder: PDFBuilding, @unchecked Sendable {
         failuresLeft = failures
     }
 
-    func makePDF(from images: [UIImage]) throws -> Data {
+    func makePDF(from images: [PageImage]) throws -> Data {
         lock.lock()
         defer { lock.unlock() }
         if failuresLeft > 0 {
             failuresLeft -= 1
             throw TestError()
         }
-        return Data("pdf-\(images.count)".utf8)
+        return blankPDF(pages: images.count)
     }
 }
 
@@ -156,7 +156,7 @@ final class FakeScanEnhancer: ScanEnhancing, @unchecked Sendable {
         return count
     }
 
-    func enhance(_ image: UIImage) -> UIImage {
+    func enhance(_ image: PageImage) -> PageImage {
         lock.lock()
         count += 1
         lock.unlock()
@@ -195,4 +195,17 @@ func appleCredential(
     code: String? = "code-123"
 ) -> AppleSignInCredential {
     AppleSignInCredential(userID: userID, fullName: name, email: email, authorizationCode: code)
+}
+
+/// A small valid PNG page, as the scanner and the importer hand pages over.
+func makeTestPage(width: CGFloat = 20, height: CGFloat = 30) -> PageImage {
+    PageImage(data: makeTestImage(width: width, height: height).pngData() ?? Data())
+}
+
+/// A real PDF with blank A4 pages, so code that counts pages with PDFKit works.
+func blankPDF(pages: Int) -> Data {
+    let renderer = UIGraphicsPDFRenderer(bounds: CGRect(x: 0, y: 0, width: 595, height: 842))
+    return renderer.pdfData { context in
+        for _ in 0..<pages { context.beginPage() }
+    }
 }

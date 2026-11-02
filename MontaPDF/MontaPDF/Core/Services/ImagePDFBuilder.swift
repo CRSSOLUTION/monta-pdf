@@ -12,7 +12,8 @@ nonisolated struct ImagePDFBuilder: PDFBuilding {
     var maxPixelDimension: CGFloat = 2200
     var jpegQuality: CGFloat = 0.75
 
-    func makePDF(from images: [UIImage]) throws -> Data {
+    func makePDF(from pages: [PageImage]) throws -> Data {
+        let images = pages.compactMap { UIImage(data: $0.data) }
         guard !images.isEmpty else { throw PDFBuilderError.noPages }
 
         let firstPage = CGRect(x: 0, y: 0, width: Self.pageWidth, height: Self.pageWidth * 1.414)
