@@ -56,6 +56,7 @@ struct AccountView: View {
                     Button("Delete Account", role: .destructive) {
                         viewModel.startDeleteAccount()
                     }
+                    .accessibilityIdentifier("deleteAccountButton")
                 } footer: {
                     Text("Signing out keeps your documents in your iCloud.")
                 }
@@ -65,6 +66,7 @@ struct AccountView: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") { dismiss() }
+                        .accessibilityIdentifier("accountDoneButton")
                 }
             }
             .confirmationDialog(

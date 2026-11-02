@@ -90,34 +90,6 @@ final class FakeExporter: DocumentExporting {
     }
 }
 
-/// Session store kept in memory.
-final class InMemorySessionStore: SessionStore {
-    private var currentUserID: String?
-    private var profiles: [String: UserSession] = [:]
-
-    func loadSession() -> UserSession? {
-        currentUserID.flatMap { profiles[$0] }
-    }
-
-    func save(_ session: UserSession) {
-        profiles[session.userID] = session
-        currentUserID = session.userID
-    }
-
-    func signOut() {
-        currentUserID = nil
-    }
-
-    func deleteAll() {
-        if let currentUserID { profiles[currentUserID] = nil }
-        currentUserID = nil
-    }
-
-    func rememberedProfile(for userID: String) -> UserSession? {
-        profiles[userID]
-    }
-}
-
 struct FakeCredentialChecker: AppleCredentialChecking {
     var authorized = true
 
@@ -177,12 +149,12 @@ final class FakeTokenRevoker: AppleTokenRevoking {
 
 @MainActor
 func makeSessionManager(
-    store: SessionStore = InMemorySessionStore(),
+    store: SessionStore? = nil,
     authorized: Bool = true,
     iCloud: Bool = true
 ) -> SessionManager {
     SessionManager(
-        store: store,
+        store: store ?? InMemorySessionStore(),
         credentialChecker: FakeCredentialChecker(authorized: authorized),
         cloudStatus: FakeCloudStatus(isICloudAvailable: iCloud)
     )
