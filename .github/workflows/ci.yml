@@ -59,7 +59,7 @@ jobs:
       - name: SonarQube Cloud analysis
         # Skipped on pull requests from forks, which can't read the token.
         if: ${{ env.SONAR_TOKEN != '' }}
-        uses: SonarSource/sonarqube-scan-action@v5
+        uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
