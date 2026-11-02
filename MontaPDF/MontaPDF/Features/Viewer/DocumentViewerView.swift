@@ -125,6 +125,7 @@ struct DocumentViewerView: View {
                     .overlay(alignment: .bottom) {
                         if pageCount > 1 {
                             Text("Page \(currentPage) of \(pageCount)")
+                                .accessibilityIdentifier("pageIndicator")
                                 .font(.footnote.weight(.semibold))
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 6)
