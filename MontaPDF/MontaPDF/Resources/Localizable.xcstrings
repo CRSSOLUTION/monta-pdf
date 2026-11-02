@@ -203,6 +203,22 @@
         }
       }
     },
+    "Contact Support" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falar com o suporte"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contactar a soporte"
+          }
+        }
+      }
+    },
     "Couldn't convert this document" : {
       "localizations" : {
         "pt-BR" : {
@@ -263,6 +279,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No se pudo importar el archivo"
+          }
+        }
+      }
+    },
+    "Couldn't open your documents" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível abrir seus documentos"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudieron abrir tus documentos"
           }
         }
       }
@@ -583,6 +615,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Guardar el original"
+          }
+        }
+      }
+    },
+    "Monta PDF couldn't open its storage. Try again, or restart the app. If it keeps happening, contact support." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O Monta PDF não conseguiu abrir o armazenamento. Tente novamente ou reinicie o app. Se continuar acontecendo, fale com o suporte."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monta PDF no pudo abrir su almacenamiento. Inténtalo de nuevo o reinicia la app. Si sigue pasando, contacta a soporte."
           }
         }
       }

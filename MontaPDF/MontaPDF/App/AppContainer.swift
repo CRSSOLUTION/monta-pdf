@@ -15,28 +15,9 @@ final class AppContainer {
     let documentRepository: DocumentRepository
     let sessionManager: SessionManager
 
-    init(inMemory: Bool = false) {
-        let schema = Schema([Document.self])
-        let configuration: ModelConfiguration
-        if inMemory {
-            configuration = ModelConfiguration(
-                schema: schema,
-                isStoredInMemoryOnly: true,
-                cloudKitDatabase: .none
-            )
-        } else {
-            configuration = ModelConfiguration(
-                schema: schema,
-                cloudKitDatabase: .private(Self.cloudKitContainerIdentifier)
-            )
-        }
-
-        do {
-            modelContainer = try ModelContainer(for: schema, configurations: [configuration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-
+    /// Throws only when no store can be opened at all; the app then shows `StorageErrorView`.
+    init(inMemory: Bool = false) throws {
+        modelContainer = try Self.makeModelContainer(inMemory: inMemory)
         documentRepository = SwiftDataDocumentRepository(container: modelContainer)
         let sessionService = inMemory ? "com.crlsribeiro.MontaPDF.session.tests" : "com.crlsribeiro.MontaPDF.session"
         sessionManager = SessionManager(
@@ -44,6 +25,23 @@ final class AppContainer {
             credentialChecker: SystemAppleCredentialChecker(),
             cloudStatus: SystemCloudStatus()
         )
+    }
+
+    /// Opens the iCloud-synced store. If CloudKit can't be set up (for example,
+    /// a schema problem), falls back to a store on this device so the app still works.
+    private static func makeModelContainer(inMemory: Bool) throws -> ModelContainer {
+        let schema = Schema([Document.self])
+        if inMemory {
+            let configuration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true, cloudKitDatabase: .none)
+            return try ModelContainer(for: schema, configurations: [configuration])
+        }
+        do {
+            let synced = ModelConfiguration(schema: schema, cloudKitDatabase: .private(cloudKitContainerIdentifier))
+            return try ModelContainer(for: schema, configurations: [synced])
+        } catch {
+            let local = ModelConfiguration(schema: schema, cloudKitDatabase: .none)
+            return try ModelContainer(for: schema, configurations: [local])
+        }
     }
 
     /// The three ViewModels of the My Documents screen, already wired together:
@@ -96,13 +94,4 @@ final class AppContainer {
     func makeLoginViewModel() -> LoginViewModel {
         LoginViewModel(session: sessionManager)
     }
-}
-
-/// ViewModels used by the My Documents screen.
-struct DocumentsFeature {
-    let list: DocumentListViewModel
-    let scanner: ScannerViewModel
-    let importer: ImportViewModel
-    /// Builds the ViewModel of the PDF viewer for a document.
-    let makeViewer: (UUID) -> DocumentViewerViewModel
 }

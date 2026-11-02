@@ -9,17 +9,21 @@ import SwiftUI
 
 @main
 struct MontaPDFApp: App {
-    private let container: AppContainer
+    @State private var startup: AppStartup
 
     init() {
         // Unit tests run inside the app, so they get an in-memory store without CloudKit.
         let isRunningTests = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
-        container = AppContainer(inMemory: isRunningTests)
+        _startup = State(initialValue: AppStartup { try AppContainer(inMemory: isRunningTests) })
     }
 
     var body: some Scene {
         WindowGroup {
-            ContentView(container: container)
+            if let container = startup.container {
+                ContentView(container: container)
+            } else {
+                StorageErrorView(onRetry: startup.start)
+            }
         }
     }
 }
