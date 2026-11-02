@@ -50,9 +50,10 @@ final class SwiftDataDocumentRepository: DocumentRepository {
     }
 
     func rename(_ document: Document, to title: String) throws {
-        let trimmed = title.trimmingCharacters(in: .whitespacesAndNewlines)
-        document.title = trimmed
-        document.isCustomTitle = !trimmed.isEmpty
+        // The name rules (80 chars, no "/" or ":") live in one place: DocumentTitleRules.
+        let sanitized = DocumentTitleRules.sanitize(title)
+        document.title = sanitized
+        document.isCustomTitle = !sanitized.isEmpty
         try context.save()
     }
 

@@ -27,7 +27,7 @@ final class DocumentListViewModel {
 
     private let repository: DocumentRepository
     private let namer: DocumentNamer
-    private let exporter: DocumentExporting
+    private let shareFiles: DocumentShareFiles
     private var documents: [Document] = []
     private var thumbnails: [UUID: UIImage] = [:]
 
@@ -38,7 +38,7 @@ final class DocumentListViewModel {
     ) {
         self.repository = repository
         self.namer = namer
-        self.exporter = exporter
+        self.shareFiles = DocumentShareFiles(exporter: exporter)
     }
 
     // MARK: - Loading
@@ -80,7 +80,7 @@ final class DocumentListViewModel {
     func rename(id: UUID, to title: String) {
         guard let document = documents.first(where: { $0.id == id }) else { return }
         perform {
-            try repository.rename(document, to: DocumentTitleRules.sanitize(title))
+            try repository.rename(document, to: title)
             documents = try repository.fetchAll()
         }
     }
@@ -94,9 +94,8 @@ final class DocumentListViewModel {
 
     func confirmRename() {
         guard let id = renameTargetID else { return }
-        let newTitle = DocumentTitleRules.sanitize(renameDraft)
-        guard !newTitle.isEmpty else { return }
-        rename(id: id, to: newTitle)
+        guard !DocumentTitleRules.sanitize(renameDraft).isEmpty else { return }
+        rename(id: id, to: renameDraft)
         renameTargetID = nil
         if savedBanner?.id == id {
             savedBanner = nil
@@ -138,18 +137,12 @@ final class DocumentListViewModel {
             let row = rows.first(where: { $0.id == id })
         else { return }
         perform {
+            let url: URL?
             switch format {
-            case .pdf:
-                guard let data = document.pdfData else { return }
-                let url = try exporter.export(data, fileName: DocumentTitleRules.fileName(for: row.title))
-                shareItem = ShareItem(url: url)
-            case .original:
-                guard let data = document.originalData else { return }
-                let ext = ((document.originalFileName ?? "") as NSString).pathExtension
-                let url = try exporter.export(
-                    data,
-                    fileName: DocumentTitleRules.fileName(for: row.title, fileExtension: ext.isEmpty ? "docx" : ext)
-                )
+            case .pdf: url = try shareFiles.pdfURL(for: document, title: row.title)
+            case .original: url = try shareFiles.originalURL(for: document, title: row.title)
+            }
+            if let url {
                 shareItem = ShareItem(url: url)
             }
         }
