@@ -9,9 +9,3 @@ import Foundation
 protocol CloudStatusProviding {
     var isICloudAvailable: Bool { get }
 }
-
-struct SystemCloudStatus: CloudStatusProviding {
-    var isICloudAvailable: Bool {
-        FileManager.default.ubiquityIdentityToken != nil
-    }
-}

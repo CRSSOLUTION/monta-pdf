@@ -7,29 +7,6 @@ import Foundation
 import Observation
 import UIKit
 
-/// A converted file waiting for the user to confirm it.
-nonisolated struct ImportPreview: Identifiable, Sendable {
-    let id = UUID()
-    let pdfData: Data
-    let pageCount: Int
-    /// Custom title (from the file name). `nil` gives an automatic "Document N".
-    let title: String?
-    let originalFileName: String?
-    /// Kept only for Word files.
-    let originalData: Data?
-
-    var isWord: Bool { originalData != nil }
-}
-
-nonisolated enum ImportAlert: Identifiable, Equatable, Sendable {
-    case unsupported
-    /// Word conversion failed; the user can still keep the original.
-    case conversionFailed
-    case failed
-
-    var id: Self { self }
-}
-
 @Observable
 @MainActor
 final class ImportViewModel {
