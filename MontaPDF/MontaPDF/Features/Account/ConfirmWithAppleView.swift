@@ -37,7 +37,7 @@ struct ConfirmWithAppleView: View {
                 SignInWithAppleButton(.continue) { request in
                     request.requestedScopes = []
                 } onCompletion: { result in
-                    Task { await viewModel.handleAppleConfirmation(result) }
+                    Task { await viewModel.handleAppleConfirmation(AppleSignInMapper.map(result)) }
                 }
                 .signInWithAppleButtonStyle(colorScheme == .dark ? .white : .black)
                 .frame(height: 52)

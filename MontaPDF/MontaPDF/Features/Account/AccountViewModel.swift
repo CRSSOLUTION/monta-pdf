@@ -3,7 +3,6 @@
 //  MontaPDF
 //
 
-import AuthenticationServices
 import Foundation
 import Observation
 
@@ -22,20 +21,20 @@ final class AccountViewModel {
     var isConfirmingWithApple = false
     private(set) var isDeleting = false
 
-    private let session: SessionViewModel
+    private let session: SessionManager
     private let repository: DocumentRepository
     private let tokenRevoker: AppleTokenRevoking
     private let bundle: Bundle
 
     init(
-        session: SessionViewModel,
+        session: SessionManager,
         repository: DocumentRepository,
-        tokenRevoker: AppleTokenRevoking? = nil,
+        tokenRevoker: AppleTokenRevoking,
         bundle: Bundle = .main
     ) {
         self.session = session
         self.repository = repository
-        self.tokenRevoker = tokenRevoker ?? WorkerAppleTokenRevoker()
+        self.tokenRevoker = tokenRevoker
         self.bundle = bundle
     }
 
@@ -91,24 +90,19 @@ final class AccountViewModel {
     }
 
     /// Step 3: result of "Continue with Apple" in the confirmation sheet.
-    func handleAppleConfirmation(_ result: Result<ASAuthorization, Error>) async {
+    func handleAppleConfirmation(_ result: AppleSignInResult) async {
         switch result {
-        case .success(let authorization):
-            guard
-                let credential = authorization.credential as? ASAuthorizationAppleIDCredential,
-                let codeData = credential.authorizationCode,
-                let code = String(data: codeData, encoding: .utf8)
-            else {
+        case .signedIn(let credential):
+            guard let code = credential.authorizationCode else {
                 isConfirmingWithApple = false
                 errorMessage = String(localized: "Couldn't delete your account. Please try again.")
                 return
             }
             await deleteAccount(authorizationCode: code)
-        case .failure(let error):
+        case .cancelled:
             isConfirmingWithApple = false
-            if let authError = error as? ASAuthorizationError, authError.code == .canceled {
-                return
-            }
+        case .failed:
+            isConfirmingWithApple = false
             errorMessage = String(localized: "Couldn't delete your account. Please try again.")
         }
     }
