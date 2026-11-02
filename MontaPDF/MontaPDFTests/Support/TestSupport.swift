@@ -142,7 +142,7 @@ final class FakeDocumentConverter: DocumentConverter {
 
 /// A real one-page PDF, for code that opens the PDF with PDFKit.
 func makeTestPDF(pages: Int = 1) throws -> Data {
-    try ImagePDFBuilder().makePDF(from: (0..<pages).map { _ in makeTestImage() })
+    try ImagePDFBuilder().makePDF(from: (0..<pages).map { _ in makeTestPage() })
 }
 
 /// Records how many pages went through the enhancer.
