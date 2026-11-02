@@ -174,3 +174,25 @@ final class FakeTokenRevoker: AppleTokenRevoking {
         revokedCodes.append(authorizationCode)
     }
 }
+
+@MainActor
+func makeSessionManager(
+    store: SessionStore = InMemorySessionStore(),
+    authorized: Bool = true,
+    iCloud: Bool = true
+) -> SessionManager {
+    SessionManager(
+        store: store,
+        credentialChecker: FakeCredentialChecker(authorized: authorized),
+        cloudStatus: FakeCloudStatus(isICloudAvailable: iCloud)
+    )
+}
+
+func appleCredential(
+    userID: String = "abc",
+    name: String? = nil,
+    email: String? = nil,
+    code: String? = "code-123"
+) -> AppleSignInCredential {
+    AppleSignInCredential(userID: userID, fullName: name, email: email, authorizationCode: code)
+}

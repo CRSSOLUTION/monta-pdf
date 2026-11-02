@@ -13,7 +13,7 @@ final class AppContainer {
 
     let modelContainer: ModelContainer
     let documentRepository: DocumentRepository
-    let sessionViewModel: SessionViewModel
+    let sessionManager: SessionManager
 
     init(inMemory: Bool = false) {
         let schema = Schema([Document.self])
@@ -39,7 +39,11 @@ final class AppContainer {
 
         documentRepository = SwiftDataDocumentRepository(container: modelContainer)
         let sessionService = inMemory ? "com.crlsribeiro.MontaPDF.session.tests" : "com.crlsribeiro.MontaPDF.session"
-        sessionViewModel = SessionViewModel(store: KeychainSessionStore(service: sessionService))
+        sessionManager = SessionManager(
+            store: KeychainSessionStore(service: sessionService),
+            credentialChecker: SystemAppleCredentialChecker(),
+            cloudStatus: SystemCloudStatus()
+        )
     }
 
     /// The three ViewModels of the My Documents screen, already wired together:
@@ -82,7 +86,15 @@ final class AppContainer {
     }
 
     func makeAccountViewModel() -> AccountViewModel {
-        AccountViewModel(session: sessionViewModel, repository: documentRepository)
+        AccountViewModel(
+            session: sessionManager,
+            repository: documentRepository,
+            tokenRevoker: WorkerAppleTokenRevoker()
+        )
+    }
+
+    func makeLoginViewModel() -> LoginViewModel {
+        LoginViewModel(session: sessionManager)
     }
 }
 

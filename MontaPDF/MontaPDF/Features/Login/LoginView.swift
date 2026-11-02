@@ -7,10 +7,10 @@ import AuthenticationServices
 import SwiftUI
 
 struct LoginView: View {
-    let viewModel: SessionViewModel
+    let viewModel: LoginViewModel
     @Environment(\.colorScheme) private var colorScheme
 
-    init(viewModel: SessionViewModel) {
+    init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
     }
 
@@ -48,7 +48,7 @@ struct LoginView: View {
             SignInWithAppleButton(.continue) { request in
                 request.requestedScopes = [.fullName, .email]
             } onCompletion: { result in
-                viewModel.handleSignIn(result)
+                viewModel.handleSignIn(AppleSignInMapper.map(result))
             }
             .signInWithAppleButtonStyle(colorScheme == .dark ? .white : .black)
             .frame(height: 52)
