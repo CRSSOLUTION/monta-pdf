@@ -51,5 +51,9 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(container: AppContainer(inMemory: true))
+    if let container = try? AppContainer(inMemory: true) {
+        ContentView(container: container)
+    } else {
+        StorageErrorView {}
+    }
 }

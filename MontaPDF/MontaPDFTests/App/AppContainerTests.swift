@@ -10,7 +10,7 @@ import Testing
 @MainActor
 struct AppContainerTests {
     @Test func savingAnImportReloadsTheListAndShowsTheBanner() throws {
-        let container = AppContainer(inMemory: true)
+        let container = try AppContainer(inMemory: true)
         let feature = container.makeDocumentsFeature()
         let document = try container.documentRepository.create(NewDocument(pdfData: nil, pageCount: 1))
 
@@ -22,7 +22,7 @@ struct AppContainerTests {
     }
 
     @Test func scannerIsWiredToTheList() throws {
-        let container = AppContainer(inMemory: true)
+        let container = try AppContainer(inMemory: true)
         let feature = container.makeDocumentsFeature()
         let document = try container.documentRepository.create(NewDocument(pdfData: nil, pageCount: 2))
 
@@ -32,7 +32,7 @@ struct AppContainerTests {
     }
 
     @Test func viewerFactoryBuildsAViewerForTheDocument() throws {
-        let container = AppContainer(inMemory: true)
+        let container = try AppContainer(inMemory: true)
         let feature = container.makeDocumentsFeature()
         let document = try container.documentRepository.create(NewDocument(pdfData: Data("pdf".utf8), pageCount: 1))
 
