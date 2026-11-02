@@ -30,9 +30,9 @@ final class MontaPDFUITests: XCTestCase {
     @MainActor
     private func scanOneDocument(in app: XCUIApplication) {
         let scan = app.buttons["emptyStateScanButton"]
-        XCTAssertTrue(scan.waitForExistence(timeout: 10), "Empty state with the Scan button")
+        XCTAssertTrue(scan.waitForExistence(timeout: 30), "Empty state with the Scan button")
         scan.tap()
-        XCTAssertTrue(app.staticTexts["Document 1"].waitForExistence(timeout: 20), "Scanned document in the list")
+        XCTAssertTrue(app.staticTexts["Document 1"].waitForExistence(timeout: 45), "Scanned document in the list")
     }
 
     @MainActor
@@ -46,7 +46,7 @@ final class MontaPDFUITests: XCTestCase {
     func testSignedOutShowsLogin() {
         let app = launch(signedIn: false)
 
-        XCTAssertTrue(app.staticTexts["Scan, convert and keep your documents as PDFs."].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Scan, convert and keep your documents as PDFs."].waitForExistence(timeout: 30))
         XCTAssertFalse(app.buttons["emptyStateScanButton"].exists)
     }
 
@@ -67,7 +67,7 @@ final class MontaPDFUITests: XCTestCase {
 
         documentRow(in: app).tap()
 
-        XCTAssertTrue(app.staticTexts["pageIndicator"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["pageIndicator"].waitForExistence(timeout: 30))
         XCTAssertTrue(app.staticTexts["Page 1 of 2"].exists)
     }
 
@@ -79,13 +79,13 @@ final class MontaPDFUITests: XCTestCase {
         documentRow(in: app).swipeLeft()
         app.buttons["Rename"].firstMatch.tap()
         let field = app.alerts.textFields.firstMatch
-        XCTAssertTrue(field.waitForExistence(timeout: 5))
+        XCTAssertTrue(field.waitForExistence(timeout: 15))
         field.tap()
         field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 20))
         field.typeText("Receipt")
         app.alerts.buttons["Save"].tap()
 
-        XCTAssertTrue(app.staticTexts["Receipt"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Receipt"].waitForExistence(timeout: 15))
         XCTAssertFalse(app.staticTexts["Document 1"].exists)
     }
 
@@ -97,10 +97,10 @@ final class MontaPDFUITests: XCTestCase {
         documentRow(in: app).swipeLeft()
         app.buttons["Delete"].firstMatch.tap()
         let confirm = app.alerts.buttons["Delete"]
-        XCTAssertTrue(confirm.waitForExistence(timeout: 5), "Delete asks for confirmation")
+        XCTAssertTrue(confirm.waitForExistence(timeout: 15), "Delete asks for confirmation")
         confirm.tap()
 
-        XCTAssertTrue(app.buttons["emptyStateScanButton"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["emptyStateScanButton"].waitForExistence(timeout: 15))
     }
 
     @MainActor
@@ -108,11 +108,11 @@ final class MontaPDFUITests: XCTestCase {
         let app = launch(signedIn: true)
 
         let account = app.buttons["accountButton"]
-        XCTAssertTrue(account.waitForExistence(timeout: 10))
+        XCTAssertTrue(account.waitForExistence(timeout: 30))
         account.tap()
 
-        XCTAssertTrue(app.buttons["deleteAccountButton"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["deleteAccountButton"].waitForExistence(timeout: 15))
         app.buttons["accountDoneButton"].tap()
-        XCTAssertTrue(app.buttons["emptyStateScanButton"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["emptyStateScanButton"].waitForExistence(timeout: 15))
     }
 }

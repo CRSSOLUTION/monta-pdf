@@ -47,8 +47,15 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             2>&1 | tee "$RUNNER_TEMP/xcodebuild.log"
 
+      - name: Boot simulator for UI tests
+        run: |
+          xcrun simctl boot "${{ steps.simulator.outputs.udid }}" || true
+          xcrun simctl bootstatus "${{ steps.simulator.outputs.udid }}" -b
+
       - name: Run UI tests
         working-directory: MontaPDF
+        # One simulator, tests in series: parallel clones on the shared runner
+        # fail to launch the app ("Failed to send signal 19").
         run: |
           set -o pipefail
           xcodebuild test \
@@ -56,10 +63,10 @@ jobs:
             -scheme MontaPDF \
             -destination "id=${{ steps.simulator.outputs.udid }}" \
             -only-testing:MontaPDFUITests \
+            -parallel-testing-enabled NO \
             -resultBundlePath "$RUNNER_TEMP/UITestResults.xcresult" \
-            -quiet \
             CODE_SIGNING_ALLOWED=NO \
-            2>&1 | tee "$RUNNER_TEMP/xcodebuild-ui.log"
+            2>&1 | tee "$RUNNER_TEMP/xcodebuild-ui.log" | grep -E "Test (Case|case|Suite)|error:|XCTAssert|failed|passed|\*\*" 
 
       - name: Upload test results
         if: failure()
