@@ -75,6 +75,8 @@ private struct ImportFlowModifier: ViewModifier {
                 case .unsupported: Text("Send an image, a PDF or a Word file.")
                 case .conversionFailed: Text("You can keep the original file and share it as it is.")
                 case .failed: Text("Please try again.")
+                case .someFilesSkipped(let count):
+                    Text("\(count) files couldn't be imported. Send images, PDFs or Word files.")
                 }
             }
     }
@@ -109,6 +111,7 @@ private struct ImportFlowModifier: ViewModifier {
         case .unsupported: Text("Unsupported format")
         case .conversionFailed: Text("Couldn't convert this document")
         case .failed: Text("Couldn't import the file")
+        case .someFilesSkipped: Text("Some files weren't imported")
         }
     }
 }

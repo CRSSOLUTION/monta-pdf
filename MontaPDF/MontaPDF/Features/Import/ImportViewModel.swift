@@ -41,7 +41,9 @@ final class ImportViewModel {
         }
     }
 
-    /// Images go into one PDF in selection order; PDF and Word must be picked alone.
+    /// Only images: one PDF in selection order, shown in a preview.
+    /// One PDF or Word file: saved as it is, or converted with a preview.
+    /// Several files of other kinds: each one becomes its own document.
     func importFiles(_ files: [ImportedFile]) async {
         guard !files.isEmpty else { return }
         let kinds = files.map(\.kind)
@@ -54,7 +56,7 @@ final class ImportViewModel {
         }
 
         guard files.count == 1, let file = files.first else {
-            alert = .unsupported
+            await importEachFile(files)
             return
         }
 
@@ -104,6 +106,52 @@ final class ImportViewModel {
     }
 
     // MARK: - Private
+
+    /// Saves every file as its own document, without previews.
+    /// A Word file that can't be converted is kept as the original, so nothing is lost.
+    private func importEachFile(_ files: [ImportedFile]) async {
+        isConverting = true
+        defer { isConverting = false }
+        var skipped = 0
+        for file in files {
+            if await saveWithoutPreview(file) == false {
+                skipped += 1
+            }
+        }
+        if skipped > 0 {
+            alert = .someFilesSkipped(skipped)
+        }
+    }
+
+    private func saveWithoutPreview(_ file: ImportedFile) async -> Bool {
+        let title = DocumentTitleRules.title(fromFileName: file.name)
+        switch file.kind {
+        case .pdf:
+            let pageCount = PDFPageCounter.count(file.data)
+            guard pageCount > 0 else { return false }
+            return save(NewDocument(pdfData: file.data, pageCount: pageCount, customTitle: title, originalFileName: file.name))
+        case .word:
+            if let converted = try? await converter.convertToPDF(data: file.data, fileName: file.name) {
+                return save(NewDocument(
+                    pdfData: converted.data,
+                    pageCount: converted.pageCount,
+                    customTitle: title,
+                    originalFileName: file.name,
+                    originalData: file.data
+                ))
+            }
+            return save(NewDocument(pdfData: nil, pageCount: 0, customTitle: title, originalFileName: file.name, originalData: file.data))
+        case .image:
+            let builder = pdfBuilder
+            let page = PageImage(data: file.data)
+            guard let data = try? await Task.detached(priority: .userInitiated, operation: {
+                try builder.makePDF(from: [page])
+            }).value else { return false }
+            return save(NewDocument(pdfData: data, pageCount: PDFPageCounter.count(data), customTitle: title, originalFileName: file.name))
+        case .unsupported:
+            return false
+        }
+    }
 
     private func buildImagePreview(_ pages: [PageImage], title: String?, originalFileName: String?) async {
         guard !pages.isEmpty else {
@@ -174,12 +222,15 @@ final class ImportViewModel {
         ))
     }
 
-    private func save(_ newDocument: NewDocument) {
+    @discardableResult
+    private func save(_ newDocument: NewDocument) -> Bool {
         do {
             let document = try repository.create(newDocument)
             onSaved?(document.id)
+            return true
         } catch {
             alert = .failed
+            return false
         }
     }
 }
