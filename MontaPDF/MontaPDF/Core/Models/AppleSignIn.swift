@@ -11,7 +11,8 @@ nonisolated struct AppleSignInCredential: Equatable, Sendable {
     let userID: String
     /// Sent by Apple only on the first sign-in.
     let fullName: String?
-    /// Sent by Apple only on the first sign-in (may be a private relay address).
+    /// Sent by Apple on the first sign-in; on later sign-ins it comes from the
+    /// identity token. May be a private relay address.
     let email: String?
     /// Short-lived code, used to revoke the token when the account is deleted.
     let authorizationCode: String?

@@ -20,7 +20,9 @@ nonisolated enum AppleSignInMapper {
                 fullName: credential.fullName.flatMap {
                     PersonNameComponentsFormatter.localizedString(from: $0, style: .default)
                 },
-                email: credential.email,
+                email: credential.email ?? AppleIdentityToken.email(
+                    from: credential.identityToken.flatMap { String(data: $0, encoding: .utf8) }
+                ),
                 authorizationCode: credential.authorizationCode.flatMap { String(data: $0, encoding: .utf8) }
             ))
         case .failure(let error):

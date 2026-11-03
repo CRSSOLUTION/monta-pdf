@@ -123,22 +123,6 @@
         }
       }
     },
-    "Apple Account" : {
-      "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Conta Apple"
-          }
-        },
-        "es-419" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cuenta de Apple"
-          }
-        }
-      }
-    },
     "Building your PDF..." : {
       "localizations" : {
         "pt-BR" : {
@@ -1079,6 +1063,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿Cerrar sesión?"
+          }
+        }
+      }
+    },
+    "Signed in with Apple" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conectado com a Apple"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sesión iniciada con Apple"
           }
         }
       }

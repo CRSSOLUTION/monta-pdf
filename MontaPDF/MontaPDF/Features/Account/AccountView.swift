@@ -17,13 +17,18 @@ struct AccountView: View {
         NavigationStack {
             List {
                 Section {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(viewModel.name ?? String(localized: "Apple Account"))
-                            .font(.headline)
-                        if let email = viewModel.email {
-                            Text(email)
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
+                    HStack(spacing: 12) {
+                        Image(systemName: "apple.logo")
+                            .font(.title2)
+                            .accessibilityHidden(true)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(viewModel.name ?? String(localized: "Signed in with Apple"))
+                                .font(.headline)
+                            if let email = viewModel.email {
+                                Text(email)
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
                         }
                     }
                     .padding(.vertical, 4)
