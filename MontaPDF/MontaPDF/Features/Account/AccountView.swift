@@ -31,9 +31,7 @@ struct AccountView: View {
 
                 Section("iCloud") {
                     LabeledContent("Documents", value: viewModel.documentCount, format: .number)
-                    LabeledContent("Space used") {
-                        Text(viewModel.storageBytes, format: .byteCount(style: .file))
-                    }
+                    LabeledContent("Space used", value: viewModel.storageText)
                 }
 
                 Section {

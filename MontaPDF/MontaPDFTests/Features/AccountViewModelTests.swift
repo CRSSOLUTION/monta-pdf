@@ -38,6 +38,16 @@ struct AccountViewModelTests {
         #expect(viewModel.appVersion.isEmpty == false)
     }
 
+    @Test func emptyStorageIsShownAsANumber() {
+        let viewModel = makeViewModel()
+
+        viewModel.load()
+
+        #expect(viewModel.storageBytes == 0)
+        #expect(viewModel.storageText.contains("0"))
+        #expect(viewModel.storageText.localizedCaseInsensitiveContains("zero") == false)
+    }
+
     @Test func signOutEndsTheSessionAndKeepsDocuments() throws {
         try repository.create(NewDocument(pdfData: nil, pageCount: 1))
         let viewModel = makeViewModel()

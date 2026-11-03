@@ -38,6 +38,14 @@ final class AccountViewModel {
         self.bundle = bundle
     }
 
+    /// e.g. "2.3 MB". Always a number: the system would otherwise say "Zero KB".
+    var storageText: String {
+        let formatter = ByteCountFormatter()
+        formatter.countStyle = .file
+        formatter.allowsNonnumericFormatting = false
+        return formatter.string(fromByteCount: storageBytes)
+    }
+
     var name: String? { session.session?.name }
     var email: String? { session.session?.email }
 
