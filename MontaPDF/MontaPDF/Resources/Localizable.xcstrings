@@ -17,6 +17,64 @@
         }
       }
     },
+    "%lld files couldn't be imported. Send images, PDFs or Word files." : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld file couldn't be imported. Send images, PDFs or Word files."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld files couldn't be imported. Send images, PDFs or Word files."
+                }
+              }
+            }
+          }
+        },
+        "pt-BR" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld arquivo não pôde ser importado. Envie imagens, PDFs ou arquivos do Word."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld arquivos não puderam ser importados. Envie imagens, PDFs ou arquivos do Word."
+                }
+              }
+            }
+          }
+        },
+        "es-419" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld archivo no se pudo importar. Envía imágenes, PDF o archivos de Word."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld archivos no se pudieron importar. Envía imágenes, PDF o archivos de Word."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "%lld pages" : {
       "localizations" : {
         "en" : {
@@ -1095,6 +1153,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Al cerrar sesión, tus documentos se quedan en tu iCloud."
+          }
+        }
+      }
+    },
+    "Some files weren't imported" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alguns arquivos não foram importados"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Algunos archivos no se importaron"
           }
         }
       }
