@@ -18,11 +18,11 @@ struct LoginView: View {
         VStack(spacing: 24) {
             Spacer()
 
-            Image(systemName: "doc.viewfinder.fill")
-                .font(.system(size: 64))
-                .foregroundStyle(.white)
+            // Same artwork as the App Store icon, so the brand looks the same everywhere.
+            Image("AppLogo")
+                .resizable()
                 .frame(width: 112, height: 112)
-                .background(Color.accentColor.gradient, in: RoundedRectangle(cornerRadius: 26))
+                .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
                 .accessibilityHidden(true)
 
             VStack(spacing: 8) {
