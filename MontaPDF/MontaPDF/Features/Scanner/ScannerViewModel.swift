@@ -21,6 +21,9 @@ final class ScannerViewModel {
     private let pdfBuilder: PDFBuilding
     private let scanEnhancer: ScanEnhancing
     private let availability: ScannerAvailability
+    /// When set, the Scan button saves these pages instead of opening the camera.
+    /// Used on the simulator (no camera) and by UI tests, which can't drive VisionKit.
+    private let samplePages: (() -> [PageImage])?
     /// Pages kept after a failed save, so the user can try again without scanning again.
     private var pendingPages: [PageImage] = []
 
@@ -28,23 +31,25 @@ final class ScannerViewModel {
         repository: DocumentRepository,
         pdfBuilder: PDFBuilding,
         scanEnhancer: ScanEnhancing,
-        availability: ScannerAvailability
+        availability: ScannerAvailability,
+        samplePages: (() -> [PageImage])? = nil
     ) {
         self.repository = repository
         self.pdfBuilder = pdfBuilder
         self.scanEnhancer = scanEnhancer
         self.availability = availability
+        self.samplePages = samplePages
     }
 
     /// Called by the Scan button. Opens the scanner or explains why it can't.
-    /// Uses sample pages on the simulator, which has no camera.
+    /// Saves the sample pages instead when they are set (simulator and UI tests).
     func scanTapped() async {
+        if let samplePages {
+            await saveScannedPages(samplePages())
+            return
+        }
         guard availability.isScannerSupported else {
-            #if DEBUG && targetEnvironment(simulator)
-            await saveScannedPages(SampleScan.pages())
-            #else
             alert = .scannerUnavailable
-            #endif
             return
         }
         guard availability.cameraAccess != .denied else {

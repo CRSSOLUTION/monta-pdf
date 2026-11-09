@@ -21,13 +21,15 @@ struct ScannerViewModelTests {
     private func makeViewModel(
         builder: FakePDFBuilder = FakePDFBuilder(),
         enhancer: FakeScanEnhancer = FakeScanEnhancer(),
-        availability: FakeScannerAvailability = FakeScannerAvailability()
+        availability: FakeScannerAvailability = FakeScannerAvailability(),
+        samplePages: (() -> [PageImage])? = nil
     ) -> ScannerViewModel {
         ScannerViewModel(
             repository: repository,
             pdfBuilder: builder,
             scanEnhancer: enhancer,
-            availability: availability
+            availability: availability,
+            samplePages: samplePages
         )
     }
 
@@ -38,6 +40,30 @@ struct ScannerViewModelTests {
 
         #expect(viewModel.isScannerPresented)
         #expect(viewModel.alert == nil)
+    }
+
+    @Test func scanWithoutScannerExplainsWhy() async throws {
+        let viewModel = makeViewModel(availability: FakeScannerAvailability(isScannerSupported: false))
+
+        await viewModel.scanTapped()
+
+        #expect(viewModel.isScannerPresented == false)
+        #expect(viewModel.alert == .scannerUnavailable)
+        #expect(try repository.fetchAll().isEmpty)
+    }
+
+    @Test func scanWithSamplePagesSavesThemWithoutOpeningTheCamera() async throws {
+        // UI tests on a real iPhone: the camera exists, but the sample pages are used.
+        let viewModel = makeViewModel(samplePages: { [makeTestPage(), makeTestPage()] })
+        var savedID: UUID?
+        viewModel.onSaved = { savedID = $0 }
+
+        await viewModel.scanTapped()
+
+        #expect(viewModel.isScannerPresented == false)
+        let stored = try #require(try repository.fetchAll().first)
+        #expect(stored.pageCount == 2)
+        #expect(savedID == stored.id)
     }
 
     @Test func scanWithCameraDeniedExplainsHowToFix() async {

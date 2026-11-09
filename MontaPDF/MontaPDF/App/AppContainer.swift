@@ -14,9 +14,12 @@ final class AppContainer {
     let modelContainer: ModelContainer
     let documentRepository: DocumentRepository
     let sessionManager: SessionManager
+    /// UI tests run on the simulator or on a real iPhone: no camera scan, no Apple ID checks.
+    private let isUITesting: Bool
 
     /// Throws only when no store can be opened at all; the app then shows `StorageErrorView`.
-    init(inMemory: Bool = false) throws {
+    init(inMemory: Bool = false, isUITesting: Bool = false) throws {
+        self.isUITesting = isUITesting
         modelContainer = try Self.makeModelContainer(inMemory: inMemory)
         documentRepository = SwiftDataDocumentRepository(container: modelContainer)
         let sessionStore: SessionStore = inMemory
@@ -24,7 +27,10 @@ final class AppContainer {
             : KeychainSessionStore(service: "com.crlsribeiro.MontaPDF.session")
         sessionManager = SessionManager(
             store: sessionStore,
-            credentialChecker: SystemAppleCredentialChecker(),
+            // The fake UI test user is unknown to Apple; a real check would sign it out on a device.
+            credentialChecker: isUITesting
+                ? AlwaysAuthorizedCredentialChecker()
+                : SystemAppleCredentialChecker(),
             cloudStatus: SystemCloudStatus()
         )
     }
@@ -59,7 +65,8 @@ final class AppContainer {
             repository: documentRepository,
             pdfBuilder: pdfBuilder,
             scanEnhancer: DocumentScanEnhancer(),
-            availability: SystemScannerAvailability()
+            availability: SystemScannerAvailability(),
+            samplePages: makeSamplePages()
         )
         let importer = ImportViewModel(
             repository: documentRepository,
@@ -74,6 +81,21 @@ final class AppContainer {
             importer: importer,
             makeViewer: { [unowned self] id in self.makeDocumentViewerViewModel(for: id) }
         )
+    }
+
+    /// Fake pages for the Scan button in Debug builds on the simulator (no camera)
+    /// and in UI tests, also on a real iPhone (XCUITest can't drive the camera).
+    private func makeSamplePages() -> (() -> [PageImage])? {
+        #if DEBUG
+        #if targetEnvironment(simulator)
+        let isSimulator = true
+        #else
+        let isSimulator = false
+        #endif
+        return isUITesting || isSimulator ? { SampleScan.pages() } : nil
+        #else
+        return nil
+        #endif
     }
 
     func makeDocumentViewerViewModel(for id: UUID) -> DocumentViewerViewModel {
@@ -96,4 +118,9 @@ final class AppContainer {
     func makeLoginViewModel() -> LoginViewModel {
         LoginViewModel(session: sessionManager)
     }
+}
+
+/// Used by UI tests: their fake user has no real Sign in with Apple credential.
+private struct AlwaysAuthorizedCredentialChecker: AppleCredentialChecking {
+    func isAuthorized(userID: String) async -> Bool { true }
 }
