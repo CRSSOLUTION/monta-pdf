@@ -74,6 +74,50 @@ final class MontaPDFUITests: XCTestCase {
     }
 
     @MainActor
+    private func createRentalPacket(in app: XCUIApplication, named name: String) {
+        let newPacket = app.buttons["newDossierButton"]
+        XCTAssertTrue(newPacket.waitForExistence(timeout: 30))
+        newPacket.tap()
+        let rental = app.descendants(matching: .any).matching(identifier: "templateRow_rental").firstMatch
+        XCTAssertTrue(rental.waitForExistence(timeout: 15), "Template list")
+        rental.tap()
+        let field = app.textFields["dossierNameField"]
+        XCTAssertTrue(field.waitForExistence(timeout: 15))
+        field.tap()
+        field.typeText(name)
+        app.buttons["createDossierButton"].tap()
+        XCTAssertTrue(app.staticTexts["dossierProgress"].waitForExistence(timeout: 15), "Checklist of the new packet")
+    }
+
+    @MainActor
+    func testScanningFillsAnItemAndMarkingTheRestAsNotApplicableCompletesThePacket() {
+        let app = launch(signedIn: true)
+        createRentalPacket(in: app, named: "Flower Street")
+
+        app.buttons.matching(identifier: "addDocumentButton").firstMatch.tap()
+        let scan = app.buttons["Scan document"]
+        XCTAssertTrue(scan.waitForExistence(timeout: 15), "Options to fill the item")
+        scan.tap()
+        XCTAssertTrue(
+            app.staticTexts["1 of 4 required"].waitForExistence(timeout: 45),
+            "The sample scan fills the first item"
+        )
+
+        for _ in 0..<3 {
+            app.buttons.matching(identifier: "addDocumentButton").firstMatch.tap()
+            let notApplicable = app.buttons["Doesn't apply"]
+            XCTAssertTrue(notApplicable.waitForExistence(timeout: 15))
+            notApplicable.tap()
+        }
+
+        XCTAssertTrue(app.staticTexts["1 of 1 required"].waitForExistence(timeout: 15))
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        let row = app.descendants(matching: .any).matching(identifier: "dossierRow").firstMatch
+        XCTAssertTrue(row.waitForExistence(timeout: 15))
+        XCTAssertTrue(row.label.contains("Ready to send"))
+    }
+
+    @MainActor
     func testCreatingAPacketOpensItsChecklist() {
         let app = launch(signedIn: true)
         let newPacket = app.buttons["newDossierButton"]

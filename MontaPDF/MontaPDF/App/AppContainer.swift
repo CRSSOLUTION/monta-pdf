@@ -51,23 +51,13 @@ final class AppContainer {
     /// The three ViewModels of the My Documents screen, already wired together:
     /// after a scan or an import is saved, the list reloads and shows the "saved" banner.
     func makeDocumentsFeature() -> DocumentsFeature {
-        let pdfBuilder = ImagePDFBuilder()
         let list = DocumentListViewModel(
             repository: documentRepository,
             namer: DocumentNamer(),
             exporter: TemporaryFileExporter()
         )
-        let scanner = ScannerViewModel(
-            repository: documentRepository,
-            pdfBuilder: pdfBuilder,
-            scanEnhancer: DocumentScanEnhancer(),
-            availability: SystemScannerAvailability()
-        )
-        let importer = ImportViewModel(
-            repository: documentRepository,
-            pdfBuilder: pdfBuilder,
-            converter: WebKitDocumentConverter()
-        )
+        let scanner = makeScanner()
+        let importer = makeImporter()
         scanner.onSaved = { [weak list] id in list?.documentAdded(id: id) }
         importer.onSaved = { [weak list] id in list?.documentAdded(id: id) }
         return DocumentsFeature(
@@ -78,13 +68,38 @@ final class AppContainer {
         )
     }
 
-    /// The Dossiers tab and the factory of the dossier screen.
+    /// The Dossiers tab and the factories of the dossier checklist and the PDF viewer.
+    /// Each checklist gets its own scanner and importer, so a saved document fills its item.
     func makeDossiersFeature() -> DossiersFeature {
         DossiersFeature(
             list: DossierListViewModel(repository: dossierRepository, session: sessionManager),
             makeDetail: { [unowned self] id in
-                DossierDetailViewModel(dossierID: id, repository: self.dossierRepository)
-            }
+                DossierDetailViewModel(
+                    dossierID: id,
+                    repository: self.dossierRepository,
+                    documents: self.documentRepository,
+                    scanner: self.makeScanner(),
+                    importer: self.makeImporter()
+                )
+            },
+            makeViewer: { [unowned self] id in self.makeDocumentViewerViewModel(for: id) }
+        )
+    }
+
+    private func makeScanner() -> ScannerViewModel {
+        ScannerViewModel(
+            repository: documentRepository,
+            pdfBuilder: ImagePDFBuilder(),
+            scanEnhancer: DocumentScanEnhancer(),
+            availability: SystemScannerAvailability()
+        )
+    }
+
+    private func makeImporter() -> ImportViewModel {
+        ImportViewModel(
+            repository: documentRepository,
+            pdfBuilder: ImagePDFBuilder(),
+            converter: WebKitDocumentConverter()
         )
     }
 

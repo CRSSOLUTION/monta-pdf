@@ -9,18 +9,21 @@ import SwiftUI
 struct DossierListView: View {
     @Bindable var viewModel: DossierListViewModel
     let makeDetail: (UUID) -> DossierDetailViewModel
+    let makeViewer: (UUID) -> DocumentViewerViewModel
     let onShowAccount: () -> Void
-    @State private var path: [UUID] = []
+    @State private var path = NavigationPath()
     /// Opened once the "new dossier" sheet has closed.
     @State private var createdID: UUID?
 
     init(
         viewModel: DossierListViewModel,
         makeDetail: @escaping (UUID) -> DossierDetailViewModel,
+        makeViewer: @escaping (UUID) -> DocumentViewerViewModel,
         onShowAccount: @escaping () -> Void = {}
     ) {
         _viewModel = Bindable(viewModel)
         self.makeDetail = makeDetail
+        self.makeViewer = makeViewer
         self.onShowAccount = onShowAccount
     }
 
@@ -60,7 +63,12 @@ struct DossierListView: View {
                     }
                 }
                 .navigationDestination(for: UUID.self) { id in
-                    DossierDetailView(viewModel: makeDetail(id))
+                    DossierDetailView(viewModel: makeDetail(id)) { documentID in
+                        path.append(DocumentRoute(id: documentID))
+                    }
+                }
+                .navigationDestination(for: DocumentRoute.self) { route in
+                    DocumentViewerView(viewModel: makeViewer(route.id))
                 }
                 .onAppear {
                     viewModel.load()
