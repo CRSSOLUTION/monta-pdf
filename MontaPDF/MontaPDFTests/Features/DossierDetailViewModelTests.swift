@@ -6,6 +6,7 @@
 import Foundation
 import SwiftData
 import Testing
+import UIKit
 @testable import MontaPDF
 
 @MainActor
