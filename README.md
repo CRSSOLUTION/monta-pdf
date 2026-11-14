@@ -41,7 +41,6 @@ server/apple-revoke/  # Cloudflare Worker for Sign in with Apple token revocatio
 docs/                 # Website on GitHub Pages: landing, privacy policy, terms of use
 store/                # App Store listing texts (en, pt-BR, es)
 design/               # App icon sources
-CLAUDE.md             # Project context for Claude Code sessions
 ```
 
 ## Workflow
