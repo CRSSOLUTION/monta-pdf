@@ -230,4 +230,13 @@ struct DossierDetailViewModelTests {
         #expect(viewModel.assembleTapped())
         #expect(viewModel.isConfirmingMissing == false)
     }
+
+    @Test func movingMatchesSwiftUIMoveSemantics() {
+        let items = ["a", "b", "c", "d"]
+
+        #expect(DossierDetailViewModel.moving(items, from: IndexSet(integer: 3), to: 0) == ["d", "a", "b", "c"])
+        #expect(DossierDetailViewModel.moving(items, from: IndexSet(integer: 0), to: 4) == ["b", "c", "d", "a"])
+        #expect(DossierDetailViewModel.moving(items, from: IndexSet(integer: 0), to: 2) == ["b", "a", "c", "d"])
+        #expect(DossierDetailViewModel.moving(items, from: IndexSet([0, 2]), to: 4) == ["b", "d", "a", "c"])
+    }
 }
