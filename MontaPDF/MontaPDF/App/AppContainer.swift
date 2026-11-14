@@ -85,6 +85,16 @@ final class AppContainer {
         )
     }
 
+    /// The Dossiers tab and the factory of the dossier screen.
+    func makeDossiersFeature() -> DossiersFeature {
+        DossiersFeature(
+            list: DossierListViewModel(repository: dossierRepository, session: sessionManager),
+            makeDetail: { [unowned self] id in
+                DossierDetailViewModel(dossierID: id, repository: self.dossierRepository)
+            }
+        )
+    }
+
     /// Fake pages for the Scan button in Debug builds on the simulator (no camera)
     /// and in UI tests, also on a real iPhone (XCUITest can't drive the camera).
     private func makeSamplePages() -> (() -> [PageImage])? {

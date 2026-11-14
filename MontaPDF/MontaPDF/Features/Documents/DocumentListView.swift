@@ -10,7 +10,8 @@ struct DocumentListView: View {
     @Bindable var scanner: ScannerViewModel
     let importer: ImportViewModel
     let makeViewer: (UUID) -> DocumentViewerViewModel
-    let onShowAccount: () -> Void
+    /// The account button lives on the Dossiers tab; `nil` hides it here.
+    let onShowAccount: (() -> Void)?
     @State private var path: [UUID] = []
     @State private var isFileImporterPresented = false
     @State private var isPhotoPickerPresented = false
@@ -20,7 +21,7 @@ struct DocumentListView: View {
         scanner: ScannerViewModel,
         importer: ImportViewModel,
         makeViewer: @escaping (UUID) -> DocumentViewerViewModel,
-        onShowAccount: @escaping () -> Void = {}
+        onShowAccount: (() -> Void)? = nil
     ) {
         _viewModel = Bindable(viewModel)
         _scanner = Bindable(scanner)
@@ -47,11 +48,13 @@ struct DocumentListView: View {
                         }
                         .accessibilityIdentifier("importMenu")
                     }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button(action: onShowAccount) {
-                            Label("Account", systemImage: "person.crop.circle")
+                    if let onShowAccount {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button(action: onShowAccount) {
+                                Label("Account", systemImage: "person.crop.circle")
+                            }
+                            .accessibilityIdentifier("accountButton")
                         }
-                        .accessibilityIdentifier("accountButton")
                     }
                 }
                 .importFlow(

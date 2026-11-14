@@ -27,12 +27,26 @@ final class MontaPDFUITests: XCTestCase {
         return app
     }
 
+    /// The app opens on the Packets tab; documents live on the second tab.
+    @MainActor
+    private func openDocumentsTab(in app: XCUIApplication) {
+        let tab = app.tabBars.buttons["Documents"]
+        XCTAssertTrue(tab.waitForExistence(timeout: 30), "Documents tab")
+        tab.tap()
+    }
+
     @MainActor
     private func scanOneDocument(in app: XCUIApplication) {
+        openDocumentsTab(in: app)
         let scan = app.buttons["emptyStateScanButton"]
         XCTAssertTrue(scan.waitForExistence(timeout: 30), "Empty state with the Scan button")
         scan.tap()
         XCTAssertTrue(app.staticTexts["Document 1"].waitForExistence(timeout: 45), "Scanned document in the list")
+    }
+
+    @MainActor
+    private func element(in app: XCUIApplication, labelContaining text: String) -> XCUIElement {
+        app.descendants(matching: .any).matching(NSPredicate(format: "label CONTAINS %@", text)).firstMatch
     }
 
     @MainActor
@@ -48,6 +62,43 @@ final class MontaPDFUITests: XCTestCase {
 
         XCTAssertTrue(app.staticTexts["Scan, convert and keep your documents as PDFs."].waitForExistence(timeout: 30))
         XCTAssertFalse(app.buttons["emptyStateScanButton"].exists)
+        XCTAssertFalse(app.buttons["newDossierButton"].exists)
+    }
+
+    @MainActor
+    func testOpensOnThePacketsTabExplainingTheIdea() {
+        let app = launch(signedIn: true)
+
+        XCTAssertTrue(app.staticTexts["Gather everything they asked for in one PDF"].waitForExistence(timeout: 30))
+        XCTAssertTrue(app.buttons["newDossierButton"].exists)
+    }
+
+    @MainActor
+    func testCreatingAPacketOpensItsChecklist() {
+        let app = launch(signedIn: true)
+        let newPacket = app.buttons["newDossierButton"]
+        XCTAssertTrue(newPacket.waitForExistence(timeout: 30))
+        newPacket.tap()
+
+        let rental = app.descendants(matching: .any).matching(identifier: "templateRow_rental").firstMatch
+        XCTAssertTrue(rental.waitForExistence(timeout: 15), "Template list")
+        rental.tap()
+        let name = app.textFields["dossierNameField"]
+        XCTAssertTrue(name.waitForExistence(timeout: 15))
+        name.tap()
+        name.typeText("Flower Street")
+        app.buttons["createDossierButton"].tap()
+
+        let progress = app.staticTexts["dossierProgress"]
+        XCTAssertTrue(progress.waitForExistence(timeout: 15), "Checklist of the new packet")
+        XCTAssertEqual(progress.label, "0 of 4 required")
+        XCTAssertTrue(element(in: app, labelContaining: "Identity document").exists)
+
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        let row = app.descendants(matching: .any).matching(identifier: "dossierRow").firstMatch
+        XCTAssertTrue(row.waitForExistence(timeout: 15), "Packet in the list")
+        XCTAssertTrue(row.label.contains("Flower Street"))
+        XCTAssertTrue(row.label.contains("4 missing"))
     }
 
     @MainActor
@@ -113,6 +164,6 @@ final class MontaPDFUITests: XCTestCase {
 
         XCTAssertTrue(app.buttons["deleteAccountButton"].waitForExistence(timeout: 15))
         app.buttons["accountDoneButton"].tap()
-        XCTAssertTrue(app.buttons["emptyStateScanButton"].waitForExistence(timeout: 15))
+        XCTAssertTrue(app.buttons["newDossierButton"].waitForExistence(timeout: 15))
     }
 }

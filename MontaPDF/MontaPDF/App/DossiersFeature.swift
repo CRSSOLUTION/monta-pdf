@@ -1,0 +1,13 @@
+//
+//  DossiersFeature.swift
+//  MontaPDF
+//
+
+import Foundation
+
+/// ViewModels used by the Dossiers tab.
+struct DossiersFeature {
+    let list: DossierListViewModel
+    /// Builds the ViewModel of the checklist of a dossier.
+    let makeDetail: (UUID) -> DossierDetailViewModel
+}
