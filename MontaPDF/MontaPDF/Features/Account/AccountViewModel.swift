@@ -23,17 +23,20 @@ final class AccountViewModel {
 
     private let session: SessionManager
     private let repository: DocumentRepository
+    private let dossiers: DossierRepository
     private let tokenRevoker: AppleTokenRevoking
     private let bundle: Bundle
 
     init(
         session: SessionManager,
         repository: DocumentRepository,
+        dossiers: DossierRepository,
         tokenRevoker: AppleTokenRevoking,
         bundle: Bundle = .main
     ) {
         self.session = session
         self.repository = repository
+        self.dossiers = dossiers
         self.tokenRevoker = tokenRevoker
         self.bundle = bundle
     }
@@ -107,7 +110,7 @@ final class AccountViewModel {
         }
     }
 
-    /// Revokes the Apple token first; only then deletes the documents and signs out.
+    /// Revokes the Apple token first; only then deletes the dossiers and documents and signs out.
     /// If revoking fails (e.g. offline), nothing is deleted and the user can try again.
     func deleteAccount(authorizationCode: String) async {
         guard !isDeleting else { return }
@@ -116,6 +119,7 @@ final class AccountViewModel {
 
         do {
             try await tokenRevoker.revoke(authorizationCode: authorizationCode)
+            try dossiers.deleteAll()
             try repository.deleteAll()
             isConfirmingWithApple = false
             session.accountDeleted()

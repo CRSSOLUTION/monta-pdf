@@ -10,7 +10,7 @@ import UIKit
 
 @MainActor
 func makeInMemoryContainer() throws -> ModelContainer {
-    let schema = Schema([Document.self])
+    let schema = AppSchema.schema
     let configuration = ModelConfiguration(
         schema: schema,
         isStoredInMemoryOnly: true,

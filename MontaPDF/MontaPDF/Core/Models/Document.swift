@@ -28,6 +28,10 @@ final class Document {
     @Attribute(.externalStorage) var pdfData: Data?
     /// The imported original (e.g. a .docx), kept untouched.
     @Attribute(.externalStorage) var originalData: Data?
+    /// Dossier items filled with this document. Deleting the document empties them
+    /// again ("missing") instead of deleting them.
+    @Relationship(deleteRule: .nullify, inverse: \DossierItem.document)
+    var dossierItems: [DossierItem]? = []
 
     init(
         id: UUID = UUID(),

@@ -13,12 +13,14 @@ final class AppContainer {
 
     let modelContainer: ModelContainer
     let documentRepository: DocumentRepository
+    let dossierRepository: DossierRepository
     let sessionManager: SessionManager
 
     /// Throws only when no store can be opened at all; the app then shows `StorageErrorView`.
     init(inMemory: Bool = false) throws {
         modelContainer = try Self.makeModelContainer(inMemory: inMemory)
         documentRepository = SwiftDataDocumentRepository(container: modelContainer)
+        dossierRepository = SwiftDataDossierRepository(container: modelContainer)
         let sessionStore: SessionStore = inMemory
             ? InMemorySessionStore()
             : KeychainSessionStore(service: "com.crlsribeiro.MontaPDF.session")
@@ -32,7 +34,7 @@ final class AppContainer {
     /// Opens the iCloud-synced store. If CloudKit can't be set up (for example,
     /// a schema problem), falls back to a store on this device so the app still works.
     private static func makeModelContainer(inMemory: Bool) throws -> ModelContainer {
-        let schema = Schema([Document.self])
+        let schema = AppSchema.schema
         if inMemory {
             let configuration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true, cloudKitDatabase: .none)
             return try ModelContainer(for: schema, configurations: [configuration])
@@ -89,6 +91,7 @@ final class AppContainer {
         AccountViewModel(
             session: sessionManager,
             repository: documentRepository,
+            dossiers: dossierRepository,
             tokenRevoker: WorkerAppleTokenRevoker()
         )
     }
