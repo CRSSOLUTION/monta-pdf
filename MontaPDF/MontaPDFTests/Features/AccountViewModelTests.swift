@@ -11,17 +11,20 @@ import Testing
 @MainActor
 struct AccountViewModelTests {
     private let repository: SwiftDataDocumentRepository
+    private let dossiers: SwiftDataDossierRepository
     private let session: SessionManager
     private let revoker = FakeTokenRevoker()
 
     init() throws {
-        repository = SwiftDataDocumentRepository(container: try makeInMemoryContainer())
+        let container = try makeInMemoryContainer()
+        repository = SwiftDataDocumentRepository(container: container)
+        dossiers = SwiftDataDossierRepository(container: container)
         session = makeSessionManager()
         session.signIn(with: appleCredential(name: "Ana", email: "ana@example.com"))
     }
 
     private func makeViewModel() -> AccountViewModel {
-        AccountViewModel(session: session, repository: repository, tokenRevoker: revoker)
+        AccountViewModel(session: session, repository: repository, dossiers: dossiers, tokenRevoker: revoker)
     }
 
     @Test func showsAccountAndUsage() throws {
@@ -77,7 +80,10 @@ struct AccountViewModelTests {
     }
 
     @Test func deleteAccountRevokesThenDeletesAndSignsOut() async throws {
-        try repository.create(NewDocument(pdfData: nil, pageCount: 1))
+        let document = try repository.create(NewDocument(pdfData: nil, pageCount: 1))
+        let rental = try #require(DossierTemplates.template(id: .rental, localization: "pt-BR"))
+        let dossier = try dossiers.create(from: rental, name: "Apto", coverName: "Ana")
+        try dossiers.attach(document, to: try #require(dossier.sortedItems.first))
         let viewModel = makeViewModel()
         viewModel.isConfirmingWithApple = true
 
@@ -85,6 +91,7 @@ struct AccountViewModelTests {
 
         #expect(revoker.revokedCodes == ["code-123"])
         #expect(try repository.fetchAll().isEmpty)
+        #expect(try dossiers.fetchAll().isEmpty)
         #expect(session.isSignedIn == false)
         #expect(viewModel.isConfirmingWithApple == false)
         #expect(viewModel.isDeleting == false)
@@ -92,6 +99,8 @@ struct AccountViewModelTests {
 
     @Test func failedRevocationKeepsEverythingAndShowsAnError() async throws {
         try repository.create(NewDocument(pdfData: nil, pageCount: 1))
+        let rental = try #require(DossierTemplates.template(id: .rental, localization: "pt-BR"))
+        try dossiers.create(from: rental, name: "Apto", coverName: "")
         revoker.shouldFail = true
         let viewModel = makeViewModel()
 
@@ -99,6 +108,7 @@ struct AccountViewModelTests {
 
         #expect(viewModel.errorMessage != nil)
         #expect(try repository.fetchAll().count == 1)
+        #expect(try dossiers.fetchAll().count == 1)
         #expect(session.isSignedIn)
     }
 

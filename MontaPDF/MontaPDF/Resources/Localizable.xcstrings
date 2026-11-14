@@ -181,6 +181,22 @@
         }
       }
     },
+    "Apartment rental" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aluguel de imóvel"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alquiler de vivienda"
+          }
+        }
+      }
+    },
     "Apple Account" : {
       "localizations" : {
         "pt-BR" : {
@@ -193,6 +209,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cuenta de Apple"
+          }
+        }
+      }
+    },
+    "Bank statements" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extratos bancários"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estados de cuenta bancarios"
+          }
+        }
+      }
+    },
+    "Blank list" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lista em branco"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lista en blanco"
           }
         }
       }
@@ -485,6 +533,22 @@
         }
       }
     },
+    "Diplomas or certificates" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diplomas ou certificados"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diplomas o certificados"
+          }
+        }
+      }
+    },
     "Discard" : {
       "localizations" : {
         "pt-BR" : {
@@ -613,6 +677,22 @@
         }
       }
     },
+    "Employment letter" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Declaração do empregador"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Constancia laboral"
+          }
+        }
+      }
+    },
     "Files" : {
       "localizations" : {
         "pt-BR" : {
@@ -625,6 +705,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Archivos"
+          }
+        }
+      }
+    },
+    "Identity document" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documento de identidade"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documento de identidad"
           }
         }
       }
@@ -677,6 +773,22 @@
         }
       }
     },
+    "Medical certificate" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atestado médico"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Certificado médico"
+          }
+        }
+      }
+    },
     "Monta PDF couldn't open its storage. Try again, or restart the app. If it keeps happening, contact support." : {
       "localizations" : {
         "pt-BR" : {
@@ -709,6 +821,22 @@
         }
       }
     },
+    "Mortgage" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Financiamento imobiliário"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crédito hipotecario"
+          }
+        }
+      }
+    },
     "My Documents" : {
       "localizations" : {
         "pt-BR" : {
@@ -737,6 +865,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nombre"
+          }
+        }
+      }
+    },
+    "New job" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Novo emprego"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuevo empleo"
           }
         }
       }
@@ -869,6 +1013,22 @@
         }
       }
     },
+    "Parent's identity document" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documento de identidade do responsável"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Identificación del padre, madre o tutor"
+          }
+        }
+      }
+    },
     "Photos" : {
       "localizations" : {
         "pt-BR" : {
@@ -929,6 +1089,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Política de Privacidad"
+          }
+        }
+      }
+    },
+    "Proof of address" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprovante de residência"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprobante de domicilio"
+          }
+        }
+      }
+    },
+    "Proof of income" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprovante de renda"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprobante de ingresos"
+          }
+        }
+      }
+    },
+    "Reference letter" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carta de referência"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carta de recomendación"
           }
         }
       }
@@ -1057,6 +1265,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Escáner no disponible"
+          }
+        }
+      }
+    },
+    "School enrollment" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Matrícula escolar"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inscripción escolar"
+          }
+        }
+      }
+    },
+    "School records" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Histórico escolar"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Historial académico"
           }
         }
       }
@@ -1205,6 +1445,22 @@
         }
       }
     },
+    "Student's birth certificate" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Certidão de nascimento do aluno"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acta de nacimiento del alumno"
+          }
+        }
+      }
+    },
     "Support" : {
       "localizations" : {
         "pt-BR" : {
@@ -1217,6 +1473,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Soporte"
+          }
+        }
+      }
+    },
+    "Tax ID" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Número de identificação fiscal"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Identificación fiscal"
+          }
+        }
+      }
+    },
+    "Tax return" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Declaração de imposto de renda"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Declaración de impuestos"
           }
         }
       }
@@ -1345,6 +1633,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Usa tu Apple ID. Funciona con cualquier correo, incluido Gmail. Puedes ocultar tu correo."
+          }
+        }
+      }
+    },
+    "Vaccination record" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carteira de vacinação"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cartilla de vacunación"
           }
         }
       }
