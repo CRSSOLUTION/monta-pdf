@@ -4,7 +4,7 @@
 | --- | --- |
 | **Produto** | Monta PDF (iOS) |
 | **Versão alvo** | 1.0 (reenvio à App Store) |
-| **Status** | Rascunho para revisão |
+| **Status** | Decisões de produto fechadas; listas dos modelos a validar |
 | **Autor** | Carlos Augusto |
 | **Atualizado** | 14/11/2026 |
 | **Telas de referência** | [`telas/`](telas/), geradas no Google Stitch e revisadas |
@@ -292,13 +292,13 @@ Regras do CloudKit: toda propriedade com valor padrão ou opcional, relações o
 | Validade de documentos (ex.: comprovante com mais de 90 dias) | v1.2 |
 | Compartilhar o dossiê para outra pessoa preencher (ex.: o fiador) | Exige compartilhamento do CloudKit |
 | Senha no PDF | Não é essencial para o problema |
-| Modelos de outros países | Ver pergunta aberta 1 |
+| Modelos específicos de outros países (ex.: México, Argentina) | Na v1, en e es-419 usam modelos genéricos (seção 13) |
 
-## 13. Perguntas abertas
+## 13. Decisões (14/11/2026)
 
-1. **Modelos fora do Brasil.** O app está em inglês e espanhol, mas os modelos usam CPF, CNH e FGTS. **Recomendação:** em pt-BR, os modelos do Brasil; em en e es-419, modelos genéricos ("Documento de identidade", "Comprovante de residência", "Comprovante de renda") e a lista em branco.
-2. **Nome "Dossiê" ou "Kit"?** O design usa "Dossiê". **Recomendação:** manter "Dossiê", que soa mais sério e é usado por imobiliárias e RH.
-3. **Ordem das abas.** **Recomendação:** Dossiês primeiro, porque é o diferencial e é o que o revisor da Apple vê primeiro.
+1. **Modelos fora do Brasil:** em pt-BR, os modelos do Brasil (seção 9). Em en e es-419, modelos genéricos sem documentos brasileiros ("Documento de identidade", "Comprovante de residência", "Comprovante de renda") e a lista em branco.
+2. **Nome da funcionalidade:** **Dossiê** em pt-BR, **Packet** em en, **Expediente** em es-419. Cada idioma usa o termo do seu mercado, não uma tradução literal. "Kit" soa como produto à venda, "Pasta" confunde com o app Arquivos e "Checklist" parece app de tarefas.
+3. **Ordem das abas:** **Dossiês** primeiro, **Documentos** depois.
 
 ## 14. App Store
 
