@@ -78,6 +78,16 @@ final class AppContainer {
         )
     }
 
+    /// The Dossiers tab and the factory of the dossier screen.
+    func makeDossiersFeature() -> DossiersFeature {
+        DossiersFeature(
+            list: DossierListViewModel(repository: dossierRepository, session: sessionManager),
+            makeDetail: { [unowned self] id in
+                DossierDetailViewModel(dossierID: id, repository: self.dossierRepository)
+            }
+        )
+    }
+
     func makeDocumentViewerViewModel(for id: UUID) -> DocumentViewerViewModel {
         DocumentViewerViewModel(
             documentID: id,
