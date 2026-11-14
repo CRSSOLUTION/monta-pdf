@@ -14,7 +14,10 @@ struct MontaPDFApp: App {
     init() {
         let options = LaunchOptions()
         _startup = State(initialValue: AppStartup {
-            let container = try AppContainer(inMemory: options.usesInMemoryStore)
+            let container = try AppContainer(
+                inMemory: options.usesInMemoryStore,
+                isUITesting: options.isUITesting
+            )
             if options.startsSignedIn {
                 container.sessionManager.signIn(with: AppleSignInCredential(
                     userID: "ui-test",
