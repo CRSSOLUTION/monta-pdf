@@ -64,9 +64,8 @@ fastlane/test_output
 ## macOS
 .DS_Store
 
-## Local AI tooling (never commit)
+## Local AI tooling (never commit; CLAUDE.md is versioned on purpose)
 .claude/
-CLAUDE.md
 AGENTS.md
 
 ## Secrets
