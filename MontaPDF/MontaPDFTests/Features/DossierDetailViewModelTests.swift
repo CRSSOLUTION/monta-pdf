@@ -72,7 +72,8 @@ struct DossierDetailViewModelTests {
 
         #expect(guarantor.state == .added)
         #expect(guarantor.document?.pageCount == 2)
-        #expect(guarantor.document?.title == "Fiador: RG ou CNH")
+        // Document titles become file names, so DocumentTitleRules drops the ":".
+        #expect(guarantor.document?.title == "Fiador RG ou CNH")
         #expect(viewModel.targetItem == nil)
         #expect(try documents.fetchAll().count == 1)
     }
