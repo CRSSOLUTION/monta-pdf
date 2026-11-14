@@ -10,4 +10,6 @@ struct DossiersFeature {
     let list: DossierListViewModel
     /// Builds the ViewModel of the checklist of a dossier.
     let makeDetail: (UUID) -> DossierDetailViewModel
+    /// Builds the ViewModel of the PDF viewer, opened from a checklist item.
+    let makeViewer: (UUID) -> DocumentViewerViewModel
 }

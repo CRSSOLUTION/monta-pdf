@@ -181,6 +181,22 @@
         }
       }
     },
+    "%lld p." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld p."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld p."
+          }
+        }
+      }
+    },
     "%lld pages" : {
       "localizations" : {
         "en" : {
@@ -299,6 +315,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cuenta"
+          }
+        }
+      }
+    },
+    "Add" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicionar"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agregar"
+          }
+        }
+      }
+    },
+    "Add document" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicionar documento"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agregar documento"
+          }
+        }
+      }
+    },
+    "Add item" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicionar item"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agregar elemento"
           }
         }
       }
@@ -475,6 +539,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
+          }
+        }
+      }
+    },
+    "Choose from library" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escolher da biblioteca"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elegir de la biblioteca"
+          }
+        }
+      }
+    },
+    "Choose photos" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escolher fotos"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elegir fotos"
           }
         }
       }
@@ -1087,6 +1183,22 @@
         }
       }
     },
+    "Import file" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar arquivo"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar archivo"
+          }
+        }
+      }
+    },
     "In progress (%lld)" : {
       "localizations" : {
         "pt-BR" : {
@@ -1099,6 +1211,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "En curso (%lld)"
+          }
+        }
+      }
+    },
+    "Item name" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome do item"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre del elemento"
           }
         }
       }
@@ -1259,6 +1387,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nombre en la portada"
+          }
+        }
+      }
+    },
+    "Needed again" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voltar a ser necessário"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver a necesitarlo"
           }
         }
       }
@@ -1759,6 +1903,70 @@
         }
       }
     },
+    "Remove" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tirar"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitar"
+          }
+        }
+      }
+    },
+    "Remove %@ from the list?" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tirar %@ da lista?"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Quitar %@ de la lista?"
+          }
+        }
+      }
+    },
+    "Remove document" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tirar documento"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitar documento"
+          }
+        }
+      }
+    },
+    "Remove from list" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tirar da lista"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitar de la lista"
+          }
+        }
+      }
+    },
     "Rename" : {
       "localizations" : {
         "pt-BR" : {
@@ -1787,6 +1995,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Renombrar documento"
+          }
+        }
+      }
+    },
+    "Rename item" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renomear item"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renombrar elemento"
+          }
+        }
+      }
+    },
+    "Replace document" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trocar documento"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reemplazar documento"
           }
         }
       }
@@ -1851,6 +2091,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Escanear"
+          }
+        }
+      }
+    },
+    "Scan document" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escanear documento"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escanear documento"
           }
         }
       }
@@ -2239,6 +2495,22 @@
         }
       }
     },
+    "The document stays in your library." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O documento continua na sua biblioteca."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El documento sigue en tu biblioteca."
+          }
+        }
+      }
+    },
     "The document will be deleted from this iPhone and from iCloud." : {
       "localizations" : {
         "pt-BR" : {
@@ -2395,6 +2667,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Versión"
+          }
+        }
+      }
+    },
+    "View document" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver documento"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver documento"
           }
         }
       }

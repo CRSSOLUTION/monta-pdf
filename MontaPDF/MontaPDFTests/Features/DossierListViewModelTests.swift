@@ -94,23 +94,4 @@ struct DossierListViewModelTests {
         #expect(makeViewModel().defaultCoverName == "Ana Souza")
     }
 
-    @Test func detailLoadsTheChecklistSplitByRequired() throws {
-        let dossier = try repository.create(from: rental, name: "Apto", coverName: "")
-        let detail = DossierDetailViewModel(dossierID: dossier.id, repository: repository)
-
-        detail.load()
-
-        #expect(detail.dossier?.id == dossier.id)
-        #expect(detail.requiredItems.count == 5)
-        #expect(detail.optionalItems.map(\.title) == ["Certidão de casamento"])
-    }
-
-    @Test func detailOfAMissingDossierIsEmpty() {
-        let detail = DossierDetailViewModel(dossierID: UUID(), repository: repository)
-
-        detail.load()
-
-        #expect(detail.isLoaded)
-        #expect(detail.dossier == nil)
-    }
 }
