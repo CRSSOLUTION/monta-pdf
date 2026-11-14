@@ -181,7 +181,9 @@ final class MontaPDFUITests: XCTestCase {
         scanOneDocument(in: app)
 
         documentRow(in: app).swipeLeft()
-        app.buttons["Rename"].firstMatch.tap()
+        let rename = app.buttons["Rename"].firstMatch
+        XCTAssertTrue(rename.waitForExistence(timeout: 15), "Swipe actions")
+        rename.tap()
         let field = app.alerts.textFields.firstMatch
         XCTAssertTrue(field.waitForExistence(timeout: 15))
         field.tap()
@@ -199,7 +201,9 @@ final class MontaPDFUITests: XCTestCase {
         scanOneDocument(in: app)
 
         documentRow(in: app).swipeLeft()
-        app.buttons["Delete"].firstMatch.tap()
+        let delete = app.buttons["Delete"].firstMatch
+        XCTAssertTrue(delete.waitForExistence(timeout: 15), "Swipe actions")
+        delete.tap()
         let confirm = app.alerts.buttons["Delete"]
         XCTAssertTrue(confirm.waitForExistence(timeout: 15), "Delete asks for confirmation")
         confirm.tap()
