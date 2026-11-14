@@ -29,7 +29,12 @@ struct ContentView: View {
         Group {
             if session.isSignedIn {
                 TabView(selection: $selectedTab) {
-                    DossierListView(viewModel: dossiers.list, makeDetail: dossiers.makeDetail) {
+                    DossierListView(
+                        viewModel: dossiers.list,
+                        makeDetail: dossiers.makeDetail,
+                        makeViewer: dossiers.makeViewer,
+                        makeAssemble: dossiers.makeAssemble
+                    ) {
                         isAccountPresented = true
                     }
                     .tabItem { Label("Packets", systemImage: "folder") }

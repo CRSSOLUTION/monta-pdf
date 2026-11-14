@@ -42,6 +42,9 @@ protocol DossierRepository {
 
     func remove(_ item: DossierItem) throws
 
+    /// Whether the assembled PDF starts with a cover and a summary.
+    func setOptions(includesCover: Bool, includesSummary: Bool, for dossier: Dossier) throws
+
     func markSent(_ dossier: Dossier, at date: Date) throws
 
     /// Takes a sent dossier back to "in progress".
