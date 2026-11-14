@@ -29,6 +29,9 @@ final class DossierDetailViewModel {
     var isAddingItem = false
     var isConfirmingRemove = false
 
+    // Assembling
+    var isConfirmingMissing = false
+
     let scanner: ScannerViewModel
     let importer: ImportViewModel
 
@@ -188,6 +191,27 @@ final class DossierDetailViewModel {
         var optional = optionalItems
         optional.move(fromOffsets: source, toOffset: destination)
         saveOrder(requiredItems + optional)
+    }
+
+    // MARK: - Assembling
+
+    /// At least one document to put in the PDF.
+    var canAssemble: Bool { (dossier?.progress.addedTotal ?? 0) > 0 }
+
+    var missingRequiredTitles: [String] { dossier?.progress.missingTitles ?? [] }
+
+    /// Returns `true` when the PDF can be assembled right away; otherwise asks first.
+    func assembleTapped() -> Bool {
+        guard canAssemble else { return false }
+        if missingRequiredTitles.isEmpty { return true }
+        isConfirmingMissing = true
+        return false
+    }
+
+    /// "Add now" in the missing-document alert: fill the first missing required item.
+    func addFirstMissing() {
+        guard let item = requiredItems.first(where: { $0.state == .missing }) else { return }
+        startAdding(item)
     }
 
     // MARK: - Thumbnails

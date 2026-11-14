@@ -199,4 +199,35 @@ struct DossierDetailViewModelTests {
         #expect(viewModel.optionalItems.map(\.title) == ["Carta do fiador", "Certidão de casamento"])
         #expect(viewModel.dossier?.sortedItems.map(\.order) == Array(0..<7))
     }
+
+    @Test func assemblingNeedsAtLeastOneDocument() {
+        let viewModel = makeViewModel()
+
+        #expect(viewModel.canAssemble == false)
+        #expect(viewModel.assembleTapped() == false)
+        #expect(viewModel.isConfirmingMissing == false)
+    }
+
+    @Test func missingRequiredDocumentsAskFirstAndAddNowFillsTheFirstOne() throws {
+        let viewModel = makeViewModel()
+        try repository.attach(try documents.create(NewDocument(pdfData: nil, pageCount: 1)), to: try item("RG ou CNH", in: viewModel))
+
+        #expect(viewModel.assembleTapped() == false)
+        #expect(viewModel.isConfirmingMissing)
+        #expect(viewModel.missingRequiredTitles.count == 4)
+
+        viewModel.addFirstMissing()
+        #expect(viewModel.targetItem?.title == "Comprovante de renda")
+        #expect(viewModel.isAddOptionsPresented)
+    }
+
+    @Test func completeDossierAssemblesRightAway() throws {
+        let viewModel = makeViewModel()
+        for required in viewModel.requiredItems {
+            try repository.attach(try documents.create(NewDocument(pdfData: nil, pageCount: 1)), to: required)
+        }
+
+        #expect(viewModel.assembleTapped())
+        #expect(viewModel.isConfirmingMissing == false)
+    }
 }

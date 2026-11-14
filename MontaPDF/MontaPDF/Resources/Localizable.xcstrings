@@ -1,6 +1,22 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@ moves to the Sent tab." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ vai para a aba Enviados."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ pasa a la pestaña Enviados."
+          }
+        }
+      }
+    },
     "%@ saved" : {
       "localizations" : {
         "pt-BR" : {
@@ -255,6 +271,64 @@
         }
       }
     },
+    "%lld required documents missing" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld required document missing"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld required documents missing"
+                }
+              }
+            }
+          }
+        },
+        "pt-BR" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Falta %lld documento obrigatório"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Faltam %lld documentos obrigatórios"
+                }
+              }
+            }
+          }
+        },
+        "es-419" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Falta %lld documento obligatorio"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Faltan %lld documentos obligatorios"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "1. Pick a template" : {
       "localizations" : {
         "pt-BR" : {
@@ -335,6 +409,22 @@
         }
       }
     },
+    "Add at least one document before assembling the PDF." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicione pelo menos um documento antes de montar o PDF."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agrega al menos un documento antes de armar el PDF."
+          }
+        }
+      }
+    },
     "Add document" : {
       "localizations" : {
         "pt-BR" : {
@@ -363,6 +453,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agregar elemento"
+          }
+        }
+      }
+    },
+    "Add now" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicionar agora"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agregar ahora"
           }
         }
       }
@@ -443,6 +549,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cuenta de Apple"
+          }
+        }
+      }
+    },
+    "Assemble PDF" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Montar PDF"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Armar PDF"
+          }
+        }
+      }
+    },
+    "Assemble and send" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Montar e enviar"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Armar y enviar"
+          }
+        }
+      }
+    },
+    "Assemble anyway" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Montar mesmo assim"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Armar de todos modos"
           }
         }
       }
@@ -623,6 +777,22 @@
         }
       }
     },
+    "Couldn't create the PDF. Please try again." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível criar o PDF. Tente de novo."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo crear el PDF. Inténtalo de nuevo."
+          }
+        }
+      }
+    },
     "Couldn't create the packet. Please try again." : {
       "localizations" : {
         "pt-BR" : {
@@ -719,6 +889,22 @@
         }
       }
     },
+    "Couldn't read %@. Replace it and try again." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível ler %@. Troque o documento e tente de novo."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo leer %@. Reemplázalo e inténtalo de nuevo."
+          }
+        }
+      }
+    },
     "Couldn't save. Please try again." : {
       "localizations" : {
         "pt-BR" : {
@@ -747,6 +933,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No se pudo iniciar sesión. Inténtalo de nuevo."
+          }
+        }
+      }
+    },
+    "Cover" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capa"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Portada"
           }
         }
       }
@@ -987,6 +1189,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Documentos incluidos (%lld)"
+          }
+        }
+      }
+    },
+    "Documents with the page where each one starts" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documentos com a página onde cada um começa"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documentos con la página donde empieza cada uno"
           }
         }
       }
@@ -1243,6 +1461,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Guardar el original"
+          }
+        }
+      }
+    },
+    "Mark" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar"
+          }
+        }
+      }
+    },
+    "Mark as sent?" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar como enviado?"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Marcar como enviado?"
           }
         }
       }
@@ -1519,6 +1769,54 @@
         }
       }
     },
+    "Not added yet: %@. Assemble the PDF anyway?" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ainda não adicionado: %@. Montar o PDF mesmo assim?"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no agregado: %@. ¿Armar el PDF de todos modos?"
+          }
+        }
+      }
+    },
+    "Not included: %@. It's still downloading from iCloud or was kept only as the original file." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fora do PDF: %@. Ainda está baixando do iCloud ou foi guardado só como arquivo original."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No incluido: %@. Todavía se está descargando de iCloud o se guardó solo como archivo original."
+          }
+        }
+      }
+    },
+    "Not yet" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ainda não"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todavía no"
+          }
+        }
+      }
+    },
     "OK" : {
       "localizations" : {
         "pt-BR" : {
@@ -1595,6 +1893,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Opcionales"
+          }
+        }
+      }
+    },
+    "Options" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opções"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opciones"
           }
         }
       }
@@ -1679,6 +1993,38 @@
         }
       }
     },
+    "Packet name and date" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome do dossiê e data"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre del expediente y fecha"
+          }
+        }
+      }
+    },
+    "Packet name, %@ and date" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome do dossiê, %@ e data"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre del expediente, %@ y fecha"
+          }
+        }
+      }
+    },
     "Packet not found" : {
       "localizations" : {
         "pt-BR" : {
@@ -1723,6 +2069,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Página %lld de %lld"
+          }
+        }
+      }
+    },
+    "Pages" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Páginas"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Páginas"
           }
         }
       }
@@ -1803,6 +2165,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vista previa"
+          }
+        }
+      }
+    },
+    "Preview PDF" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver prévia do PDF"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vista previa del PDF"
           }
         }
       }
@@ -2271,6 +2649,22 @@
         }
       }
     },
+    "Share PDF" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartilhar PDF"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir PDF"
+          }
+        }
+      }
+    },
     "Share as" : {
       "localizations" : {
         "pt-BR" : {
@@ -2411,6 +2805,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Acta de nacimiento del alumno"
+          }
+        }
+      }
+    },
+    "Summary" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sumário"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Índice"
           }
         }
       }
@@ -2779,6 +3189,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "o importa un archivo"
+          }
+        }
+      }
+    },
+    "p. %lld" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "p. %lld"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "p. %lld"
           }
         }
       }

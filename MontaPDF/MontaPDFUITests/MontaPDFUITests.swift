@@ -111,6 +111,15 @@ final class MontaPDFUITests: XCTestCase {
         }
 
         XCTAssertTrue(app.staticTexts["1 of 1 required"].waitForExistence(timeout: 15))
+
+        // Cover + summary + the two sample pages.
+        app.buttons["assemblePDFButton"].tap()
+        let pageCount = app.staticTexts["assembledPageCount"]
+        XCTAssertTrue(pageCount.waitForExistence(timeout: 30), "Assembled PDF")
+        XCTAssertEqual(pageCount.label, "4 pages")
+        XCTAssertTrue(app.buttons["sharePDFButton"].isEnabled)
+
+        app.navigationBars.buttons.element(boundBy: 0).tap()
         app.navigationBars.buttons.element(boundBy: 0).tap()
         let row = app.descendants(matching: .any).matching(identifier: "dossierRow").firstMatch
         XCTAssertTrue(row.waitForExistence(timeout: 15))

@@ -12,10 +12,17 @@ struct DossierDetailView: View {
     @State private var viewModel: DossierDetailViewModel
     /// Pushes the PDF viewer of a document on the navigation stack.
     let openDocument: (UUID) -> Void
+    /// Pushes the "Assemble and send" screen.
+    let openAssemble: () -> Void
 
-    init(viewModel: DossierDetailViewModel, openDocument: @escaping (UUID) -> Void) {
+    init(
+        viewModel: DossierDetailViewModel,
+        openDocument: @escaping (UUID) -> Void,
+        openAssemble: @escaping () -> Void
+    ) {
         _viewModel = State(initialValue: viewModel)
         self.openDocument = openDocument
+        self.openAssemble = openAssemble
     }
 
     private var scanner: ScannerViewModel { viewModel.scanner }
@@ -97,6 +104,13 @@ struct DossierDetailView: View {
         } message: {
             Text("The document stays in your library.")
         }
+        .alert(missingAlertTitle, isPresented: $viewModel.isConfirmingMissing) {
+            Button("Add now") { viewModel.addFirstMissing() }
+                .keyboardShortcut(.defaultAction)
+            Button("Assemble anyway") { openAssemble() }
+        } message: {
+            Text("Not added yet: \(viewModel.missingRequiredTitles.formatted(.list(type: .and))). Assemble the PDF anyway?")
+        }
         .alert("Something went wrong", isPresented: isErrorPresented) {
             Button("OK", role: .cancel) {}
         } message: {
@@ -139,6 +153,22 @@ struct DossierDetailView: View {
             }
         }
         .listStyle(.insetGrouped)
+        .safeAreaInset(edge: .bottom) {
+            Button {
+                if viewModel.assembleTapped() { openAssemble() }
+            } label: {
+                Label("Assemble PDF", systemImage: "doc.on.doc")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 6)
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+            .disabled(!viewModel.canAssemble)
+            .padding(.horizontal)
+            .padding(.bottom, 8)
+            .accessibilityIdentifier("assemblePDFButton")
+        }
         .navigationTitle(dossier.name)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -158,6 +188,10 @@ struct DossierDetailView: View {
             onSetNotApplicable: { viewModel.setNotApplicable($0, for: item) },
             onRemoveItem: { viewModel.startRemove(item) }
         )
+    }
+
+    private var missingAlertTitle: Text {
+        Text("\(viewModel.missingRequiredTitles.count) required documents missing")
     }
 
     private var isErrorPresented: Binding<Bool> {

@@ -32,7 +32,8 @@ struct ContentView: View {
                     DossierListView(
                         viewModel: dossiers.list,
                         makeDetail: dossiers.makeDetail,
-                        makeViewer: dossiers.makeViewer
+                        makeViewer: dossiers.makeViewer,
+                        makeAssemble: dossiers.makeAssemble
                     ) {
                         isAccountPresented = true
                     }

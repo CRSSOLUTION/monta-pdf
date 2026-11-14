@@ -82,7 +82,15 @@ final class AppContainer {
                     importer: self.makeImporter()
                 )
             },
-            makeViewer: { [unowned self] id in self.makeDocumentViewerViewModel(for: id) }
+            makeViewer: { [unowned self] id in self.makeDocumentViewerViewModel(for: id) },
+            makeAssemble: { [unowned self] id in
+                AssembleDossierViewModel(
+                    dossierID: id,
+                    repository: self.dossierRepository,
+                    assembler: DossierPDFAssembler(),
+                    exporter: TemporaryFileExporter()
+                )
+            }
         )
     }
 

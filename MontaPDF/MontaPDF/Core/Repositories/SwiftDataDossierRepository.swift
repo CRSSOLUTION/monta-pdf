@@ -119,6 +119,12 @@ final class SwiftDataDossierRepository: DossierRepository {
         try context.save()
     }
 
+    func setOptions(includesCover: Bool, includesSummary: Bool, for dossier: Dossier) throws {
+        dossier.includesCover = includesCover
+        dossier.includesSummary = includesSummary
+        try context.save()
+    }
+
     func markSent(_ dossier: Dossier, at date: Date) throws {
         dossier.sentAt = date
         dossier.editedAfterSending = false
