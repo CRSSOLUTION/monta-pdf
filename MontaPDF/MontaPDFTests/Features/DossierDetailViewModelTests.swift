@@ -199,4 +199,13 @@ struct DossierDetailViewModelTests {
         #expect(viewModel.optionalItems.map(\.title) == ["Carta do fiador", "Certidão de casamento"])
         #expect(viewModel.dossier?.sortedItems.map(\.order) == Array(0..<7))
     }
+
+    @Test func movingMatchesSwiftUIMoveSemantics() {
+        let items = ["a", "b", "c", "d"]
+
+        #expect(DossierDetailViewModel.moving(items, from: IndexSet(integer: 3), to: 0) == ["d", "a", "b", "c"])
+        #expect(DossierDetailViewModel.moving(items, from: IndexSet(integer: 0), to: 4) == ["b", "c", "d", "a"])
+        #expect(DossierDetailViewModel.moving(items, from: IndexSet(integer: 0), to: 2) == ["b", "a", "c", "d"])
+        #expect(DossierDetailViewModel.moving(items, from: IndexSet([0, 2]), to: 4) == ["b", "d", "a", "c"])
+    }
 }

@@ -45,15 +45,14 @@ final class DossierDetailViewModel {
         repository: DossierRepository,
         documents: DocumentRepository,
         scanner: ScannerViewModel,
-        importer: ImportViewModel,
-        namer: DocumentNamer = DocumentNamer()
+        importer: ImportViewModel
     ) {
         self.dossierID = dossierID
         self.repository = repository
         self.documents = documents
         self.scanner = scanner
         self.importer = importer
-        self.namer = namer
+        self.namer = DocumentNamer()
         scanner.onSaved = { [weak self] id in self?.documentSaved(id: id) }
         importer.onSaved = { [weak self] id in self?.documentSaved(id: id) }
     }
@@ -179,15 +178,11 @@ final class DossierDetailViewModel {
     }
 
     func moveRequired(from source: IndexSet, to destination: Int) {
-        var required = requiredItems
-        required.move(fromOffsets: source, toOffset: destination)
-        saveOrder(required + optionalItems)
+        saveOrder(Self.moving(requiredItems, from: source, to: destination) + optionalItems)
     }
 
     func moveOptional(from source: IndexSet, to destination: Int) {
-        var optional = optionalItems
-        optional.move(fromOffsets: source, toOffset: destination)
-        saveOrder(requiredItems + optional)
+        saveOrder(requiredItems + Self.moving(optionalItems, from: source, to: destination))
     }
 
     // MARK: - Thumbnails
@@ -203,6 +198,15 @@ final class DossierDetailViewModel {
     }
 
     // MARK: - Private
+
+    /// Same result as SwiftUI's `move(fromOffsets:toOffset:)`, without importing SwiftUI here.
+    static func moving<T>(_ items: [T], from source: IndexSet, to destination: Int) -> [T] {
+        let moved = source.map { items[$0] }
+        var rest = items.enumerated().filter { !source.contains($0.offset) }.map(\.element)
+        let insertAt = destination - source.filter { $0 < destination }.count
+        rest.insert(contentsOf: moved, at: min(max(insertAt, 0), rest.count))
+        return rest
+    }
 
     private func remove(_ items: [DossierItem]) {
         perform {
