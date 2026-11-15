@@ -18,17 +18,19 @@ struct ScannerViewModelTests {
         repository = SwiftDataDocumentRepository(container: try makeInMemoryContainer())
     }
 
+    // Fakes are built in the body: as default argument values they would be
+    // main-actor calls from a nonisolated context (compiler warning).
     private func makeViewModel(
-        builder: FakePDFBuilder = FakePDFBuilder(),
-        enhancer: FakeScanEnhancer = FakeScanEnhancer(),
-        availability: FakeScannerAvailability = FakeScannerAvailability(),
+        builder: FakePDFBuilder? = nil,
+        enhancer: FakeScanEnhancer? = nil,
+        availability: FakeScannerAvailability? = nil,
         samplePages: (() -> [PageImage])? = nil
     ) -> ScannerViewModel {
         ScannerViewModel(
             repository: repository,
-            pdfBuilder: builder,
-            scanEnhancer: enhancer,
-            availability: availability,
+            pdfBuilder: builder ?? FakePDFBuilder(),
+            scanEnhancer: enhancer ?? FakeScanEnhancer(),
+            availability: availability ?? FakeScannerAvailability(),
             samplePages: samplePages
         )
     }

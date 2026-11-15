@@ -31,27 +31,40 @@ struct AssembleDossierView: View {
             }
         }
         .safeAreaInset(edge: .bottom) {
-            Button {
-                viewModel.share()
-            } label: {
-                Label("Share PDF", systemImage: "square.and.arrow.up")
-                    .font(.headline)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 6)
+            VStack(spacing: 4) {
+                Button {
+                    viewModel.share()
+                } label: {
+                    Label("Share PDF", systemImage: "square.and.arrow.up")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 6)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                .disabled(viewModel.assembled == nil || viewModel.isAssembling)
+                .accessibilityIdentifier("sharePDFButton")
+
+                // Fallback when the share sheet doesn't report the send (some apps don't).
+                if viewModel.isSent {
+                    Button("Reopen packet") { viewModel.reopen() }
+                        .accessibilityIdentifier("reopenButton")
+                } else {
+                    Button("Mark as sent") { viewModel.markSent() }
+                        .disabled(viewModel.assembled == nil)
+                        .accessibilityIdentifier("markSentButton")
+                }
             }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
-            .disabled(viewModel.assembled == nil || viewModel.isAssembling)
             .padding(.horizontal)
             .padding(.bottom, 8)
-            .accessibilityIdentifier("sharePDFButton")
+            .background(.bar)
         }
         .task { await viewModel.load() }
-        .sheet(item: $viewModel.shareItem, onDismiss: viewModel.shareSheetDismissed) { item in
-            ActivityView(items: [item.url]) { completed in
+        .onChange(of: viewModel.shareItem) { _, item in
+            guard let item else { return }
+            SharePresenter.present(item.url) { completed in
                 viewModel.shareFinished(completed: completed)
             }
-            .presentationDetents([.medium, .large])
         }
         .sheet(isPresented: $viewModel.isPreviewPresented) {
             if let assembled = viewModel.assembled {

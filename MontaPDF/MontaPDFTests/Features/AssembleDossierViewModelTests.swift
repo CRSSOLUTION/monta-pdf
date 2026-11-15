@@ -108,9 +108,9 @@ struct AssembleDossierViewModelTests {
         await viewModel.load()
         viewModel.share()
 
+        // The share sheet reports the send once it's gone: ask right away.
         viewModel.shareFinished(completed: true)
         #expect(viewModel.shareItem == nil)
-        viewModel.shareSheetDismissed()
         #expect(viewModel.isAskingSent)
 
         viewModel.markSent()
@@ -124,8 +124,8 @@ struct AssembleDossierViewModelTests {
         viewModel.share()
 
         viewModel.shareFinished(completed: false)
-        viewModel.shareSheetDismissed()
 
+        #expect(viewModel.shareItem == nil)
         #expect(viewModel.isAskingSent == false)
         #expect(dossier.sentAt == nil)
     }
@@ -138,8 +138,22 @@ struct AssembleDossierViewModelTests {
         viewModel.share()
 
         viewModel.shareFinished(completed: true)
-        viewModel.shareSheetDismissed()
 
         #expect(viewModel.isAskingSent == false)
+    }
+
+    @Test func markAsSentByHandAndReopen() async throws {
+        try fillRequiredItems()
+        let viewModel = makeViewModel()
+        await viewModel.load()
+        #expect(viewModel.isSent == false)
+
+        viewModel.markSent()
+        #expect(viewModel.isSent)
+        #expect(dossier.status == .sent(referenceDate))
+
+        viewModel.reopen()
+        #expect(viewModel.isSent == false)
+        #expect(dossier.status == .readyToSend)
     }
 }
