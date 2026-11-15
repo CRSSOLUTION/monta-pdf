@@ -1481,6 +1481,22 @@
         }
       }
     },
+    "Mark as sent" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar como enviado"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar como enviado"
+          }
+        }
+      }
+    },
     "Mark as sent?" : {
       "localizations" : {
         "pt-BR" : {
@@ -2389,6 +2405,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Renombrar elemento"
+          }
+        }
+      }
+    },
+    "Reopen packet" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reabrir dossiê"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reabrir expediente"
           }
         }
       }

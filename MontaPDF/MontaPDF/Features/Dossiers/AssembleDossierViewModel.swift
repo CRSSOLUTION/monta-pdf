@@ -16,11 +16,10 @@ final class AssembleDossierViewModel {
     private(set) var assembled: AssembledDossierPDF?
     private(set) var isAssembling = false
     var errorMessage: String?
+    /// The exported file waiting to be shared. The view opens the share sheet when it's set.
     var shareItem: ShareItem?
     var isAskingSent = false
     var isPreviewPresented = false
-    /// Set by the share sheet: the user sent or saved the file (not cancelled).
-    private var shareCompleted = false
 
     private let repository: DossierRepository
     private let assembler: DossierPDFAssembling
@@ -91,32 +90,36 @@ final class AssembleDossierViewModel {
     func share() {
         guard let assembled else { return }
         do {
-            shareCompleted = false
             shareItem = ShareItem(url: try exporter.export(assembled.data, fileName: fileName))
         } catch {
             errorMessage = String(localized: "Couldn't create the PDF. Please try again.")
         }
     }
 
-    /// Called by the share sheet when the user picks an action or cancels.
+    /// Called by the share sheet once it's gone: if the user sent or saved the file,
+    /// ask whether the dossier was sent.
     func shareFinished(completed: Bool) {
-        shareCompleted = completed
-        if completed {
-            shareItem = nil
-        }
-    }
-
-    /// Once the share sheet is gone, ask whether the dossier was sent.
-    func shareSheetDismissed() {
-        guard shareCompleted, dossier?.sentAt == nil else { return }
-        shareCompleted = false
+        shareItem = nil
+        guard completed, !isSent else { return }
         isAskingSent = true
     }
+
+    var isSent: Bool { dossier?.sentAt != nil }
 
     func markSent() {
         guard let dossier else { return }
         do {
             try repository.markSent(dossier, at: now())
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    /// Takes a sent dossier back to "in progress".
+    func reopen() {
+        guard let dossier else { return }
+        do {
+            try repository.reopen(dossier)
         } catch {
             errorMessage = error.localizedDescription
         }

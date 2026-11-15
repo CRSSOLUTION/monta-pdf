@@ -124,6 +124,22 @@ final class MontaPDFUITests: XCTestCase {
         let row = app.descendants(matching: .any).matching(identifier: "dossierRow").firstMatch
         XCTAssertTrue(row.waitForExistence(timeout: 15))
         XCTAssertTrue(row.label.contains("Ready to send"))
+
+        // Marking it as sent moves it to the Sent filter.
+        row.tap()
+        let assemble = app.buttons["assemblePDFButton"]
+        XCTAssertTrue(assemble.waitForExistence(timeout: 15))
+        assemble.tap()
+        let markSent = app.buttons["markSentButton"]
+        XCTAssertTrue(markSent.waitForExistence(timeout: 30))
+        markSent.tap()
+        XCTAssertTrue(app.buttons["reopenButton"].waitForExistence(timeout: 15))
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        XCTAssertTrue(app.buttons["Sent (1)"].waitForExistence(timeout: 15))
+        app.buttons["Sent (1)"].tap()
+        XCTAssertTrue(row.waitForExistence(timeout: 15))
+        XCTAssertTrue(row.label.contains("Sent on"))
     }
 
     @MainActor
