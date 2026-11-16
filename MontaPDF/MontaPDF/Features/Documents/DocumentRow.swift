@@ -16,4 +16,6 @@ nonisolated struct DocumentRow: Identifiable, Sendable {
     /// Set for imported files (e.g. "Contract.docx").
     var originalFileName: String?
     var hasOriginal = false
+    /// Dossiers that use this document ("Apto Rua das Flores").
+    var dossierNames: [String] = []
 }

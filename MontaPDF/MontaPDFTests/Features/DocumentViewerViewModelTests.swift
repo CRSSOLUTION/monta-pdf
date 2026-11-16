@@ -11,10 +11,13 @@ import Testing
 @MainActor
 struct DocumentViewerViewModelTests {
     private let repository: SwiftDataDocumentRepository
+    private let dossiers: SwiftDataDossierRepository
     private let exporter = FakeExporter()
 
     init() throws {
-        repository = SwiftDataDocumentRepository(container: try makeInMemoryContainer())
+        let container = try makeInMemoryContainer()
+        repository = SwiftDataDocumentRepository(container: container)
+        dossiers = SwiftDataDossierRepository(container: container)
     }
 
     private func makeViewModel(for id: UUID) -> DocumentViewerViewModel {
@@ -82,5 +85,17 @@ struct DocumentViewerViewModelTests {
 
         #expect(viewModel.isDeleted)
         #expect(try repository.fetchAll().isEmpty)
+    }
+
+    @Test func loadKnowsTheDossiersThatUseTheDocument() throws {
+        let document = try repository.create(NewDocument(pdfData: Data("pdf".utf8), pageCount: 1))
+        let rental = try #require(DossierTemplates.template(id: .rental, localization: "pt-BR"))
+        let dossier = try dossiers.create(from: rental, name: "Apto Rua das Flores", coverName: "")
+        try dossiers.attach(document, to: try #require(dossier.sortedItems.first))
+        let viewModel = makeViewModel(for: document.id)
+
+        viewModel.load()
+
+        #expect(viewModel.dossierNames == ["Apto Rua das Flores"])
     }
 }

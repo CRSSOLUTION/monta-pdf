@@ -49,6 +49,13 @@ struct DocumentRowView: View {
                 }
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
+                if !row.dossierNames.isEmpty {
+                    Label(row.dossierNames.formatted(.list(type: .and)), systemImage: "folder")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .accessibilityLabel(Text("In \(row.dossierNames.formatted(.list(type: .and)))"))
+                }
             }
         }
         .padding(.vertical, 4)

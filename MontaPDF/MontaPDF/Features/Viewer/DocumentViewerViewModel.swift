@@ -11,6 +11,8 @@ import Observation
 final class DocumentViewerViewModel {
     let documentID: UUID
     private(set) var title = ""
+    /// Dossiers that use this document, named in the delete confirmation.
+    private(set) var dossierNames: [String] = []
     private(set) var pdfData: Data?
     private(set) var shareURL: URL?
     /// Imported original (e.g. .docx), offered next to the PDF when sharing.
@@ -47,6 +49,7 @@ final class DocumentViewerViewModel {
             }
             let titles = namer.displayTitles(for: try repository.fetchAll())
             title = titles[documentID] ?? document.title
+            dossierNames = document.dossierNames
             pdfData = document.pdfData
             originalShareURL = try? shareFiles.originalURL(for: document, title: title)
             shareURL = try? shareFiles.pdfURL(for: document, title: title)

@@ -1417,6 +1417,22 @@
         }
       }
     },
+    "In %@" : {
+      "localizations" : {
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Em %@"
+          }
+        }
+      }
+    },
     "In progress (%lld)" : {
       "localizations" : {
         "es-419" : {
@@ -1429,6 +1445,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Em andamento (%lld)"
+          }
+        }
+      }
+    },
+    "It's used in %@, which will show it as missing again. The document will be deleted from this iPhone and from iCloud." : {
+      "localizations" : {
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se usa en %@, que lo volverá a mostrar como faltante. El documento se eliminará de este iPhone y de iCloud."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ele está em %@, que vai voltar a mostrá-lo como faltando. O documento será apagado deste iPhone e do iCloud."
           }
         }
       }

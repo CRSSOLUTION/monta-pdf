@@ -52,7 +52,8 @@ struct DocumentViewerView: View {
             }
             .deleteDocumentAlert(
                 isPresented: $viewModel.isConfirmingDelete,
-                title: viewModel.title
+                title: viewModel.title,
+                dossierNames: viewModel.dossierNames
             ) {
                 viewModel.confirmDelete()
             }
