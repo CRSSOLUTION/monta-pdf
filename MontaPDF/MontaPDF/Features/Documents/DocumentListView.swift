@@ -98,7 +98,8 @@ struct DocumentListView: View {
                 }
                 .deleteDocumentAlert(
                     isPresented: $viewModel.isConfirmingDelete,
-                    title: viewModel.deleteTarget?.title ?? ""
+                    title: viewModel.deleteTarget?.title ?? "",
+                    dossierNames: viewModel.deleteTarget?.dossierNames ?? []
                 ) {
                     viewModel.confirmDelete()
                 }

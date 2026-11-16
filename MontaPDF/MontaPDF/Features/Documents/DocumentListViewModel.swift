@@ -185,7 +185,8 @@ final class DocumentListViewModel {
                     pageCount: document.pageCount,
                     hasPDF: document.pdfData != nil,
                     originalFileName: document.originalFileName,
-                    hasOriginal: document.originalData != nil
+                    hasOriginal: document.originalData != nil,
+                    dossierNames: document.dossierNames
                 )
             }
     }

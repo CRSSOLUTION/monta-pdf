@@ -12,10 +12,13 @@ import UIKit
 @MainActor
 struct DocumentListViewModelTests {
     private let repository: SwiftDataDocumentRepository
+    private let dossiers: SwiftDataDossierRepository
     private let exporter = FakeExporter()
 
     init() throws {
-        repository = SwiftDataDocumentRepository(container: try makeInMemoryContainer())
+        let container = try makeInMemoryContainer()
+        repository = SwiftDataDocumentRepository(container: container)
+        dossiers = SwiftDataDossierRepository(container: container)
     }
 
     private func makeViewModel() -> DocumentListViewModel {
@@ -180,5 +183,40 @@ struct DocumentListViewModelTests {
         viewModel.share(id: document.id)
 
         #expect(viewModel.shareItem == nil)
+    }
+
+    // MARK: - Dossiers
+
+    @Test func rowsNameTheDossiersThatUseEachDocument() throws {
+        let used = try addDocument(minute: 1)
+        let unused = try addDocument(minute: 2)
+        let rental = try #require(DossierTemplates.template(id: .rental, localization: "pt-BR"))
+        let flores = try dossiers.create(from: rental, name: "Apto Rua das Flores", coverName: "")
+        let centro = try dossiers.create(from: rental, name: "Casa Centro", coverName: "")
+        try dossiers.attach(used, to: try #require(flores.sortedItems.first))
+        try dossiers.attach(used, to: try #require(flores.sortedItems.last))
+        try dossiers.attach(used, to: try #require(centro.sortedItems.first))
+        let viewModel = makeViewModel()
+
+        viewModel.load()
+
+        #expect(viewModel.rows.first { $0.id == used.id }?.dossierNames == ["Apto Rua das Flores", "Casa Centro"])
+        #expect(viewModel.rows.first { $0.id == unused.id }?.dossierNames == [])
+    }
+
+    @Test func deleteTargetKnowsTheDossiersThatWillMissTheDocument() throws {
+        let document = try addDocument(minute: 1)
+        let rental = try #require(DossierTemplates.template(id: .rental, localization: "pt-BR"))
+        let dossier = try dossiers.create(from: rental, name: "Apto", coverName: "")
+        let item = try #require(dossier.sortedItems.first)
+        try dossiers.attach(document, to: item)
+        let viewModel = makeViewModel()
+        viewModel.load()
+
+        viewModel.startDelete(id: document.id)
+        #expect(viewModel.deleteTarget?.dossierNames == ["Apto"])
+        viewModel.confirmDelete()
+
+        #expect(item.state == .missing)
     }
 }

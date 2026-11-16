@@ -21,16 +21,23 @@ extension View {
     }
 
     /// "Delete «name»?" confirmation.
+    /// `dossierNames`: dossiers that use the document. They are named in the message,
+    /// because deleting it sets their item back to "missing".
     func deleteDocumentAlert(
         isPresented: Binding<Bool>,
         title: String,
+        dossierNames: [String] = [],
         onDelete: @escaping () -> Void
     ) -> some View {
         alert(Text("Delete “\(title)”?"), isPresented: isPresented) {
             Button("Delete", role: .destructive, action: onDelete)
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("The document will be deleted from this iPhone and from iCloud.")
+            if dossierNames.isEmpty {
+                Text("The document will be deleted from this iPhone and from iCloud.")
+            } else {
+                Text("It's used in \(dossierNames.formatted(.list(type: .and))), which will show it as missing again. The document will be deleted from this iPhone and from iCloud.")
+            }
         }
     }
 }
