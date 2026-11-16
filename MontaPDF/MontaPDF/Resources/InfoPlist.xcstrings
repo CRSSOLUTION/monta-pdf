@@ -11,13 +11,13 @@
             "value" : "Monta PDF"
           }
         },
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Monta PDF"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Monta PDF"
@@ -35,13 +35,13 @@
             "value" : "MontaPDF"
           }
         },
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "MontaPDF"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "MontaPDF"
@@ -51,7 +51,6 @@
     },
     "NSCameraUsageDescription" : {
       "comment" : "Privacy - Camera Usage Description",
-      "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -59,16 +58,16 @@
             "value" : "We use the camera to scan your documents."
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usamos a câmera para escanear seus documentos."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Usamos la cámara para escanear tus documentos."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usamos a câmera para escanear seus documentos."
           }
         }
       }

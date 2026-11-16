@@ -3,32 +3,32 @@
   "strings" : {
     "%@ moves to the Sent tab." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ vai para a aba Enviados."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ pasa a la pestaña Enviados."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ vai para a aba Enviados."
           }
         }
       }
     },
     "%@ saved" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Salvo: %@"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Guardado: %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvo: %@"
           }
         }
       }
@@ -53,7 +53,7 @@
             }
           }
         },
-        "pt-BR" : {
+        "es-419" : {
           "variations" : {
             "plural" : {
               "one" : {
@@ -71,7 +71,7 @@
             }
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "variations" : {
             "plural" : {
               "one" : {
@@ -111,24 +111,6 @@
             }
           }
         },
-        "pt-BR" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld arquivo não pôde ser importado. Envie imagens, PDFs ou arquivos do Word."
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld arquivos não puderam ser importados. Envie imagens, PDFs ou arquivos do Word."
-                }
-              }
-            }
-          }
-        },
         "es-419" : {
           "variations" : {
             "plural" : {
@@ -146,34 +128,52 @@
               }
             }
           }
+        },
+        "pt-BR" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld arquivo não pôde ser importado. Envie imagens, PDFs ou arquivos do Word."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld arquivos não puderam ser importados. Envie imagens, PDFs ou arquivos do Word."
+                }
+              }
+            }
+          }
         }
       }
     },
     "%lld missing: %@" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Faltam %lld: %@"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Faltan %lld: %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faltam %lld: %@"
           }
         }
       }
     },
     "%lld of %lld" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld de %lld"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld de %lld"
@@ -183,29 +183,29 @@
     },
     "%lld of %lld required" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld de %lld obrigatórios"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld de %lld obligatorios"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld de %lld obrigatórios"
           }
         }
       }
     },
     "%lld p." : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld p."
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld p."
@@ -233,7 +233,7 @@
             }
           }
         },
-        "pt-BR" : {
+        "es-419" : {
           "variations" : {
             "plural" : {
               "one" : {
@@ -251,7 +251,7 @@
             }
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "variations" : {
             "plural" : {
               "one" : {
@@ -291,24 +291,6 @@
             }
           }
         },
-        "pt-BR" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Falta %lld documento obrigatório"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Faltam %lld documentos obrigatórios"
-                }
-              }
-            }
-          }
-        },
         "es-419" : {
           "variations" : {
             "plural" : {
@@ -326,370 +308,388 @@
               }
             }
           }
+        },
+        "pt-BR" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Falta %lld documento obrigatório"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Faltam %lld documentos obrigatórios"
+                }
+              }
+            }
+          }
         }
       }
     },
     "1. Pick a template" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1. Escolha o modelo"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "1. Elige la plantilla"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. Escolha o modelo"
           }
         }
       }
     },
     "2. Add each document" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "2. Adicione cada documento"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "2. Agrega cada documento"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. Adicione cada documento"
           }
         }
       }
     },
     "3. Send a single PDF" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "3. Envie um PDF só"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "3. Envía un solo PDF"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3. Envie um PDF só"
           }
         }
       }
     },
     "Account" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Conta"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cuenta"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conta"
           }
         }
       }
     },
     "Add" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adicionar"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agregar"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicionar"
           }
         }
       }
     },
     "Add at least one document before assembling the PDF." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adicione pelo menos um documento antes de montar o PDF."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agrega al menos un documento antes de armar el PDF."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicione pelo menos um documento antes de montar o PDF."
           }
         }
       }
     },
     "Add document" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adicionar documento"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agregar documento"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicionar documento"
           }
         }
       }
     },
     "Add item" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adicionar item"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agregar elemento"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicionar item"
           }
         }
       }
     },
     "Add now" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adicionar agora"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agregar ahora"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicionar agora"
           }
         }
       }
     },
     "All your documents will be deleted from this iPhone and from iCloud. This can't be undone. Type %@ to confirm." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Todos os seus documentos serão apagados deste iPhone e do iCloud. Isso não pode ser desfeito. Digite %@ para confirmar."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Todos tus documentos se eliminarán de este iPhone y de iCloud. Esto no se puede deshacer. Escribe %@ para confirmar."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos os seus documentos serão apagados deste iPhone e do iCloud. Isso não pode ser desfeito. Digite %@ para confirmar."
           }
         }
       }
     },
     "Allow camera access in Settings to scan your documents." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permita o acesso à câmera nos Ajustes para escanear seus documentos."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Permite el acceso a la cámara en Configuración para escanear tus documentos."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permita o acesso à câmera nos Ajustes para escanear seus documentos."
           }
         }
       }
     },
     "Apartment rental" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aluguel de imóvel"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alquiler de vivienda"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aluguel de imóvel"
           }
         }
       }
     },
     "Appears on the PDF cover." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aparece na capa do PDF."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aparece en la portada del PDF."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aparece na capa do PDF."
           }
         }
       }
     },
     "Apple Account" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Conta Apple"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cuenta de Apple"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conta Apple"
           }
         }
       }
     },
     "Assemble PDF" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Montar PDF"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Armar PDF"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Montar PDF"
           }
         }
       }
     },
     "Assemble and send" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Montar e enviar"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Armar y enviar"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Montar e enviar"
           }
         }
       }
     },
     "Assemble anyway" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Montar mesmo assim"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Armar de todos modos"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Montar mesmo assim"
           }
         }
       }
     },
     "Bank statements" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Extratos bancários"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estados de cuenta bancarios"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extratos bancários"
           }
         }
       }
     },
     "Blank list" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lista em branco"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lista en blanco"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lista em branco"
           }
         }
       }
     },
     "Build your own list" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Monte sua própria lista"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Arma tu propia lista"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monte sua própria lista"
           }
         }
       }
     },
     "Building your PDF..." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Montando seu PDF..."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Armando tu PDF..."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Montando seu PDF..."
           }
         }
       }
     },
     "Camera access needed" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acesso à câmera necessário"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Se necesita acceso a la cámara"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acesso à câmera necessário"
           }
         }
       }
     },
     "Cancel" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
@@ -699,285 +699,285 @@
     },
     "Choose from library" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Escolher da biblioteca"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Elegir de la biblioteca"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escolher da biblioteca"
           }
         }
       }
     },
     "Choose photos" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Escolher fotos"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Elegir fotos"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escolher fotos"
           }
         }
       }
     },
     "Confirm with Apple" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirme com a Apple"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Confirma con Apple"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirme com a Apple"
           }
         }
       }
     },
     "Contact Support" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Falar com o suporte"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Contactar a soporte"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falar com o suporte"
           }
         }
       }
     },
     "Couldn't convert this document" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não foi possível converter este documento"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No se pudo convertir este documento"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível converter este documento"
           }
         }
       }
     },
     "Couldn't create the PDF. Please try again." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não foi possível criar o PDF. Tente de novo."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No se pudo crear el PDF. Inténtalo de nuevo."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível criar o PDF. Tente de novo."
           }
         }
       }
     },
     "Couldn't create the packet. Please try again." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não foi possível criar o dossiê. Tente de novo."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No se pudo crear el expediente. Inténtalo de nuevo."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível criar o dossiê. Tente de novo."
           }
         }
       }
     },
     "Couldn't delete your account. Check your connection and try again." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não foi possível excluir sua conta. Verifique sua conexão e tente novamente."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No se pudo eliminar tu cuenta. Revisa tu conexión e inténtalo de nuevo."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível excluir sua conta. Verifique sua conexão e tente novamente."
           }
         }
       }
     },
     "Couldn't delete your account. Please try again." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não foi possível excluir sua conta. Tente novamente."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No se pudo eliminar tu cuenta. Inténtalo de nuevo."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível excluir sua conta. Tente novamente."
           }
         }
       }
     },
     "Couldn't import the file" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não foi possível importar o arquivo"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No se pudo importar el archivo"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível importar o arquivo"
           }
         }
       }
     },
     "Couldn't load your packets." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não foi possível carregar seus dossiês."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No se pudieron cargar tus expedientes."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível carregar seus dossiês."
           }
         }
       }
     },
     "Couldn't open your documents" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não foi possível abrir seus documentos"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No se pudieron abrir tus documentos"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível abrir seus documentos"
           }
         }
       }
     },
     "Couldn't read %@. Replace it and try again." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não foi possível ler %@. Troque o documento e tente de novo."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No se pudo leer %@. Reemplázalo e inténtalo de nuevo."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível ler %@. Troque o documento e tente de novo."
           }
         }
       }
     },
     "Couldn't save. Please try again." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não foi possível salvar. Tente novamente."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No se pudo guardar. Inténtalo de nuevo."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível salvar. Tente novamente."
           }
         }
       }
     },
     "Couldn't sign in. Please try again." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não foi possível entrar. Tente novamente."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No se pudo iniciar sesión. Inténtalo de nuevo."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível entrar. Tente novamente."
           }
         }
       }
     },
     "Cover" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Capa"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Portada"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capa"
           }
         }
       }
     },
     "Create packet" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Criar dossiê"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Crear expediente"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Criar dossiê"
           }
         }
       }
     },
     "Custom" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Personalizado"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Personalizado"
@@ -987,125 +987,125 @@
     },
     "DELETE" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "EXCLUIR"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ELIMINAR"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EXCLUIR"
           }
         }
       }
     },
     "Delete" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Excluir"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eliminar"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excluir"
           }
         }
       }
     },
     "Delete Account" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Excluir conta"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eliminar cuenta"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excluir conta"
           }
         }
       }
     },
     "Delete your account?" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Excluir sua conta?"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿Eliminar tu cuenta?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excluir sua conta?"
           }
         }
       }
     },
     "Delete “%@”?" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Excluir “%@”?"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿Eliminar “%@”?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excluir “%@”?"
           }
         }
       }
     },
     "Deleting your account..." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Excluindo sua conta..."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eliminando tu cuenta..."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excluindo sua conta..."
           }
         }
       }
     },
     "Diplomas or certificates" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diplomas ou certificados"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Diplomas o certificados"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diplomas ou certificados"
           }
         }
       }
     },
     "Discard" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Descartar"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Descartar"
@@ -1115,29 +1115,29 @@
     },
     "Do you want to capture a document?" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deseja capturar algum documento?"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿Quieres capturar algún documento?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deseja capturar algum documento?"
           }
         }
       }
     },
     "Document %lld" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Documento %lld"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Documento %lld"
@@ -1147,29 +1147,29 @@
     },
     "Document not found" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Documento não encontrado"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Documento no encontrado"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documento não encontrado"
           }
         }
       }
     },
     "Documents" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Documentos"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Documentos"
@@ -1179,77 +1179,77 @@
     },
     "Documents included (%lld)" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Documentos incluídos (%lld)"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Documentos incluidos (%lld)"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documentos incluídos (%lld)"
           }
         }
       }
     },
     "Documents with the page where each one starts" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Documentos com a página onde cada um começa"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Documentos con la página donde empieza cada uno"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documentos com a página onde cada um começa"
           }
         }
       }
     },
     "Does the document look right?" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O documento ficou correto?"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿El documento quedó bien?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O documento ficou correto?"
           }
         }
       }
     },
     "Doesn't apply" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não se aplica"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No aplica"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não se aplica"
           }
         }
       }
     },
     "Done" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -1259,141 +1259,141 @@
     },
     "Downloading from iCloud..." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Baixando do iCloud..."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Descargando de iCloud..."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baixando do iCloud..."
           }
         }
       }
     },
     "Edited after sending" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alterado depois do envio"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Modificado después del envío"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alterado depois do envio"
           }
         }
       }
     },
     "Education" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Educação"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Educación"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Educação"
           }
         }
       }
     },
     "Employment letter" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Declaração do empregador"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Constancia laboral"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Declaração do empregador"
           }
         }
       }
     },
     "Files" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Arquivos"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Archivos"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivos"
           }
         }
       }
     },
     "Gather everything they asked for in one PDF" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Junte tudo o que pediram em um só PDF"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Junta todo lo que te pidieron en un solo PDF"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Junte tudo o que pediram em um só PDF"
           }
         }
       }
     },
     "Identity document" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Documento de identidade"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Documento de identidad"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documento de identidade"
           }
         }
       }
     },
     "If you're offline, connect to the internet to open this document." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Se estiver sem internet, conecte-se para abrir este documento."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Si no tienes conexión, conéctate a internet para abrir este documento."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se estiver sem internet, conecte-se para abrir este documento."
           }
         }
       }
     },
     "Import" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Importar"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Importar"
@@ -1403,77 +1403,77 @@
     },
     "Import file" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Importar arquivo"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Importar archivo"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar arquivo"
           }
         }
       }
     },
     "In progress (%lld)" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Em andamento (%lld)"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "En curso (%lld)"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Em andamento (%lld)"
           }
         }
       }
     },
     "Item name" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome do item"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nombre del elemento"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome do item"
           }
         }
       }
     },
     "Keep Original" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Guardar o original"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Guardar el original"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar o original"
           }
         }
       }
     },
     "Mark" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Marcar"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Marcar"
@@ -1483,13 +1483,13 @@
     },
     "Mark as sent" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Marcar como enviado"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Marcar como enviado"
@@ -1499,45 +1499,45 @@
     },
     "Mark as sent?" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Marcar como enviado?"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿Marcar como enviado?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar como enviado?"
           }
         }
       }
     },
     "Medical certificate" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Atestado médico"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Certificado médico"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atestado médico"
           }
         }
       }
     },
     "Missing" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Falta"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Falta"
@@ -1547,13 +1547,13 @@
     },
     "Missing: %@" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Falta: %@"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Falta: %@"
@@ -1563,285 +1563,285 @@
     },
     "Monta PDF couldn't open its storage. Try again, or restart the app. If it keeps happening, contact support." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O Monta PDF não conseguiu abrir o armazenamento. Tente novamente ou reinicie o app. Se continuar acontecendo, fale com o suporte."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Monta PDF no pudo abrir su almacenamiento. Inténtalo de nuevo o reinicia la app. Si sigue pasando, contacta a soporte."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O Monta PDF não conseguiu abrir o armazenamento. Tente novamente ou reinicie o app. Se continuar acontecendo, fale com o suporte."
           }
         }
       }
     },
     "More" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mais opções"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Más opciones"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mais opções"
           }
         }
       }
     },
     "Mortgage" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Financiamento imobiliário"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Crédito hipotecario"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Financiamento imobiliário"
           }
         }
       }
     },
     "My Documents" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Meus Documentos"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mis documentos"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meus Documentos"
           }
         }
       }
     },
     "Name" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nombre"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome"
           }
         }
       }
     },
     "Name on cover" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome na capa"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nombre en la portada"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome na capa"
           }
         }
       }
     },
     "Needed again" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voltar a ser necessário"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Volver a necesitarlo"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voltar a ser necessário"
           }
         }
       }
     },
     "New job" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Novo emprego"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nuevo empleo"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Novo emprego"
           }
         }
       }
     },
     "New packet" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Novo dossiê"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nuevo expediente"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Novo dossiê"
           }
         }
       }
     },
     "No documents yet" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nenhum documento ainda"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aún no hay documentos"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nenhum documento ainda"
           }
         }
       }
     },
     "No documents yet. You'll add them in the next step." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nenhum documento ainda. Você adiciona na próxima etapa."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aún no hay documentos. Los agregas en el siguiente paso."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nenhum documento ainda. Você adiciona na próxima etapa."
           }
         }
       }
     },
     "No packets in progress" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nenhum dossiê em andamento"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No hay expedientes en curso"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nenhum dossiê em andamento"
           }
         }
       }
     },
     "No packets sent yet" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nenhum dossiê enviado ainda"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aún no hay expedientes enviados"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nenhum dossiê enviado ainda"
           }
         }
       }
     },
     "Not added" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não adicionado"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No agregado"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não adicionado"
           }
         }
       }
     },
     "Not added yet: %@. Assemble the PDF anyway?" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ainda não adicionado: %@. Montar o PDF mesmo assim?"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aún no agregado: %@. ¿Armar el PDF de todos modos?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ainda não adicionado: %@. Montar o PDF mesmo assim?"
           }
         }
       }
     },
     "Not included: %@. It's still downloading from iCloud or was kept only as the original file." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fora do PDF: %@. Ainda está baixando do iCloud ou foi guardado só como arquivo original."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No incluido: %@. Todavía se está descargando de iCloud o se guardó solo como archivo original."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fora do PDF: %@. Ainda está baixando do iCloud ou foi guardado só como arquivo original."
           }
         }
       }
     },
     "Not yet" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ainda não"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Todavía no"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ainda não"
           }
         }
       }
     },
     "OK" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -1851,13 +1851,13 @@
     },
     "Open" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abrir"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abrir"
@@ -1867,29 +1867,29 @@
     },
     "Open Settings" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abrir Ajustes"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abrir Configuración"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir Ajustes"
           }
         }
       }
     },
     "Optional" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Opcional"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Opcional"
@@ -1899,77 +1899,77 @@
     },
     "Optional items" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Opcionais"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Opcionales"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opcionais"
           }
         }
       }
     },
     "Options" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Opções"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Opciones"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opções"
           }
         }
       }
     },
     "Original File" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Arquivo original"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Archivo original"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo original"
           }
         }
       }
     },
     "Original file" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Arquivo original"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Archivo original"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo original"
           }
         }
       }
     },
     "Original file kept" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Original guardado"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Original guardado"
@@ -1979,13 +1979,13 @@
     },
     "PDF" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "PDF"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "PDF"
@@ -1995,93 +1995,93 @@
     },
     "Packet name" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome do dossiê"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nombre del expediente"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome do dossiê"
           }
         }
       }
     },
     "Packet name and date" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome do dossiê e data"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nombre del expediente y fecha"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome do dossiê e data"
           }
         }
       }
     },
     "Packet name, %@ and date" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome do dossiê, %@ e data"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nombre del expediente, %@ y fecha"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome do dossiê, %@ e data"
           }
         }
       }
     },
     "Packet not found" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dossiê não encontrado"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Expediente no encontrado"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dossiê não encontrado"
           }
         }
       }
     },
     "Packets" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dossiês"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Expedientes"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dossiês"
           }
         }
       }
     },
     "Page %lld of %lld" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Página %lld de %lld"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Página %lld de %lld"
@@ -2091,13 +2091,13 @@
     },
     "Pages" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Páginas"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Páginas"
@@ -2107,29 +2107,29 @@
     },
     "Parent's identity document" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Documento de identidade do responsável"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identificación del padre, madre o tutor"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documento de identidade do responsável"
           }
         }
       }
     },
     "Photos" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fotos"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fotos"
@@ -2139,365 +2139,365 @@
     },
     "Pick a template, like a rental or a new job, see what's missing and send it all at once." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Escolha um modelo, como aluguel ou emprego, veja o que falta e envie tudo de uma vez."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Elige una plantilla, como alquiler o empleo, mira lo que falta y envía todo de una vez."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escolha um modelo, como aluguel ou emprego, veja o que falta e envie tudo de uma vez."
           }
         }
       }
     },
     "Please try again." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tente novamente."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inténtalo de nuevo."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tente novamente."
           }
         }
       }
     },
     "Preview" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prévia"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vista previa"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prévia"
           }
         }
       }
     },
     "Preview PDF" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ver prévia do PDF"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vista previa del PDF"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver prévia do PDF"
           }
         }
       }
     },
     "Privacy Policy" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Política de Privacidade"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Política de Privacidad"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de Privacidade"
           }
         }
       }
     },
     "Proof of address" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comprovante de residência"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Comprobante de domicilio"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprovante de residência"
           }
         }
       }
     },
     "Proof of income" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comprovante de renda"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Comprobante de ingresos"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprovante de renda"
           }
         }
       }
     },
     "Ready to send" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pronto para enviar"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Listo para enviar"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pronto para enviar"
           }
         }
       }
     },
     "Real estate" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Imobiliário"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inmobiliario"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imobiliário"
           }
         }
       }
     },
     "Reference letter" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Carta de referência"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Carta de recomendación"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carta de referência"
           }
         }
       }
     },
     "Remove" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tirar"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quitar"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tirar"
           }
         }
       }
     },
     "Remove %@ from the list?" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tirar %@ da lista?"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿Quitar %@ de la lista?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tirar %@ da lista?"
           }
         }
       }
     },
     "Remove document" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tirar documento"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quitar documento"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tirar documento"
           }
         }
       }
     },
     "Remove from list" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tirar da lista"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quitar de la lista"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tirar da lista"
           }
         }
       }
     },
     "Rename" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Renomear"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Renombrar"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renomear"
           }
         }
       }
     },
     "Rename Document" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Renomear documento"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Renombrar documento"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renomear documento"
           }
         }
       }
     },
     "Rename item" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Renomear item"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Renombrar elemento"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renomear item"
           }
         }
       }
     },
     "Reopen packet" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reabrir dossiê"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reabrir expediente"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reabrir dossiê"
           }
         }
       }
     },
     "Replace document" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trocar documento"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reemplazar documento"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trocar documento"
           }
         }
       }
     },
     "Required" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obrigatórios"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obligatorios"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obrigatórios"
           }
         }
       }
     },
     "Save" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Salvar"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Guardar"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvar"
           }
         }
       }
     },
     "Save PDF" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Salvar PDF"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Guardar PDF"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvar PDF"
           }
         }
       }
     },
     "Scan" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Escanear"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Escanear"
@@ -2507,13 +2507,13 @@
     },
     "Scan document" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Escanear documento"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Escanear documento"
@@ -2523,125 +2523,125 @@
     },
     "Scan paper documents and keep them as PDFs, synced with iCloud." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Escaneie documentos em papel e guarde como PDF, sincronizados no iCloud."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Escanea documentos en papel y guárdalos como PDF, sincronizados con iCloud."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escaneie documentos em papel e guarde como PDF, sincronizados no iCloud."
           }
         }
       }
     },
     "Scan, convert and keep your documents as PDFs." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Escaneie, converta e guarde seus documentos em PDF."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Escanea, convierte y guarda tus documentos en PDF."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escaneie, converta e guarde seus documentos em PDF."
           }
         }
       }
     },
     "Scanner unavailable" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scanner indisponível"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Escáner no disponible"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scanner indisponível"
           }
         }
       }
     },
     "School enrollment" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Matrícula escolar"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inscripción escolar"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Matrícula escolar"
           }
         }
       }
     },
     "School records" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Histórico escolar"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Historial académico"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Histórico escolar"
           }
         }
       }
     },
     "Search templates" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Buscar modelos"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Buscar plantillas"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar modelos"
           }
         }
       }
     },
     "Send an image, a PDF or a Word file." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Envie uma imagem, um PDF ou um arquivo Word."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Envía una imagen, un PDF o un archivo Word."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envie uma imagem, um PDF ou um arquivo Word."
           }
         }
       }
     },
     "Sent (%lld)" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enviados (%lld)"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enviados (%lld)"
@@ -2651,77 +2651,77 @@
     },
     "Sent on %@" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enviado em %@"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enviado el %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviado em %@"
           }
         }
       }
     },
     "Share" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compartilhar"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Compartir"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartilhar"
           }
         }
       }
     },
     "Share PDF" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compartilhar PDF"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Compartir PDF"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartilhar PDF"
           }
         }
       }
     },
     "Share as" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compartilhar como"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Compartir como"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartilhar como"
           }
         }
       }
     },
     "Show" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mostrar"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mostrar"
@@ -2731,397 +2731,397 @@
     },
     "Sign Out" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sair"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cerrar sesión"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sair"
           }
         }
       }
     },
     "Sign out?" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sair da conta?"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿Cerrar sesión?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sair da conta?"
           }
         }
       }
     },
     "Signing out keeps your documents in your iCloud." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ao sair, seus documentos continuam no seu iCloud."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Al cerrar sesión, tus documentos se quedan en tu iCloud."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ao sair, seus documentos continuam no seu iCloud."
           }
         }
       }
     },
     "Some files weren't imported" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alguns arquivos não foram importados"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Algunos archivos no se importaron"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alguns arquivos não foram importados"
           }
         }
       }
     },
     "Something went wrong" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algo deu errado"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Algo salió mal"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Algo deu errado"
           }
         }
       }
     },
     "Space used" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Espaço usado"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Espacio usado"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Espaço usado"
           }
         }
       }
     },
     "Student's birth certificate" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Certidão de nascimento do aluno"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Acta de nacimiento del alumno"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Certidão de nascimento do aluno"
           }
         }
       }
     },
     "Summary" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sumário"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Índice"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sumário"
           }
         }
       }
     },
     "Support" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suporte"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Soporte"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suporte"
           }
         }
       }
     },
     "Tax ID" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Número de identificação fiscal"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identificación fiscal"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Número de identificação fiscal"
           }
         }
       }
     },
     "Tax return" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Declaração de imposto de renda"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Declaración de impuestos"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Declaração de imposto de renda"
           }
         }
       }
     },
     "Templates are suggestions. Confirm the list with whoever asked for the documents." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Os modelos são sugestões. Confirme a lista com quem pediu os documentos."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Las plantillas son sugerencias. Confirma la lista con quien te pidió los documentos."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Os modelos são sugestões. Confirme a lista com quem pediu os documentos."
           }
         }
       }
     },
     "Terms of Use" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Termos de Uso"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Términos de Uso"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Termos de Uso"
           }
         }
       }
     },
     "The document stays in your library." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O documento continua na sua biblioteca."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "El documento sigue en tu biblioteca."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O documento continua na sua biblioteca."
           }
         }
       }
     },
     "The document will be deleted from this iPhone and from iCloud." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O documento será apagado deste iPhone e do iCloud."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "El documento se eliminará de este iPhone y de iCloud."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O documento será apagado deste iPhone e do iCloud."
           }
         }
       }
     },
     "This device can't scan documents." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Este aparelho não consegue escanear documentos."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Este dispositivo no puede escanear documentos."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este aparelho não consegue escanear documentos."
           }
         }
       }
     },
     "This document was saved without converting to PDF. You can share the original file." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Este documento foi guardado sem converter para PDF. Você pode compartilhar o arquivo original."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Este documento se guardó sin convertir a PDF. Puedes compartir el archivo original."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este documento foi guardado sem converter para PDF. Você pode compartilhar o arquivo original."
           }
         }
       }
     },
     "To delete your account, confirm it's you with your Apple ID. This also removes Monta PDF from the apps that use your Apple ID." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Para excluir sua conta, confirme que é você com seu Apple ID. Isso também remove o Monta PDF dos apps que usam seu Apple ID."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Para eliminar tu cuenta, confirma que eres tú con tu Apple ID. Esto también quita Monta PDF de las apps que usan tu Apple ID."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para excluir sua conta, confirme que é você com seu Apple ID. Isso também remove o Monta PDF dos apps que usam seu Apple ID."
           }
         }
       }
     },
     "Try Again" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tentar novamente"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reintentar"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tentar novamente"
           }
         }
       }
     },
     "Unsupported format" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Formato não suportado"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Formato no compatible"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Formato não suportado"
           }
         }
       }
     },
     "Use a name that helps you recognize this packet." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use um nome que ajude você a reconhecer este dossiê."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Usa un nombre que te ayude a reconocer este expediente."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use um nome que ajude você a reconhecer este dossiê."
           }
         }
       }
     },
     "Use your Apple ID. Works with any email, including Gmail. You can hide your email." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use seu Apple ID. Funciona com qualquer e-mail, inclusive Gmail. Você pode ocultar seu e-mail."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Usa tu Apple ID. Funciona con cualquier correo, incluido Gmail. Puedes ocultar tu correo."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use seu Apple ID. Funciona com qualquer e-mail, inclusive Gmail. Você pode ocultar seu e-mail."
           }
         }
       }
     },
     "Vaccination record" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Carteira de vacinação"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cartilla de vacunación"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carteira de vacinação"
           }
         }
       }
     },
     "Version" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Versão"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Versión"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versão"
           }
         }
       }
     },
     "View document" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ver documento"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ver documento"
@@ -3131,61 +3131,61 @@
     },
     "Work" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trabalho"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trabajo"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trabalho"
           }
         }
       }
     },
     "You can keep the original file and share it as it is." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Você pode guardar o arquivo original e compartilhar como está."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Puedes guardar el archivo original y compartirlo tal cual."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você pode guardar o arquivo original e compartilhar como está."
           }
         }
       }
     },
     "Your scanned pages were kept." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "As páginas escaneadas foram mantidas."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Las páginas escaneadas se conservaron."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As páginas escaneadas foram mantidas."
           }
         }
       }
     },
     "iCloud" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "iCloud"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "iCloud"
@@ -3195,45 +3195,45 @@
     },
     "iCloud is off. Your documents will stay only on this iPhone until you turn on iCloud." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O iCloud está desligado. Seus documentos ficam só neste iPhone até você ativar o iCloud."
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "iCloud está desactivado. Tus documentos se quedarán solo en este iPhone hasta que actives iCloud."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O iCloud está desligado. Seus documentos ficam só neste iPhone até você ativar o iCloud."
           }
         }
       }
     },
     "or import a file" : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ou importe um arquivo"
-          }
-        },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "o importa un archivo"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ou importe um arquivo"
           }
         }
       }
     },
     "p. %lld" : {
       "localizations" : {
-        "pt-BR" : {
+        "es-419" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "p. %lld"
           }
         },
-        "es-419" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "p. %lld"
