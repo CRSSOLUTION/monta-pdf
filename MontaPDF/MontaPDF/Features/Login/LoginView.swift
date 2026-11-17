@@ -52,6 +52,10 @@ struct LoginView: View {
                     viewModel.handleSignIn(AppleSignInMapper.map(result))
                 }
                 .signInWithAppleButtonStyle(colorScheme == .dark ? .white : .black)
+                // The Apple button keeps the style it was created with, so switching
+                // between light and dark left a white button on a white background.
+                // A new identity per color scheme makes SwiftUI build it again.
+                .id(colorScheme)
                 .accessibilityIdentifier("signInWithAppleButton")
                 .frame(height: 52)
 
