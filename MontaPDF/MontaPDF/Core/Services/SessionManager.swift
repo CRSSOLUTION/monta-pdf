@@ -18,6 +18,10 @@ final class SessionManager {
     var isICloudAvailable: Bool { cloudStatus.isICloudAvailable }
 
     private let store: SessionStore
+    /// Account that signed in during this launch. Apple just authorized it, so it isn't
+    /// checked again: right after a revocation (account deleted, then signed in again),
+    /// Apple can still report the old "revoked" state for a few minutes.
+    private var freshUserID: String?
     private let credentialChecker: AppleCredentialChecking
     private let cloudStatus: CloudStatusProviding
 
@@ -38,11 +42,12 @@ final class SessionManager {
         )
         store.save(newSession)
         session = newSession
+        freshUserID = credential.userID
     }
 
     /// Signs out if the user revoked Sign in with Apple for this app in Settings.
     func validateCredential() async {
-        guard let userID = session?.userID else { return }
+        guard let userID = session?.userID, userID != freshUserID else { return }
         let authorized = await credentialChecker.isAuthorized(userID: userID)
         if !authorized {
             signOut()

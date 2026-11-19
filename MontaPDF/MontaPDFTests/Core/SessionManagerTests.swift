@@ -51,6 +51,26 @@ struct SessionManagerTests {
         #expect(manager.isSignedIn == false)
     }
 
+    @Test func freshSignInIsNotCheckedAgain() async {
+        // After deleting the account and signing in again, Apple can still report
+        // "revoked" for a few minutes. A sign-in just authorized by Apple is trusted.
+        let manager = makeSessionManager(store: store, authorized: false)
+        manager.signIn(with: appleCredential(userID: "abc"))
+
+        await manager.validateCredential()
+
+        #expect(manager.isSignedIn)
+    }
+
+    @Test func freshSignInIsCheckedOnTheNextLaunch() async {
+        makeSessionManager(store: store).signIn(with: appleCredential(userID: "abc"))
+        let nextLaunch = makeSessionManager(store: store, authorized: false)
+
+        await nextLaunch.validateCredential()
+
+        #expect(nextLaunch.isSignedIn == false)
+    }
+
     @Test func validCredentialStaysSignedIn() async {
         store.save(UserSession(userID: "abc"))
         let manager = makeSessionManager(store: store, authorized: true)
